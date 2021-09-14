@@ -1,0 +1,349 @@
+# Unit 1 Problems
+
+## 1.1
+
+**problem 1**
+$$
+x+2y = 8 \\
+3x - 4y = 4
+$$
+
+$$
+2x + 4y = 16 \\
+3x - 4y = 4
+$$
+
+$$
+5x = 20 \\ 
+\fbox{$x = 4, y=2$}
+$$
+
+**CORRECT**
+
+**problem 2**
+$$
+2x - 3y + 4z = -12 \\
+x - 2y + z = -5 \\
+3x + y + 2z = 1
+$$
+
+$$
+2x - 3y + 4z = -12 \\
+-y - 2z = 2 \\ 
+11y- 8z = 38
+$$
+
+$$
+2x-3y + 4z = -12 \\
+-y - 2z = 2 \\ 
+-30z = 60
+$$
+
+$$
+\fbox{$z=-2,y=2,x=1$}
+$$
+
+**CORRECT**
+
+**problem 3**
+$$
+3x+2y+z = 2 \\ 
+4x+2y + 2z = 8 \\ 
+x- y + z = 4
+$$
+
+$$
+3x + 2y + z = 2 \\ 
+-2y  +2z = 16 \\
+-5y+2z = 2
+$$
+
+$$
+3x + 2y + z = 2 \\ 
+-2y  +2z = 16 \\
+-6z = -156
+$$
+
+$$
+\fbox{$z = 26,y=18,x=-20$}
+$$
+
+**CORRECT**
+
+**problem 4**
+$$
+x + y = 5 \\
+3x + 3y = 10
+$$
+There is no solution to this problem; these are parallel lines. **CORRECT**
+
+**problem 5**
+$$
+2x + 4y + 6z = -12 \\
+2x - 3y - 4z = 15 \\ 
+3x + 4y + 5z = -8 
+$$
+
+$$
+2x + 4y + 6z = -12 \\ 
+-7y - 10z = 27 \\ 
+-4y - 8z = 20
+$$
+
+**CORRECT**
+
+**problem 6** 
+$$
+x + y - 2z = 5 \\
+2x + 3y + 4z = 2
+$$
+
+$$
+x + y - 2z = 5 \\ 
+y + 8z = 12 \\ 
+$$
+
+therefore, $y = 12-8z$ and $x = -7 + 10z$
+
+**THE CORRECT ANSWER IS $x=13+10t$ and $y=-8-8t$. IDK HOW TO DO THIS.**
+
+**problem 7**
+$$
+x+4y-z = 12 \\
+3x + 8y - 2z = 4 
+$$
+
+$$
+2x + 8y - 2z = 24 \\ 
+3x + 8y - 2z = 4
+$$
+
+$$
+x = -20
+$$
+
+$$
+8y - 2z = 64 \\ 
+8y - 2z = 64
+$$
+
+$$
+\fbox{$x = -20$, $y$ and $z$ are any real number}
+$$
+
+**THE CORRECT ANSWER IS $x=-20$, $y = 0.25z + 8$, and $z$ is any real number. THIS WAS A STUPID MISTAKE I THINK. YEAH IT WAS. REMEMBER TO SUBSTITUTE $z$ for $y$ in the final answer if $y$ isn't a real number.**
+
+**problem 8**
+$$
+3x + 4y - z = 8 \\ 
+6x + 8y - 2z = 3
+$$
+There are no solutions; this solution of equations is inconsistent. **CORRECT**
+
+**problem 9** 
+$$
+x + y + 3z = 12 \\
+2x + 2y + 6z = 6 
+$$
+There are no solutions; this solution of equations is inconsistent. **CORRECT**
+
+**problem 10** 
+$$
+x + y = 1 \\
+2x - y = 5 \\ 
+3x + 4y = 2
+$$
+
+$$
+3x = 6 \rightarrow \fbox{$x = 2, y=-1$}
+$$
+
+**CORRECT**
+
+**problem 11** 
+$$
+2x + 3y = 13 \\
+x - 2y = 3 \\ 
+5x + 2y = 27 \\ 
+$$
+
+$$
+2x + 3y = 13 \\ 
+2x - 4y = 6  
+$$
+
+$$
+7y = 7 \rightarrow \fbox{$y = 1, x=5$}
+$$
+
+**CORRECT**
+
+**problem 12** 
+$$
+x - 5y = 6 \\
+3x + 2y = 1 \\ 
+5x + 2y = 1 
+$$
+
+$$
+3x - 15y = 18 \\ 
+3x + 2y = 1 
+$$
+
+this system of equations is inconsistent. 
+
+**CORRECT**
+
+**problem 13**
+$$
+x + 3y = -4 \\ 
+2x + 5y = -8 \\
+x + 3y = -5 
+$$
+
+$$
+2x + 6y = -8 \\
+2x + 5y = -8
+$$
+
+this system of equations is inconsistent.
+
+**CORRECT**
+
+**problem 14** 
+$$
+2x + 3y - z = 6 \\
+2x - y + 2z = -8 \\ 
+3x - y + z = -7
+$$
+
+$$
+2x + 3y - z = 6 \\
+-4y + 3z = -14 \\ 
+-11y + 5z = -32
+$$
+
+$$
+-13z = 26 \rightarrow \fbox{$z = -2, y = 2, x = -1$}
+$$
+
+**CORRECT** 
+
+# 1.2
+
+**problem 7** 
+
+If possible, compute* the indicated linear combination: 
+
+1. $$3D + 2F$$
+   $$
+   3 \begin{bmatrix}3 & -2 \\ 2 & 4\end{bmatrix} + 2\begin{bmatrix}-4 & 5 \\ 2 & 3\end{bmatrix}
+   $$
+
+   $$
+   \begin{bmatrix}9 & -6 \\ 6 & 12\end{bmatrix} + \begin{bmatrix}-8 & 10 \\ 4 & 6\end{bmatrix} = \fbox{$\begin{bmatrix}1 & 4 \\ 10 & 18\end{bmatrix}$}
+   $$
+
+
+
+2. $$3A + 2A$$ and $5A$
+
+$$
+3\begin{bmatrix}1 & 2 & 3 \\ 2 & 1 & 4\end{bmatrix} + 2\begin{bmatrix}1 & 2 & 3 \\ 2 & 1 & 4\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}3 & 6 & 9 \\ 6 & 3 & 12\end{bmatrix} + \begin{bmatrix}2 & 4 & 6 \\ 4 & 2 & 8\end{bmatrix} = \fbox{$\begin{bmatrix}5 & 10 & 15 \\ 10 & 5 & 20\end{bmatrix}$}
+$$
+
+$$
+5\begin{bmatrix}1 & 2 & 3 \\ 2 & 1 & 4\end{bmatrix} = \fbox{$\begin{bmatrix}5 & 10 & 15 \\ 10 & 5 & 20\end{bmatrix}$}
+$$
+
+3. $(2 + 3)D$ and $2D + 3D$ 
+
+$$
+5\begin{bmatrix}3 & -2 \\ 2 & 4\end{bmatrix} = \fbox{$\begin{bmatrix}15 & -10 \\ 10 & 20\end{bmatrix}$}
+$$
+
+$$
+2\begin{bmatrix}3 & -2 \\ 2 & 4\end{bmatrix} + 3\begin{bmatrix}3 & -2 \\ 2 & 4\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}6 & -4 \\ 4 & 8\end{bmatrix} + \begin{bmatrix}9 & -6 \\ 6 & 12\end{bmatrix} = \fbox{$\begin{bmatrix}15 & -10 \\ 10 & 16\end{bmatrix}$}
+$$
+
+*I just did every other problem because I'm lazy and it's a waste of time
+
+**ALL CORRECT**
+
+**problem 8**
+
+If possible**, compute the following: 
+
+1. $A^T$ and $(A^T)^T$ 
+
+$$
+A^T = \begin{bmatrix}1 & 2 \\ 2 & 1 \\ 3 & 4\end{bmatrix}
+$$
+
+$$
+(A^T)^T = \begin{bmatrix}1 & 2 & 3 \\ 2 & 1 & 4\end{bmatrix}
+$$
+
+2. $(2D + 3F)^T$ 
+
+$$
+2\begin{bmatrix}3 & -2 \\ 2 & 4\end{bmatrix} + 3\begin{bmatrix}-4 & 5 \\ 2 & 3\end{bmatrix} 
+$$
+
+$$
+\begin{bmatrix}6 & -4 \\ 4 & 8\end{bmatrix} + \begin{bmatrix}-12 & 15 \\ 6 & 9\end{bmatrix} = \begin{bmatrix}-6 & 11 \\ 10 & 17\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}-6 & 11 \\ 10 & 17\end{bmatrix}^T = \fbox{$\begin{bmatrix}-6 & 10 \\ 11 & 17\end{bmatrix}$}
+$$
+
+3. $2A^T + B$
+
+$$
+2\begin{bmatrix}1 & 2 \\ 2 & 1 \\ 3 & 4\end{bmatrix} + \begin{bmatrix}1 & 0 \\ 2 & 1 \\ 3 & 2\end{bmatrix} = \begin{bmatrix}2 & 4 \\ 4 & 2 \\ 6 & 8\end{bmatrix} + \begin{bmatrix}1 & 0 \\ 2 & 1 \\ 3 & 2\end{bmatrix} = \fbox{$\begin{bmatrix}3 & 4 \\ 6 & 3 \\ 9 & 10\end{bmatrix}$}
+$$
+
+**ALL CORRECT**
+
+**problem 13**
+
+If $A$ is an $n\cross n$ matrix, what are the entries on the main diagonal of $A - A^T$?
+
+They would all be equal to 0. **CORRECT**
+
+## 1.3
+
+14. If possible, compute the following: 
+
+    1. $A(BD) \Rightarrow (AB)D$
+       $$
+       \begin{bmatrix}1 & 2 & 3 \\ 2 & 1 & 4\end{bmatrix} \cross \begin{bmatrix}1 & 0 \\ 2 & 1 \\ 3 & 2\end{bmatrix} = \begin{bmatrix}14 & 8 \\ 16 & 9\end{bmatrix}
+       $$
+
+       $$
+       \begin{bmatrix}14 & 8 \\ 16 & 9\end{bmatrix} \cross \begin{bmatrix}3 & -2 \\ 2 & 5\end{bmatrix} = \fbox{$\begin{bmatrix}58 & 12 \\ 66 & 13\end{bmatrix}$}
+       $$
+
+    2. $A(C+E)$
+
+       You cannot compute this, as the dimensions of $A$ are invalid for calculating $AC$ and $AD$.
+
+    3. $(2AB)^T$ and $2(AB)^T$ 
+       $$
+       (2AB)^T = \begin{bmatrix}\end{bmatrix}
+       $$
+       
+
+    
+
+
+
