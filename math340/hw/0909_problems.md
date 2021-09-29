@@ -343,7 +343,435 @@ They would all be equal to 0. **CORRECT**
        $$
        
 
-    
+## 1.4
+
+3. Verify Theorem 1.2(a) for the following matrices: 
+
+$$
+A = 
+\begin{bmatrix}
+2 & -3 & 2 \\
+3 & -1 & 2
+\end{bmatrix},
+B = 
+\begin{bmatrix}
+0 & 1 & 2 \\
+1 & 3 & -2
+\end{bmatrix},
+$$
+
+$$
+C = 
+\begin{bmatrix}
+1 & -3 \\ 
+-3 & 4
+\end{bmatrix}
+$$
+
+The three properties of matrix multiplication: 
+$$
+A(BC) = (AB)C\\
+(A+B)C = AC + BC \\ 
+C(A+B) = CA + CB
+$$
+
+$$
+BC = 
+\begin{bmatrix}
+???
+\end{bmatrix}
+$$
+
+You cannot multiply $AB$ nor $BC$, so this theorem does not work since the matrices are not the appropriate sizes for multiplication. 
+
+9. Find a pair of unequal 2x2 matrices $A$ and $B$, other than those given in Example 9, such that $AB = O$.
+
+$$
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix} \cross
+\begin{bmatrix}
+e & f \\ 
+g & h
+\end{bmatrix}
+$$
+
+$$
+ae + bg = 0 \\
+af + bh = 0 \\
+ce + dg = 0 \\
+cf + dh = 0 \\
+$$
+
+$$
+\begin{bmatrix}
+1 & 1 \\
+1 & 1
+\end{bmatrix}
+\cross
+\begin{bmatrix}
+1 & 1 \\
+-1 & -1 
+\end{bmatrix} = 
+\begin{bmatrix}
+0 & 0 \\
+0 & 0
+\end{bmatrix}
+$$
+
+10. Find two different $2 \cross 2$ matrices $A$ such that $A^2 = \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}$. 
+
+$$
+\fbox{$\begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}
+\text{ and }
+\begin{bmatrix}
+-1 & 0 \\ 
+0 & -1
+\end{bmatrix}$}
+$$
+
+11. Find two unequal $2\cross 2$ matrices $A$ and $B$ such that $AB = \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}$.
+
+$$
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+\cross
+\begin{bmatrix}
+e & f \\
+g & h
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}
+1 & 0 \\
+-1 & 1
+\end{bmatrix}
+\cross
+\begin{bmatrix}
+1 & 0 \\
+1 & 1
+\end{bmatrix}
+$$
+
+$$
+\fbox{$A = 
+\begin{bmatrix}
+1 & 0 \\ 
+-1 &  1
+\end{bmatrix},
+B = 
+\begin{bmatrix}
+1 & 0 \\
+1 & 1
+\end{bmatrix}
+$}
+$$
+
+## 1.5
+
+4. Let 
+
+$$
+A = 
+\begin{bmatrix}
+3 & 2 & -1 \\
+0 & -4 & 3 \\
+0 & 0 & 0
+\end{bmatrix} \text{ and }
+B =
+\begin{bmatrix}
+6 & -3 & 2 \\
+0 & 2 & 4 \\
+0 & 0 & 3
+\end{bmatrix}
+$$
+
+Verify that $A + B$ and $AB$ are upper triangular.
+$$
+A + B = 
+\begin{bmatrix}
+9 & -1 & 1 \\
+0 & -2 & 7 \\
+0 & 0 & 3
+\end{bmatrix}\ \  ✔
+$$
+
+$$
+AB = 
+\begin{bmatrix}
+18 & -5 & 11 \\
+0 & -8 & -7 \\
+0 & 0 & 0 
+\end{bmatrix} \ \ ✔
+$$
+
+6. Let $A$ = $\begin{bmatrix} 1 & 2 \\ 3 & -2 \end{bmatrix}$ and $B = \begin{bmatrix} 1 & -1 \\ 2 & 3 \end{bmatrix}$. Compute each of the following: 
+
+1. $A^2$ 
+
+$$
+\begin{bmatrix}
+1 & 2 \\
+3 & -2
+\end{bmatrix} \cross 
+\begin{bmatrix}
+1 & 2 \\
+3 & -2
+\end{bmatrix}  = 
+\fbox{$
+\begin{bmatrix}
+7 & -2 \\
+-3 & 10
+\end{bmatrix}$}
+$$
+
+		  2. $B^3$ 
+
+$$
+\begin{bmatrix} 
+1 & -1 \\ 
+2 & 3 
+\end{bmatrix} \cross
+\begin{bmatrix} 
+1 & -1 \\ 
+2 & 3 
+\end{bmatrix} \cross
+\begin{bmatrix} 
+1 & -1 \\ 
+2 & 3 
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}
+-1 & -4 \\
+8 & 7
+\end{bmatrix} \cross
+\begin{bmatrix} 
+1 & -1 \\ 
+2 & 3 
+\end{bmatrix} = 
+\fbox{$
+\begin{bmatrix}
+-9 & -11 \\
+22 & 13
+\end{bmatrix}
+$}
+$$
+
+21. Show that if $A$ is any $m \cross n$ matrix, then $AA^T$ and $A^TA$ are symmetric. 
+
+$$
+(AA^T)^T = A^TA
+$$
+
+22. One of the discussion problems 
+
+24. Let $A$ and $B$ be symmetric matrices.
+
+1. Show that $A + B$ is symmetric. 
+
+$$
+(A+B)^T = A^T + B^T
+$$
+
+$$
+A^T = A,B^T = B
+$$
+
+$$
+A^T + B^T = A + B
+$$
+
+$$
+\fbox{QED}
+$$
+
+2. Show that $AB$ is symmetric if and only if $AB = BA$\. 
+
+$$
+A^T = A, B^T = B
+$$
+
+$$
+(AB)^T = A^TB^T = AB
+$$
+
+$$
+(AB)^T = B^TA^T = BA
+$$
+
+$$
+AB = BA \Rightarrow (AB)^T = AB
+$$
+
+$$
+\fbox{QED}
+$$
+
+## 1.6
+
+4. $f : \R^2 \rightarrow R^2$ is a counterclockwise rotation through $\frac{2}{3}\pi$ radians: $u = \begin{bmatrix} -2 \\\ -3 \end{bmatrix}$ 
+
+![image-20210923122049120](/home/svadrut/.config/Typora/typora-user-images/image-20210923122049120.png)
+
+5. $f : \R^2 \rightarrow \R^2$ defined by 
+
+$$
+f\left(\begin{bmatrix}x \\ y \end{bmatrix}\right) = 
+\begin{bmatrix}
+-1 & 0 \\
+0 & -1
+\end{bmatrix}
+\begin{bmatrix}
+x \\ y
+\end{bmatrix}: u = 
+\begin{bmatrix}
+-3 \\ 3
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}
+-1 & 0 \\
+0 & -1
+\end{bmatrix} \cross 
+\begin{bmatrix}
+-3 \\ 3
+\end{bmatrix} = 
+\begin{bmatrix}
+3 \\
+-3
+\end{bmatrix}
+$$
+
+![image-20210923122905755](/home/svadrut/.config/Typora/typora-user-images/image-20210923122905755.png)
+
+10. Do the same thing as the other problem; turn it into a system of equations. 
+
+$$
+1 + 2y = 1 \\
+1y = 1 \\
+x + y = 1
+$$
+
+Obviously, this doesn't work; therefore, this vector $w$ is not in the range of $f$. 
+
+15. In this exercise, give a geometric description of the matrix transformation $f : \R^2 \rightarrow \R^2$ defined by $f(u) = Au$ for each given matrix $A$. 
+
+$$
+\begin{bmatrix}
+-1 & 0 \\ 
+0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+x \\ 
+y 
+\end{bmatrix} = 
+\begin{bmatrix}
+-x \\ 
+y
+\end{bmatrix}
+$$
+
+This reflects the vector over the $x$-axis. 
+
+The other one reflects it over the $y$-axis. 
+
+2. In this exercise, sketch $u$ and its image under each given matrix transformation $f$. $f: \R^2 \to \R^2$ defined by 
+
+$$
+f(\begin{bmatrix} x \\ y \end{bmatrix}) = \begin{bmatrix} -1 & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix}x \\ y \end{bmatrix} : u = \begin{bmatrix}1 \\ -2 \end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}
+-1 & 0 \\
+0 & 1 
+\end{bmatrix} 
+\begin{bmatrix}
+1 \\ -2 
+\end{bmatrix} = 
+\begin{bmatrix}
+-1 \\ -2
+\end{bmatrix}
+$$
+
+![image-20210928101946103](/home/svadrut/.config/Typora/typora-user-images/image-20210928101946103.png)
+
+I already did 9, 10 is a graded problem
+
+20. Let $f: \R^n \to \R^m$ be a matrix transformation defined by $f(u) = Au$, where $A$ is an $m \times n$ matrix. 
+
+Show that $f(u+v) = f(u) + f(v)$ for any $u$ and $v$ in $\R^n$. 
+$$
+f(u) + f(v) = Au + Av = A(u+v) = f(u+v) \\
+\fbox{QED}
+$$
+Show that $f(cu) = cf(u)$ for any $u$ in $\R^n$ and  any real number $c$. 
+$$
+f(cu) = A(cu) = (Ac)u = c(Au) = cf(u) \\ 
+\fbox{QED}
+$$
+Show that $f(cu + dv) = cf(u) + df(v)$ for any $u$ and $V$ in $\R^n$ and any real numbers $c$ and $d$. 
+$$
+f(cu+dv) = A(cu+dv) = A(cu) + A(dv) = c(Au) + d(Av) = cf(u) + df(v) \\
+\fbox{QED}
+$$
+
+21. Let $f : \R^n \to \R^m$ be a matrix transformation defined by $f(u) = Au$, where $A$ is an $m \cross n$ matrix. Show that if $u$ and $v$ are vectors in $\R^n$ such that $f(u) = 0$ and $f(v) = 0$, where 
+
+$$
+0 = 
+\begin{bmatrix}
+0 \\ 0 \\ \ldots \\ 0 \\ 0 
+\end{bmatrix}
+$$
+
+​		then $f(cu + dv) = 0$ for any real numbers $c$ and $d$. 
+$$
+f(cu+dv) = cf(u) + df(v) = c(0A) + d(0A) = 0c + 0d = 0 \\
+\fbox{QED}
+$$
+
+## 2.1
 
 
 
+
+
+# Discussion Problems
+
+1. Given the linear system 
+
+$$
+x + 2y = 10 \\ 
+3x + (6 + t)y = 30
+$$
+
+* Determine a particular value of $t$ so that the system has infinitely many solutions
+
+$$
+6y = (6 +t)y
+$$
+
+$$
+\fbox{$t = 0$}
+$$
+
+* Determine a particular value of $t$ so that the system has a unique solution 
+
+$$
+\fbox{$t =1$}
+$$
+
+* How many different values of $t$ can be selected in part (b)? 
+
+You can select all values of $t$ except for zero. 

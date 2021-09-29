@@ -1,0 +1,104 @@
+\documentclass[letterpaper]{report}
+
+\setlength\parindent{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+\title{Lecture 011: Examples and Exercises}
+\author{Svadrut Kukunooru}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\subsection{Example Problem}%
+\label{sub:Example Problem}
+Consider the matrix $A = \begin{bmatrix} 
+    3 & 5 \\
+    2 & 4
+\end{bmatrix} $
+Compute the RREF of $ \begin{bmatrix} 
+ A | I_2
+\end{bmatrix} $.  \\ \\ 
+This is basically just 
+\[
+    \begin{bmatrix}
+    3 & 5 & 1 & 0 \\
+    2 & 4 & 0 & 1
+    \end{bmatrix}
+.\] 
+I don't have enough time to record the row operations, but it turns into 
+\[
+\begin{bmatrix} 
+    1 & 0 & 2 & -\frac{5}{2} \\ 
+    0 & 1 & -1 & \frac{3}{2}
+\end{bmatrix} 
+.\] 
+You can find the variables in a system of equations with this method. 
+\\ \\
+\textbf{THEOREM}: IF $A$ is an $n\times n$ matrix, then 
+\[
+    \text{RREF}([A | I_n]) = [I_n | A^{-1}]
+.\] 
+\textbf{TAKEAWAY}: In order to find $A^{-1}$, we do not need to record all elementary matrices involved in computing RREF; instead, just carry an identity matrix as you compute the RREF. 
+\subsection{Example Problem}%
+\label{sub:Example Problem}
+Invert the following matrix 
+\[
+    \begin{bmatrix}
+    1 & 1 & 2 \\
+    2 & 3 & 4 \\
+    0 & 0 & 1 
+    \end{bmatrix} \to 
+    \begin{bmatrix} 
+        1 & 1 & 2 & | & 1 & 0 & 0 \\
+        2 & 3 & 4 & | & 0 & 1 & 0 \\
+        0 & 0 & 1 & | & 0 & 0 & 1
+    \end{bmatrix} 
+.\] 
+\[
+\to 
+    \begin{bmatrix} 
+        1 & 1 & 2 & | & 1 & 0 & 0 \\
+        0 & 1 & 0 & | & -2 & 1 & 0 \\
+        0 & 0 & 1 & | & 0 & 0 & 1
+    \end{bmatrix} \to 
+\]\[
+    \begin{bmatrix} 
+        1 & 0 & 2 & | & 3 & -1 & 0 \\
+        0 & 1 & 0 & | & -2 & 1 & 0 \\
+        0 & 0 & 1 & | & 0 & 0 & 1
+    \end{bmatrix}  \to 
+    \begin{bmatrix} 
+        1 & 0 & 0 & | & 3 & -1 & -2 \\
+        0 & 1 & 0 & | & -2 & 1 & 0 \\
+        0 & 0 & 1 & | & 0 & 0 & 1
+    \end{bmatrix} 
+.\] 
+\subsection{Example Problem}%
+\label{sub:Example Problem}
+For what values of $a$ is this matrix invertible? 
+\[
+A = 
+\begin{bmatrix} 
+    1 & 1 & 0 \\
+    1 & 0 & 1 \\
+    1 & 2 & a
+\end{bmatrix} 
+.\] 
+To solve this, simply compute the RREF. Recall that $A$ is invertible is invertible only if the RREF of A is an identity matrix. 
+
+\subsection{Example Problem}
+\label{sub:}
+For what value of $A$ does the linearsolution have?kA
+\[
+\begin{cases}
+    x + y - z \\
+    x + 2y + 2z \\
+    x y + (g-10)z 
+\end{cases}
+.\] \\
+\end{document}

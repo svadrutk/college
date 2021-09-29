@@ -193,7 +193,7 @@ pre code {
 <pre class="r"><code>sum(1:100)</code></pre>
 <pre><code>## [1] 5050</code></pre>
 <p>The sum of the integers from 1 to 100 is:</p>
-<p>5050</p>
+<p><span class="math display">\[5050\]</span></p>
 </div>
 <div id="section-1" class="section level3">
 <h3>2</h3>
@@ -204,21 +204,28 @@ v2</code></pre>
 <pre><code>##  [1] 0.46959815 0.37919403 0.07082100 0.62916489 0.07746191 0.73439538
 ##  [7] 0.54002142 0.05295505 0.67023077 0.69509282</code></pre>
 <p>Create a vector named <code>v2_a</code> from <code>v2</code> by dividing each value by the sum of these ten values. <em>Note: this re-weighting results in a new vector where the values are proportional to the originals, but sum to one.</em></p>
-<pre class="r"><code>v2_a = v2/sum(v2)</code></pre>
+<pre class="r"><code>v2_a = v2/sum(v2)
+v2_a</code></pre>
+<pre><code>##  [1] 0.10873007 0.08779803 0.01639779 0.14567592 0.01793542 0.17004083
+##  [7] 0.12503577 0.01226113 0.15518425 0.16094078</code></pre>
 <div id="a" class="section level4">
 <h4>2A</h4>
 <p>What is the first element of <code>v2_a</code>?</p>
-<p>0.10873007</p>
+<p><span class="math display">\[0.10873007\]</span></p>
 </div>
 <div id="b" class="section level4">
 <h4>2B</h4>
 <p>What is the maximum value of <code>v2_a</code>?</p>
-<p>0.1700408</p>
+<pre class="r"><code>max(v2_a)</code></pre>
+<pre><code>## [1] 0.1700408</code></pre>
+<p><span class="math display">\[0.1700408\]</span></p>
 </div>
 <div id="c" class="section level4">
 <h4>2C</h4>
 <p>What is the standard deviation of <code>v2_a</code>? Use the function <code>sd()</code>. (The standard deviation is a numerical summary of a sample of numbers that measures the size of the spread around their mean.)</p>
-<p>0.06326752</p>
+<pre class="r"><code>sd(v2_a)</code></pre>
+<pre><code>## [1] 0.06326752</code></pre>
+<p><span class="math display">\[0.06326752\]</span></p>
 </div>
 <div id="d" class="section level4">
 <h4>2D</h4>
@@ -239,7 +246,7 @@ v2</code></pre>
 <pre class="r"><code>sum(x^2)</code></pre>
 <pre><code>## [1] 111.4508</code></pre>
 <p>The sum of squared values is:</p>
-<p>111.4508</p>
+<p><span class="math display">\[111.4508\]</span></p>
 </div>
 <div id="section-3" class="section level3">
 <h3>4</h3>
@@ -254,33 +261,37 @@ v2</code></pre>
 mean(y)</code></pre>
 <pre><code>## [1] 102.0422</code></pre>
 <p>What is the mean?</p>
-<p>102.422</p>
+<p><span class="math display">\[102.0422\]</span></p>
 </div>
 <div id="b-1" class="section level3">
 <h3>4B</h3>
 <p>Create a vector named <code>r</code> by taking <code>y</code> and subtracting from each value the mean you computed in the previous part.</p>
-<pre class="r"><code>r = y - 102.422
+<pre class="r"><code>r = y - 102.0422
 mean(r)</code></pre>
-<pre><code>## [1] -0.3798313</code></pre>
+<pre><code>## [1] -3.13253e-05</code></pre>
 <pre class="r"><code>sd(r)</code></pre>
 <pre><code>## [1] 19.64915</code></pre>
 <pre class="r"><code>sd(y)</code></pre>
 <pre><code>## [1] 19.64915</code></pre>
 <p>What is the mean of <code>r</code>? What are the standard deviations of <code>r</code> and <code>y</code>?</p>
-<p>-0.37 19.64915 19.64915</p>
-</div>
-<div id="c-1" class="section level3">
-<h3>4C</h3>
+<p><span class="math display">\[
+-3.132 \cdot 10^{-5} \\  
+19.64915  \\
+19.64915  
+\]</span> ### 4C</p>
 <p>Create a vector named <code>z</code> by taking <code>r</code> and dividing each element by the standard deviation of <code>r</code> (computed with <code>sd()</code>).</p>
 <pre class="r"><code>z = r/sd(r)
 mean(z)</code></pre>
-<pre><code>## [1] -0.01933067</code></pre>
+<pre><code>## [1] -1.594232e-06</code></pre>
 <pre class="r"><code>median(z)</code></pre>
-<pre><code>## [1] 0.08030881</code></pre>
+<pre><code>## [1] 0.09963789</code></pre>
 <pre class="r"><code>sd(z)</code></pre>
 <pre><code>## [1] 1</code></pre>
 <p>What are the mean, median, and standard deviation of <code>z</code>?</p>
-<p>-0.01933067 0.08030881 1</p>
+<p><span class="math display">\[-1.594232 \cdot 10^{-6}  \\
+0.09963789  \\
+1  \\
+\]</span></p>
 </div>
 </div>
 

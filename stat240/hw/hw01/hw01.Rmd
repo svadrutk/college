@@ -33,7 +33,7 @@ sum(1:100)
 
 The sum of the integers from 1 to 100 is:
 
-5050
+$$5050$$
 
 ### 2
 
@@ -50,26 +50,35 @@ Create a vector named `v2_a` from `v2` by dividing each value by the sum of thes
 
 ```{r}
 v2_a = v2/sum(v2)
+v2_a
 ```
 
 #### 2A
 
 What is the first element of `v2_a`?
 
-0.10873007
+$$0.10873007$$
 
 #### 2B
 
 What is the maximum value of `v2_a`?
 
-0.1700408
+```{r}
+max(v2_a)
+```
+
+$$0.1700408$$
 
 #### 2C
 
 What is the standard deviation of `v2_a`? Use the function `sd()`.
 (The standard deviation is a numerical summary of a sample of numbers that measures the size of the spread around their mean.)
 
-0.06326752
+```{r}
+sd(v2_a)
+```
+
+$$0.06326752$$
 
 #### 2D
 
@@ -101,7 +110,7 @@ sum(x^2)
 
 The sum of squared values is:
 
-111.4508
+$$111.4508$$
 
 ### 4
 
@@ -124,14 +133,14 @@ mean(y)
 
 What is the mean?
 
-102.422 
+$$102.0422$$ 
 
 ### 4B
 
 Create a vector named `r` by taking `y` and subtracting from each value the mean you computed in the previous part.
 
 ```{r}
-r = y - 102.422
+r = y - 102.0422
 mean(r)
 sd(r)
 sd(y)
@@ -140,10 +149,11 @@ sd(y)
 What is the mean of `r`?
 What are the standard deviations of `r` and `y`?
 
--0.37
-19.64915
-19.64915
-
+$$
+-3.132 \cdot 10^{-5} \\  
+19.64915  \\
+19.64915  
+$$
 ### 4C
 
 Create a vector named `z` by taking `r` and dividing each element by the standard deviation of `r` (computed with `sd()`).
@@ -157,10 +167,10 @@ sd(z)
 
 What are the mean, median, and standard deviation of `z`?
 
--0.01933067
-0.08030881
-1
-
+$$-1.594232 \cdot 10^{-6}  \\
+0.09963789  \\
+1  \\
+$$
 
 
 

@@ -1,0 +1,123 @@
+\documentclass[letterpaper]{report}
+\setlength\parindent{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+
+\title{Lecture 7: Row Echelon Forms}
+\author{Svadrut Kukunooru}
+\date{\today}
+
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+A matrix  is said to be in \textit{reduced row echelon form} (RREF) if: 
+\begin{enumerate}
+    \item Rows of zeroes appear at bottom of matrix
+    \item First nonzero entry at each row is one
+    \item Nonzero entries are placed into an echelon form
+    \item All entries above leading ones are zero 
+\end{enumerate}
+If a matrix is not in RREF, we can make it into one by using elementary row operations, e.g.
+\begin{itemize}
+    \item  Exchange two rows
+    \item Multiply row by scalar
+    \item Add one row to another
+\end{itemize}
+\subsection{Example Problem}%
+\label{sub:Example Problem}
+Simplify the following matrix to RREF: 
+\[
+\begin{bmatrix} 
+    -1 & 2 & 5 \\
+    2 & -1 & 6 \\ 
+    2 & -2 & 7
+\end{bmatrix} 
+.\] 
+First, we can subtract the 2nd and 3rd row by two copies of row one, e.g.
+\[
+\begin{bmatrix} 
+    1 & -2 & 5 \\
+    0 & 3 & -4 \\
+    0 & 2 & -3
+\end{bmatrix} 
+.\] 
+Then, subtract the 2nd row by two copies of the 3rd row:
+\[
+\begin{bmatrix} 
+    1 & -2 & 5 \\
+    0 & 1 & -1 \\
+    0 & 2 & -3
+\end{bmatrix} 
+.\] 
+
+Subtract the third row by two copies of the second row: 
+
+\[
+\begin{bmatrix} 
+    1 & -2 & 5 \\
+    0 & 1 & -1 \\
+    0 & 0 & 1
+\end{bmatrix} 
+.\] 
+Some more manipulations: 
+\[
+\begin{bmatrix} 
+    1 & -2 & 5 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix} 
+\rightarrow
+\fbox{$
+\begin{bmatrix} 
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix}$}
+.\] \newpage
+The procedure is this: 
+\begin{enumerate}
+    \item  Make the leading term of 1st row 1 by scaling
+    \item Kill the 1st entries of all rows below
+    \item Make the leading form of 2nd row 1 by scaling
+    \item Kill the leading terms below the second leading 1
+    \item Repeat the above until you get row echelon form
+    \item Kill the entries below leading 1's by going bottom-up
+\end{enumerate}
+\textbf{DEF}: Two matrices are said to be row equivalent if one is obtained from another using elementary row operations. \\ \\ 
+\textbf{THEOREM}: Any matrix is row equivalent to one in RREF, which is unique (rank? I can't read). A matrix can be row equivalent to multiple row echelon forms, e.g.
+\[
+\begin{bmatrix} 
+    1 & 1 \\
+    0 & 1
+\end{bmatrix} 
+\text{ and }
+\begin{bmatrix} 
+    1 & 0 \\
+    0 & 1
+\end{bmatrix} 
+.\] 
+\subsection{Example Problem}%
+\label{sub:Example Problem}
+Reduce the following matrix to RREF: 
+\[
+\begin{bmatrix} 
+    1 & 2 & 0 & 3 & 5 \\
+    0 & 0 & 1 & 2 & 1 \\
+    0 & 0 & 0 & 0 & 1
+\end{bmatrix} 
+.\] 
+The only reason this matrix isn't already in RREF is that the 5 and 1 are nonzero entries above the 3rd leading 1. Therefore, 
+\[
+\fbox{$
+\begin{bmatrix} 
+    1 & 2 & 0 & 3 & 0 \\
+    0 & 0 & 1 & 2 & 0 \\
+    0 & 0 & 0 & 0 & 1
+\end{bmatrix}$}
+.\] 
+\end{document}
