@@ -2,7 +2,7 @@
 
 ## 1.1
 
-**problem 1**
+**problem 1 **
 $$
 x+2y = 8 \\
 3x - 4y = 4
@@ -743,7 +743,294 @@ $$
 
 ## 2.1
 
+2. Find a row echelon form for each of the given matrices. Record the row operations you perform, using the notation for elementary row operation. 
 
+$$
+\begin{bmatrix}
+-1 & 1 & 1 & 0 & | & 3 \\
+-3 & 4 & 1 & 1 & | & 10 \\
+4 & -6 & -4 & -2 & | & -14
+\end{bmatrix} \to
+\begin{bmatrix}
+-1 & 1 & 1 & 0 & | & 3 \\
+0 & 1 & -2 & 0 & | & 1 \\
+0 & -2 & 0 & -2 & | & -2
+\end{bmatrix}
+$$
+
+$$
+\to 
+\begin{bmatrix}
+-1 & 0 & 3 & 0 & | & 2 \\
+0 & 1 & -2 & 0 & | & 1 \\
+0 & -2 & 0 & -2 & | & -2 
+\end{bmatrix} \to
+\begin{bmatrix}
+-1 & 0 & 3 & 0 & | & -2 \\
+0 & 1 & -2 & 0 & | & 1 \\
+0 & 1 & 0 & 1 & | & 1
+\end{bmatrix} \to 
+$$
+
+$$
+\to
+\fbox{$
+\begin{bmatrix}
+1 & 0 & -3 & 0 & | & 2 \\
+0 & 1 & -2 & 0 & | & 1 \\
+0 & 0 & 0 & 1 & | & 0
+\end{bmatrix}$}
+$$
+
+---
+
+$$
+\begin{bmatrix}
+1 & 1 & -4 \\
+-2 & -1 & 10 \\
+4 & 3 & -12
+\end{bmatrix} \to 
+\begin{bmatrix}
+1 & 1 & -4 \\
+0 & 1 & 2 \\
+0 & -1 & 4
+\end{bmatrix} \to 
+\fbox{$
+\begin{bmatrix}
+1 & 1 & -4 \\
+0 & 1 & 2 \\
+0 & 0 & 6
+\end{bmatrix} $}
+$$
+
+3. Each of the given matrices is in row echelon form. Determine its reduced row echelon form. 
+
+$$
+\begin{bmatrix}
+1 & 2 & 4 \\
+0 & 1 & -2 \\
+0 & 0 & 1
+\end{bmatrix} \to 
+\begin{bmatrix}
+1 & 0 & 8 \\
+0 & 1 & -2 \\
+0 & 0 & 1
+\end{bmatrix} \to 
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix} \to \fbox{$I_3$}
+$$
+
+---
+
+$$
+\begin{bmatrix}
+1 & 4 & 3 & 5 \\
+0 & 0 & 1 & -4 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0
+\end{bmatrix} \to 
+\begin{bmatrix}
+1 & 4 & 0 & 17 \\
+0 & 0 & 1 & -4 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0
+\end{bmatrix} \to 
+\fbox{$
+\begin{bmatrix}
+1 & 4 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0
+\end{bmatrix}
+$}
+$$
+
+5. Find the reduced row echelon form of each of the given matrices. Record the row operations you perform, using the notation for elementary row operations. 
+
+$$
+\begin{bmatrix}
+1 & 0 & -2 \\
+-2 & 1 & 9 \\
+3 & 2 & 4
+\end{bmatrix} \to 
+\begin{bmatrix}
+1 & 0 & -2 \\
+0 & 1 & 5 \\
+0 & 2 & 10
+\end{bmatrix} \to 
+\fbox{$
+\begin{bmatrix}
+1 & 0 & -2 \\
+0 & 1 & 5 \\
+0 & 0 & 0
+\end{bmatrix} $}
+$$
+
+---
+
+$$
+\begin{bmatrix}
+1 & 0 & 1 \\
+-1 & 2 & -2 \\
+0 & 1 & 0 \\
+-2 & 7 & -5
+\end{bmatrix} \to 
+\begin{bmatrix}
+1 & 0 & 1 \\
+0 & 2 & -1 \\
+0 & 1 & 0 \\
+0 & 7 & -3
+\end{bmatrix} \to 
+\begin{bmatrix}
+1 & 0 & 1 \\
+0 & 1 & -1/2 \\
+0 & 1 & 0 \\
+0 & 7 & -3
+\end{bmatrix} \to
+$$
+
+$$
+\begin{bmatrix}
+1 & 0 & 1 \\
+0 & 1 & -1/2 \\
+0 & 0 & 1/2 \\
+ 0 & 0 & 1/2
+\end{bmatrix} \to 
+\begin{bmatrix}
+1 & 0 & 1 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0 
+\end{bmatrix} \to 
+\fbox{$
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0
+\end{bmatrix}$}
+$$
+
+## 2.2 
+
+1. Each of the given linear systems is in row echelon form. Solve the system. 
+
+$$
+x + 2y - z = 6 \\
+y + z = 5 \\
+z = 4 
+$$
+
+$$
+\fbox{$z=4, y=1, x=8$}
+$$
+
+---
+
+$$
+x - 3y + 4z + w = 0 \\
+z - w = 4 \\
+w = 1
+$$
+
+$$
+z = 5, w = 1
+$$
+
+We can substitute $y  = t$ and proceed. 
+$$
+\fbox{$z = 5, w = 1, y = t, x = -21 + 3t$}
+$$
+
+2. Each of the given linear systems is in row echelon form. Solve the system. 
+
+$$
+x + y - z + 2w = 4 \\
+w = 5
+$$
+
+Converting to a matrix, we get 
+$$
+\begin{bmatrix}
+1 & 1 & -1 & 2 & | & 4 \\
+0 & 0 & 0 & 1 & | & 5
+\end{bmatrix}
+$$
+Since it's already in row echelon form, we can simply write the solution as 
+$$
+x + y -z = -6
+$$
+We substitute $y$ for $s$ and $z$ for $t$. Therefore, $\fbox{$x = -6-s-t$, $y = s$, $z = t,w=5$}$. 
+
+---
+
+$$
+\begin{bmatrix}
+1 & -1 & 1 & | & 0 \\
+0 & 1 & 2 & | & 0 \\
+0 & 0 & 1 & | & 1
+\end{bmatrix}
+$$
+
+Therefore, $\fbox{$z = 1, y = -2, x=-3$}$. 
+
+7. Solve the linear system with the given augmented matrix, if it is consistent. 
+
+$$
+\begin{bmatrix}
+1 & 1 & 1 & | & 0 \\
+1 & 1 & 0 & | & 3 \\ 
+0 & 1 & 1 & | & 1
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}
+1 & 1 & 1 & | & 0 \\
+1 & 1 & 0 & | & 3 \\ 
+0 & 1 & 1 & | & 1
+\end{bmatrix} \to (R_1 - R_3 = R_1) \to
+\begin{bmatrix}
+1 & 0 & 0 & | & -1 \\
+1 & 1 & 0 & | & 3 \\
+0 & 1 & 1 & | & 1
+\end{bmatrix}
+$$
+
+$$
+\fbox{$x = -1, y = 4, z = -3$}
+$$
+
+---
+
+$$
+\begin{bmatrix}
+1 & 2 & 3 & | & 0 \\
+1 & 1 & 1 & | & 0 \\
+5 & 7 & 9 & | & 0 
+\end{bmatrix}
+$$
+
+$$
+\fbox{$x = y = z = 0$}
+$$
+
+14. In the following linear system, determine all values of $a$ for which the resulting linear system has no solution, a unique solution, and infinitely many solutions. 
+
+$$
+x + y - z = 2 \\
+x + 2y + z = 3 \\
+x + y + (a^2 - 5)z = a
+$$
+
+Infinitely many solutions: 2 
+
+No solutions: -2 
+
+Unique solution: anything other than 2 and -2
 
 
 
@@ -775,3 +1062,176 @@ $$
 * How many different values of $t$ can be selected in part (b)? 
 
 You can select all values of $t$ except for zero. 
+
+## Worksheet 4
+
+1. Let $f: \R^n \to \R^m$ be a matrix transformation efined by $f(u) = Au$ where $A$ is an $m \times n$ matrix. 
+
+   Show that $f(u+v) = f(u) + f(v)$ for any $u$ and $v$ in $\R^n$. 
+
+$$
+f(u + v) = A(u+v) = Au + Av = f(u) + f(v) \\
+\fbox{QED}
+$$
+
+​		Show that $f(cu) = cf(u)$ for any $u$ in $\R^n$ and any real number $c$. 
+$$
+A(cu) = c(Au) = cf(u) \\
+\fbox{QED}
+$$
+​		Show that $f(cu + dv) = cf(u) + df(v)$ for any $u$  and $v$ in $\R^n$ and any real numbers $c$ and $d$ 
+$$
+f(cu+dv) = A(cu + dv) = A(cu) + A(dv) = c(Au) + d(Av) = cf(u) + df(v) \\
+\fbox{QED}
+$$
+
+2. Given the matrix 
+
+$$
+\begin{bmatrix}
+1 & 1 & -1 \\
+3 & 4 & -1 \\
+5 & 6 & 3 \\
+-2 & -2 & 2
+\end{bmatrix}
+$$
+
+​		Find a row echelon form of the given matrix. 
+$$
+\begin{bmatrix}
+1 & 1 & -1 \\
+0 & 1 & 2 \\
+0 & 1 & 8  \\
+0 & 0 & 4
+\end{bmatrix} \to
+\begin{bmatrix}
+1 & 0 & -3 \\
+0 & 1 & 2 \\
+0 & 1 & 8 \\
+0 & 0 & 4
+\end{bmatrix} \to 
+\begin{bmatrix}
+1 & 0 & -3 \\
+0 & 1 & 2 \\
+0 & 0 & 6 \\
+0 & 0 & 4
+\end{bmatrix}
+$$
+
+$$
+\to 
+\begin{bmatrix}
+1 & 0 & -3 \\
+0 & 1 & 2 \\
+0 & 0 & 1 \\
+0 & 0 & 4
+\end{bmatrix} \to 
+\fbox{$
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0 
+\end{bmatrix}$}
+$$
+
+​		Find the reduced row echelon form of the given matrix
+
+I think I did, but I need to find a row echelon form :(
+
+3. Given the linear system 
+
+$$
+x + y + 3z - 3w  = 0 \\
+2y + z - 3w = 3 \\ 
+x + 2z - w = -1
+$$
+
+​		Write down the augmented matrix.
+$$
+\begin{bmatrix}
+1 & 1 & 3 & -3 & | & 0 \\
+0 & 2 & 1 & -3 & | & 3 \\
+1 & 0 & 2 & -1 & | & -1
+\end{bmatrix}
+$$
+​		Find the RREF of the augmented matrix. 
+
+
+$$
+\begin{bmatrix}
+1 & 1 & 3 & -3 & | & 0 \\
+0 & 2 & 1 & -3 & | & 3 \\
+1 & 0 & 2 & -1 & | & -1
+\end{bmatrix} \to 
+\begin{bmatrix}
+1 & 1 & 3 & -3 & | & 0 \\
+0 & 2 & 1 & -3 & | & 3 \\
+0 & -1 & -1 & 2 & | & -1
+\end{bmatrix} \to 
+$$
+
+$$
+\to 
+\begin{bmatrix}
+1 & 1 & 3 & -3 & | & 0 \\
+0 & -1 & \frac{-1}{2} & \frac{3}{2} & | & \frac{-3}{2} \\ 
+0 & -1 & -1 & 2 & | & 1
+\end{bmatrix} \to 
+\begin{bmatrix}
+1 & 0 & \frac{5}{2} & \frac{-3}{2} & | & \frac{-3}{2} \\ 
+0 & -1 & \frac{-1}{2} & \frac{-3}{2} & | & \frac{-3}{2} \\ 
+0 & 0 & \frac{-1}{2} & \frac{1}{2} & | & \frac{1}{2}
+\end{bmatrix} \to
+$$
+
+$$
+\to 
+\begin{bmatrix}
+1 & 0 & 5/2 & -3/2 & | & -3/2 \\
+0 & 1 & 1/2 & -3/2 & | & 3/2 \\
+0 & 0 & 1 & -1 & | & -1
+\end{bmatrix} \to 
+\fbox{$
+\begin{bmatrix}
+1 & 0 & 0 & 1 & | & 1 \\
+0 & 1 & 0 & -1 & | & 2 \\
+0 & 0 & 1 & -1 & | & -1
+\end{bmatrix}$}
+$$
+
+​		Solve the linear system. 
+$$
+x + w = 1 \\
+y - w = -2 \\
+z - w = -1
+$$
+
+$$
+ x = 1 - w , y = w-2, z = w - 1
+$$
+
+4. Consider the linear system
+
+$$
+x + y - z = 2 \\
+x + 2y + z = 3 \\
+x + y + (a^2 - 5)z = a
+$$
+
+​		Determine all values of $a$ for which the resulting linear system has
+
+​		
+
+​		No solution. 
+$$
+a = -2
+$$
+​		A unique solution
+$$
+a \neq -2, 2
+$$
+​		Infinitely many solutions
+$$
+a = 2
+$$

@@ -1,0 +1,43 @@
+\documentclass[letterpaper]{report}
+
+\setlength\parindent{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+\title{Lecture 012: Introduction to Determinants}
+\author{Svadrut Kukunooru}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+A determinant defines a function $\text{det} : M_{n\times n} \to \mathbb{R}$. Recall that in a 2x2 case, 
+\[
+    det\left(
+    \begin{bmatrix} 
+        a & b \\
+        c & d
+\end{bmatrix}\right)  = ad - bc
+\] 
+\textbf{SIGNED AREA}: Suppose you want to integrate the sin function from $-\pi$ to $\pi$: 
+\[
+    \int_{-\pi}^{\pi} \sin(x)
+\] 
+The answer to this is zero, since the are aon the left side of the y-axis negates the area on the right side of the y-axis. POINT: It is natural to assign area a sign. 
+\\ \\ 
+Given vectors $\vec{v_1}$ and $\vec{v_2}$ on $\mathbb{R}$ we denote by $P(v_1, v_2)$ the \textit{parallelogram} defined by $v_1$ and $v_2$. Note that the signed area of $P(v_1,v_2)$ is 0 if $v_1$ and $v_2$ are parallel/colinear. It is positive if $v_1$ rotates counterclockwise towards $v_2$ in $P(v_1, v_2)$, and negative if $v_1$ rotates clockwise towards $v_2$.  \\ \\ 
+\textbf{THEOREM}: If $A$ is a $2\times 2$ matrix with row vectors $r_1$ and $r_2$, then the determinant of A is the signed area of $P(r_1,r_2)$ For example say you have a matrix 
+\[
+A = 
+\begin{bmatrix} 
+    3 & 1 \\
+    2 & 3
+\end{bmatrix} 
+\begin{bmatrix} 
+r_1 \\ r_2
+\end{bmatrix} 
+\] How do you find the area of the parallelogram?
+Most poeple use the \textbf{SLIDE METHOD}, where 
+\end{document}

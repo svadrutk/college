@@ -1,0 +1,244 @@
+---
+author: "Svadrut Kukunooru"
+title: "Assignment 3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, fig.height = 3)
+library(tidyverse)
+library(lubridate)
+library(scales)
+source("../../scripts/viridis.R")
+```
+
+#### Due Sunday, October 3, 11:59 pm CT
+
+### Problems
+
+The following R chunk reads in the default exoplanet data,
+selects some variables, and changes some variable names.
+
+```{r read-planet-data}
+## Read in the csv file
+## Select some variables that we will work with and rename them
+## Note that the file begins with 100 meta-data lines that this code skips
+## The argument `comment = "#"` fails as the symbol '#' appears in some of the websites included in the data set which are then interpreted as comments, preventing the full case to be read in as data
+planets = read_csv("../../data/exoplanets_default_2021-06-15.csv",
+                   skip = 100) %>%
+  select(pl_name, hostname, discoverymethod,
+         disc_year, sy_pnum, pl_rade, pl_bmasse) %>%
+  rename(planet = pl_name,
+         star = hostname,
+         method = discoverymethod,
+         year = disc_year,
+         number = sy_pnum,
+         radius = pl_rade,
+         mass = pl_bmasse) 
+```
+
+### 1
+
+Using the exoplanet data table `planets`, filter so that you only use planets discovered by the transit method. Remove cases where either of the variables `year` or `radius` ar missing. Create a table with a data summary with the number of planets discovered and the mean radius of these planets by year. Then make a plot of the data such that: the size of points are proportional to the number of planets discovered that year; the axes have descriptive labels; and the plot contains an informative title.
+
+```{r}
+### Add your code here
+transitPlanets <- planets[planets$method=="Transit",]
+noRadius <- transitPlanets[!is.na(transitPlanets$radius),]
+almost <- noRadius[!is.na(noRadius$year),]
+
+table <- select(almost, 
+                year, planet, radius)
+by_year <- group_by(table, year, )
+final <- summarise(by_year, planetsDiscovered = n(), averageRadius = mean(radius))
+final
+
+ggplot(data=final) + geom_point(mapping = aes(x = year, y = averageRadius, size = planetsDiscovered)) + xlab("Year") + ylab("Radius") + ggtitle("Planets Discovered vs. Year")
+
+```
+
+### 2
+
+Using the planets data set created at the beginning of the assignment, determine which methods have been used to discover fewer than ten planets each.
+
+```{r} 
+planets %>% group_by(method) %>% filter(sum(number) < 10) %>% summarize(total = sum(number))
+```
+After removing these planets discovered by methods,
+for the remaining planets, summarize for each year, the number of planets and the proportion of planets discovered by each method.
+Proportions should sum to one in each year.
+This data summary should have one row for each year and method (if the method was used in that year) and columns with the names `year`, `method`, `n`, and `proportion`.
+*(Hint: you may find it helpful to create a `total` column with the total number of exoplanets discovered each year repeated for each row to help calculate the proportion.)*
+
+```{r}
+
+planets %>% 
+  filter(!method == "Astrometry" & !method == "Disk Kinematics" & !method == "Pulsation Timing Variations")  %>% group_by(year, method) %>% 
+  summarise(count = n()) %>% 
+  mutate(proportion = count/sum(count)) %>%
+  print(n = 15, width = Inf) 
+
+```
+
+#### (a) 
+
+**Report the dimensions of this data summary. Print the first 15 rows and all columns.**
+
+105x4
+
+
+#### (b) 
+
+Create a graph with the year on the x axis, the proportion of discovered planets on the y axis,
+and connect points from the same method with a line, using a different color for each method.
+Use appropriate axis labels and plot title.
+
+```{r}
+planets %>% 
+  filter(!method == "Astrometry" & !method == "Disk Kinematics" & !method == "Pulsation Timing Variations")  %>% group_by(year, method) %>% 
+  summarise(count = n()) %>% 
+  mutate(total = sum(count), proportion = count/total) %>% 
+    ggplot(mapping = aes(x = year, y = proportion, color = method)) + 
+      geom_line() + xlab("Year") + ylab("Proportion of Methods") + ggtitle("Proportions of Methods to Planets Discovered vs Year")
+```
+
+
+#### (c)
+
+Which method was used predominantly from the earliest discoveries of exoplanets and which method has supplanted that method in relative popularity in recent years?
+
+Radial Velocity; Transit
+
+
+### 3
+
+Begin with the data summary from the previous problem.
+Filter to only include years from 2001 -- 2020.
+Display the counts of exoplanets discovered by method in an alternative manner using bar graphs
+with year on the x axis, different fill colors for each method,
+and the counts of the number of planets for each year and method on the y axis using the function `geom_col()`.
+Do not stack the bars for each year, but rather display them next to each other in a clump by each year label.
+(*Note: The default is to stack bars. Use the argument `position = position_dodge2(preserve = "single")` inside of `geom_col()` to avoid stacking and to preserve the same bar width when the number of methods present changes by year.*)
+
+```{r}
+planets %>% 
+  filter(!method == "Astrometry" & !method == "Disk Kinematics" & !method == "Pulsation Timing Variations")  %>% group_by(year, method) %>% 
+  summarise(count = n()) %>% 
+  mutate(total = sum(count), proportion = count/total) %>% 
+  filter(year>=2001 & year <=2020) %>% 
+    ggplot(mapping = aes(x = year, y = count, color = method, fill=method)) + 
+      geom_col(stat="identity", position = position_dodge2(preserve = "single")) + xlab("Year") + ylab("Exoplanet Count") + ggtitle("Exoplanet Count by Method per Year")
+    
+```
+
+
+### 4
+
+Using the planet data set created at the beginning of the assignment,
+filter to remove planets discovered by a method used discover fewer than ten planets as well as keeping only planets discovered between 2001 and 2020.
+
+Using this filtered data set, create a bar graph using `geom_bar()` which displays the number of planets discovered by each of the remaining methods over these years.
+Do not stack the bars and use different fill colors for each method.
+(*Note: When using the function `geom_bar()`, you do not specify the y aesthetic as the function will do the work of creating the counts. The graph will look the same as in the previous problem.*)
+
+
+```{r}
+planets %>% 
+  filter(!method == "Astrometry" & !method == "Disk Kinematics" & !method == "Pulsation Timing Variations")  %>% group_by(year, method) %>%  filter(year>= 2001, year <= 2020) %>% group_by(method) %>% ggplot(aes(x = method, fill = method)) + 
+  geom_bar() + theme(axis.text.x = element_text(angle=60, hjust = 1)) + xlab("Method")+ ylab("Exoplanet Count") + ggtitle("Exoplanet Count per Year")
+```
+
+
+### 5
+
+Create a table with the subset of the planet data considering only planets discovered using the method `Radial Velocity` with discovery years in the sequence 1998, 2002, 2006, 2010, 2014, and 2018 and for which the mass is estimated. For this subset of the planets, calculate *for each year* the number of planets, and the minimum, median, and maximum values of the mass.
+
+-  Print these summary statistics in a table by year, so that each row corresponds to a different year and the columns are `year`, `n`, `min`, `median`, and `max`.  
+-  Answer the question below the code chunk.
+
+
+```{r}
+## Add your code here
+planets %>% 
+  group_by(year) %>% 
+  filter(method == 'Radial Velocity', year %in% c(1998, 2002, 2006, 2010, 2014, 2018), is.na(mass) == FALSE) %>% 
+  summarize(n = sum(number), min = min(mass), median = median(mass), max = max(mass))
+```
+
+**Describe the trend between year and minimum mass of planet discovered using Radial Velocity.**
+
+As the years have progressed, the minimum mass of planets discovered using Radial Velocity has decreased. 
+
+### 6
+
+Only a handful of planets have both an estimated mass AND an estimated radius less than those of the Earth.  What are the names of these planets, what method(s) were used to detect them, and in what year were they discovered?
+
+- Create a data summary table with the planet name, star name, method, mass, and radius of the planets that have **both** an estimated mass < 1 Earth mass and an estimated radius < 1 Earth radius.  
+- Order the rows increasing by mass.
+- Print the entire table.
+
+```{r}
+## Add your code here
+planets %>% 
+  filter(mass < 1 & radius < 1) %>% 
+  select(planet, star, method, mass, radius)
+```
+
+
+### 7
+
+Use the official Madison weather data.
+For each date where there is no missing data for the maximum and minimum temperature,
+calculate the difference between the maximum and minimum temperatures.
+Find the median, mean, and standard deviations of these values for each month and display the results in a table.
+
+```{r}
+weather <- read_csv("../../data/madison-weather-official-2020.csv")
+weather %>% 
+  filter(is.na(tmax) == FALSE & is.na(tmin) == FALSE) %>% group_by(month = month(date))  %>%
+  mutate(difference = tmax-tmin) %>% summarize(mean = mean(difference), median = median(difference), standardDeviation = sd(difference))
+```
+
+
+### 8
+
+Use the official Madison weather data.
+
+### (a)
+
+Determine the mean maximum and minimum temperatures for each day of the year for the period from 1991 -- 2020.
+Graph these values with line plots, one for maximum, one for minimum, for each day of the month with a different facet for each month of the year.
+
+```{r}
+weather %>% 
+  filter(is.na(tmax) == FALSE & is.na(tmin) == FALSE) %>% 
+  filter(year(date) >= 1991 & year(date) <= 2020) %>% group_by(month = month(date), day = day(date))  %>% summarize(tmax = mean(tmax), tmin = mean(tmin)) %>%
+ggplot(mapping = aes(x = day, y = tmax)) + 
+  facet_wrap(~ month) + 
+geom_line()
+
+weather %>% 
+  filter(is.na(tmax) == FALSE & is.na(tmin) == FALSE) %>% 
+  filter(year(date) >= 1991 & year(date) <= 2020) %>% group_by(month = month(date), day = day(date))  %>% summarize(tmax = mean(tmax), tmin = mean(tmin)) %>%
+ggplot(mapping = aes(x = day, y = tmin)) + 
+  facet_wrap(~ month) + 
+geom_line()
+
+```
+
+### (b)
+
+Find the ten days of the year which have the largest gap between the average high and low temperatures using data from 1991 -- 2020. Display these values in a table, ordered with the largest gaps at the top.
+
+```{r}
+weather %>% 
+  filter(is.na(tmax) == FALSE & is.na(tmin) == FALSE) %>% 
+  filter(year(date) >= 1991 & year(date) <= 2020) %>% group_by(month = month(date), day = day(date)) %>% 
+  summarize(mtmax = mean(tmax), mtmin = mean(tmin)) %>%
+  mutate(mdiff = mtmax - mtmin) %>%
+  arrange(desc(mdiff)) %>%
+  print(n = 10)
+           
+```
+
+

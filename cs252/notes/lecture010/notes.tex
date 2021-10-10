@@ -1,0 +1,21 @@
+\documentclass[letterpaper]{report}
+
+\setlength\parindent{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+\title{Lec 010}
+\author{Svadrut Kukunooru}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+    Computer memory is a 1-D array of elements each of the same size. Memory location is like an element -- it's a place to store a fixed number of bits. Addressability is the size of memory location in bits. This is typically 8 bits, or a byte. 
+    The address of a memory location is like an elements' order. It says where to access an element, and uniquely identifies a certain memory location. It is a patter nof bits that is often represented in hex. Address space is the number of uniquely addressable memory locations. Typically starts at 0 and goes to $2^N - 1$ where $N$ is number of bits in the address. 
+    Data in a memory location is like an elements' value. It says where the contents are stored, and it's a pattern of bits that is also usually represented in hex. M[address] means contents of memory at the address location. Memory does not know what type of data it is storing. 
+    ROM Stands for read only memory; it retains data when powered off. RAM stands for random access memory; it can read AND write, unlike ROM, which can only read. SRAM is small and fast, and data does not fade. DRAM is large and slow, and data fades over time. Flash is very slow and very large, but also very cheap. It is like RAM in that it can read and write.
+\end{document}
+
