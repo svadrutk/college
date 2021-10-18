@@ -1,0 +1,82 @@
+\documentclass[letterpaper]{report}
+
+\setlength\parindent{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+\title{Weekly HW 005}
+\author{Svadrut Kukunooru}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+    
+\subsection{3.2.2(f)}%
+\label{sub:3.2.2(f)}
+Compute the following determinants via reduction to triangular form or by citing a particular theorem or corollary: 
+\[
+\begin{bmatrix} 
+    2 & 0 & 1 & 4 \\
+    3 & 2 & -4 & -2 \\
+    2 & 3 & -1 & 0 \\
+    11 & 8 & -4 & 6 
+\end{bmatrix} \to 
+\begin{bmatrix} 
+    2 & 0 & 1 & 4 \\
+    0 & 2 & -\frac{11}{2} & -8 \\
+    0 & 3 & -2 & -4 \\
+    0 & 8 & -\frac{19}{2} & -16 
+\end{bmatrix} \to 
+\begin{bmatrix} 
+    2 & 0 & 1 & 4 \\
+    0 & 2 & -\frac{11}{2} & -8 \\
+    0 & 0 & \frac{25}{4} & 8 \\
+    0 & 0 & \frac{25}{2} & 16 
+\end{bmatrix} 
+\] 
+\[
+\to 
+\begin{bmatrix} 
+    2 & 0 & 1 & 4 \\
+    0 & 2 & -\frac{11}{2} & -8 \\
+    0 & 0 & \frac{25}{4} & 8 \\
+    0 & 0 & 0 & 0
+\end{bmatrix} \to 
+2 \times  2 \times  \frac{25}{4} \times  0 = \fbox{0}
+\] 
+\subsection{3.2.26(b)}%
+\label{sub:3.2.26(b)}
+Use Theorem 3.8 to determine all values of $t$ so that the following matrices are nonsingular: 
+\[
+\begin{bmatrix} 
+    t & 1 & 2 \\
+    0 & 1 & 1 \\
+    1 & 0 & t
+\end{bmatrix} 
+\] 
+\[
+-t^2 +t + 2 \neq 0 
+\] 
+\[
+\fbox{$t \neq 1, -1$}
+\] 
+\subsection{3.3.12}%
+\label{sub:3.3.12}
+Find all values of $t$ for which 
+\[
+\begin{bmatrix} 
+    t - 1 & 0 & 1 \\
+    -2 & t + 2 & -1 \\
+    0 & 0 & t + 1 
+\end{bmatrix} 
+\] 
+\[
+    (t-1)(t^2 +3t + 2) = 0 
+\] 
+\[
+    \fbox{$t = 1, -1, -2$}
+\] 
+\end{document}
