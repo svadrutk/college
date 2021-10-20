@@ -250,15 +250,16 @@ The resulting data frame should have the following columns of data.
 - `obese_n` = estimated # of obese adults (by zip and sex)
 - `obese_p` = estimated proportion of obese adults (by zip and sex)
 
+
 ```{r}
 obesity = read_csv("../../data/obesity.csv")
 obesity <- obesity[!obesity$age == "05-17",]
 obesity <- obesity[!is.na(obesity$obese),]
 ZIPS2KILL <- obesity %>% group_by(zip) %>% summarise(isThereData = n()) 
-ZIPS2KILL <- ZIPS2KILL[ZIPS2KILL$isThereData < 8,]
-ZIPS2KILL <- dplyr::pull(ZIPS2KILL, zip)
-obesity<- obesity[!obesity$zip == ZIPS2KILL, ]
-FINALQ4 <- obesity %>% group_by(zip, sex) %>% summarise(adult_n = sum(pop), obese_n = sum(obese), obese_p = obese_n/adult_n) 
+ZIPS2KILL <- ZIPS2KILL[ZIPS2KILL$isThereData != 8,]
+ZIPS2KILL <- ZIPS2KILL$zip
+obesity <- obesity[!obesity$zip %in% ZIPS2KILL, ]
+FINALQ4 <- obesity %>% group_by(zip, sex) %>% summarise(adult_n = sum(n), obese_n = sum(obese), obese_p = obese_n/adult_n) 
 FINALQ4
 ```
 
@@ -276,7 +277,7 @@ This action will require both reshaping data and transforming the values and col
 ```{r}
 education = read_csv("../../data/education.csv")
 colnames(education) = c("zip", "Male", "Female")
-education <- education %>% pivot_longer(c(Male, Female), names_to = "sex", values_to = "pct_bach")
+education <- education %>% pivot_longer(c(Female, Male), names_to = "sex", values_to = "pct_bach")
 ```
 
 Print out all columns of the first ten rows of the education data frame.
@@ -290,8 +291,9 @@ print(education)
 Join the two data sets together by adding the `pct_bach` column to the data set from problem 5.
 
 ```{r}
-education <- education[!education$zip == ZIPS2KILL, ]
-
+education <- education[!education$zip %in% ZIPS2KILL,]
+education <- education[education$zip %in% FINALQ4$zip,]
+FINALQ4$pct_bach <- education$pct_bach
 ```
 
 Using the joined data set and the adult population, calculate the statewide percentages of men and women aged 25 and older with a bachelors degree.
@@ -299,8 +301,15 @@ Using the joined data set and the adult population, calculate the statewide perc
 Display the numerator and denominator for each percentage calculation as part of your solution.
 
 ```{r}
-
+FEMALE <- subset(FINALQ4, FINALQ4$sex == "female")
+MALE <- subset(FINALQ4, FINALQ4$sex == "male")
+malepct <- mean(MALE$pct_bach)
+femalepct <- mean(FEMALE$pct_bach)
+rm(MALE, FEMALE)
 ```
+
+The male percentage is 23.966%, and the female percentage is 26.624%. 
+
 ### 8
 
 Make a scatter plot with one point per zip code and sex that displays the *percentage* of a zip code aged 25+ with a bachelor's degree on the x-axis and the *percentage* obese on the y axis.  
@@ -308,9 +317,13 @@ Make a scatter plot with one point per zip code and sex that displays the *perce
 - Create appropriate labels and titles for the plot.  
 
 ```{r}
+ggplot(data = FINALQ4) +
+  geom_point(mapping = aes(x = pct_bach, y = obese_p, color = sex)) + ggtitle("Obesity Percentage vs. Bachelor's Percentage, By Sex and Zip Code") + ylab("Obese Percentage") + xlab("Bachelor's Percentage") +   geom_smooth(mapping = aes(x = pct_bach, y = obese_p, color=sex))
 
 ```
 
 Comment on patterns in the plot of the data.
 What is the evident relationship between obesity and obtaining a college education?
+
+It appears that zip codes with a higher amount of obese people do not have a higher amount of people getting bachelor degrees as much as zip codes with a higher percentage of non-obese people. Additionally, it appears that more women are obese in these surveyed zip codes than men, although in terms of bachelor degrees, both sexes follow the same pattern. 
 
