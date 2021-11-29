@@ -1,0 +1,204 @@
+---
+title: "STAT 240 Discussion 8"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+library(tidyverse)
+source("../../scripts/viridis.R")
+source("../../scripts/ggprob.R")
+```
+
+\newcommand{\E}{\mathsf{E}}
+\newcommand{\Var}{\mathsf{Var}}
+\renewcommand{\prob}{\mathsf{P}}
+
+## Questions
+
+### 1
+
+(a) A fair coin is tossed repeatedly until the tenth head is tossed. $X_1$ is the number of tails tossed prior to the tenth head.
+
+REPLACE THIS TEXT WITH YOUR RESPONSE
+
+
+
+(b) Four buckets each contain a total of five tokens each, some red and some blue. The number of red tokens in the buckets are 1, 2, 3, and 4 with blue tokens making up the remainder. One token is drawn at random from each bucket. $X_2$ is the total number of red tokens drawn.
+
+REPLACE THIS TEXT WITH YOUR RESPONSE
+
+
+
+
+(c) A random sample of students in a fitness study.
+$X_3$ is the mean systolic blood pressure of the sample.
+
+REPLACE THIS TEXT WITH YOUR RESPONSE
+
+
+
+### 2
+
+Let $X \sim \text{Binomial}(25, 0.4)$.
+
+#### A
+
+Calculate and report the mean $\mu = \E(X)$ and the standard deviation $\sigma = \sqrt{\Var(X)}$.
+
+```{r}
+
+```
+
+
+#### B
+
+Calculate $\prob(X \ge 14)$.
+
+```{r}
+
+```
+
+
+### C
+
+Create a graph of the $\text{Binomial}(25, 0.4)$ distribution.
+Color the segments for $x = 14, 15, \ldots, 25$ red and use gray for the rest. Plot using `theme_minimal()`.
+
+You may edit the code in this block which does something similar for a different problem.
+Note the use of `geom_binom_density()` with different values of `a` and `b`.
+
+```{r, fig.height = 3}
+gbinom(100, 0.5, a = 30, b = 70) +
+  geom_binom_density(100, 0.5, a = 35, b = 50, color = "gray") +
+  geom_binom_density(100, 0.5, a = 55, b = 70, color = "red") +
+  theme_minimal()
+```
+
+
+### 3
+
+Create a data frame with columns `n`, `p`, `x`, `mu`, and `prob` where:
+
+- `n` varies from 2 to 100 by twos (so each `n` value is even:  2, 4, 6, 8, ..., 100);
+- `p` equals 0.5;
+- `x` is `n*p`;
+- `mu` is the mean of the Binomial distribution with parameters `n` and `p`;
+- `prob` is $\prob(X = x)$, where $X \sim ~ \text{Binomial}(n, p)$
+
+Show the first few rows using `head()`, then respond to the question below.
+
+
+What is the relationship between `x` and `mu`?
+
+REPLACE THIS TEXT WITH YOUR RESPONSE
+
+
+
+
+
+### 4
+
+The central limit theorem implies that the binomial distribution converges to a normal distribution as $n$ increases.  This problem will examine one aspect of the convergence, namely the right tail probability of being more than two standard deviations above the mean, $\prob(X > \mu + 2\sigma)$.
+
+**(a)** What is the probability that a normal random variable with mean $\mu$ and standard deviation $\sigma$ exceeds $\mu + 2 \sigma$? Display answer rounded to four decimal places.
+
+
+
+
+
+**(b)** 
+
+Create a data frame with columns `n`, `p`, `mu`, `sigma`, `x`, and `prob` where:  
+
+- `n` varies from 1 to 1000 by ones (1, 2, 3, ..., 1000);  
+- `p` equals 0.5;  
+- `mu` is the mean of the Binomial distribution with parameters `n` and `p`
+- `sigma` is the standard deviation of the Binomial distribution with parameters `n` and `p`;
+- `x = mu` + 2*sigma`;  
+- `prob` is $\prob(X > x)$, where $X \sim \text{Binomial}(n, p)$
+
+Display the first few rows of the data frame with `head()`.
+
+
+
+**(c)** Plot the right tail probabilities versus $n$, and carryout the following modifications:
+
+- Add a red, dashed, horizontal line at the value you found in part **(a)**.  
+- Add a smooth curve which lessens the visual impact of the oscillations due to the discreteness of the binomial distribution.
+
+
+
+
+### 5
+
+Repeat problems **4B** and **4C** if $p = 0.005$.
+
+
+
+
+### 5D
+
+Ignoring the oscillations, how do the patterns of the two smooth curves in the graphs differ from one another, especially when $n$ is large?
+
+REPLACE THIS TEXT WITH YOUR RESPONSE
+
+
+
+### 6
+
+Draw a graph of the binomial distribution with $(n=500, p = 0.5)$ and a graph for the binomial distribution with $(n=500, p = 0.005)$; you may use the `gbinom()` function in the *ggprob.R* script.
+Scale these graphics so that the x axis is restricted to where the probabilities are relatively large; set `scale=TRUE` in the `gbinom()` function to accomplish this.  
+
+Overlay each plot with a red normal density with a mean and standard deviation that matches the mean and standard deviation of the corresponding binomial distribution.  Consider the `geom_norm_density()` function in the *ggprob.R* script.
+
+Compare the skewness of the distributions and comment on how this might help explain the differences in the right tail probabilities from Problem 3.
+
+REPLACE THIS TEXT WITH YOUR RESPONSE
+
+
+
+### 7
+
+If $X \sim \text{N}(20, 3)$, what is $\prob(15 < X < 27)$?
+
+```{r}
+
+```
+
+0.924
+
+### 8
+
+Draw a graph of a normal distribution with mean 20 and standard deviation 3 with the area between 15 and 27 shaded.
+How does this area correspond to the previous calculated probability?
+
+REPLACE THIS TEXT WITH YOUR RESPONSE
+
+
+
+The shaded area equals the previous problem calculation.
+
+### 9
+
+Define $z_1 = (15 - 20)/3$ and $z_2 = (27 - 20)/3$.
+If $Z \sim \text{N}(0,1)$, what is $\prob(z_1 < Z < z_2)$?
+
+```{r}
+
+```
+
+
+
+### 10
+
+Draw a graph of a standard normal distribution and shade the area under the curve between $z_1$ and $z_2$ from the previous problem.
+How does this plotted graph compare to the graph made in question 8?
+
+```{r}
+
+```
+
+
+
+
