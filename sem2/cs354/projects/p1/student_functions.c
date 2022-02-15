@@ -14,11 +14,31 @@
 
 void Clean_Whitespace(char str[]) {
     // do your work here
-    for(int i = 0; i < sizeof(str); i++) {
-        if(str[i] == " " || str[i] == "\t" || str[i] == "\n") {
-            str[i] = ""; 
+    int index = 0;
+    int i = 0; 
+    // jump to the first word
+    while(str[index] == ' ' || str[index] == '\t' || str[index] == '\n') {
+        index++; 
+    }
+    // get rid of the leading spaces 
+    while(str[i + index] != '\0')
+    {
+        str[i] = str[i + index];
+        i++;
+    }
+    
+    int j = 0; 
+    // get rid of whitespace between the words 
+    for(i = 0; str[i]; i++) {
+        if(str[i] != ' ' || str[i-1] != ' ') {
+            str[j++] = str[i];
         }
     }
+    // get rid of trailing whitespace
+    while(str[j] == ' ' || str[j] == '\t' || str[j] == '\n') {
+        j--; 
+    }
+    str[j+1] = '\0'; 
     return;
 }
 
@@ -28,14 +48,17 @@ void Clean_Whitespace(char str[]) {
  */ 
 void Fix_Case(char str[]) {
     // do your work here
-    for(int i = 0; i < sizeof(str); i++) {
-        if(str[i-1] == " " || str[i-1] == "\t" || str[i-1] == "\n") {
-            if(str[i] >= 97 || str[i] <= 122) {
+    if(str[0] >= 97 && str[0] <= 122) {
+        str[0] -= 32; 
+    }
+    for(int i = 1; i < sizeof(str); i++) {
+        if(str[i-1] == ' ') {
+            if(str[i] >= 97 && str[i] <= 122) {
                 str[i]-= 32; 
             }
         }
         else {
-            if(str[i] >= 65 || str[i] <= 90) {
+            if(str[i] >= 65 && str[i] <= 90) {
                 str[i] += 32; 
             }
         }
@@ -59,11 +82,19 @@ int String_To_Year(char str[]) {
  */
 void Director_Last_Name(char str[]) {
     // do your work here
-    char last_word[] = ""; 
-    for(int i = 0; i < sizeof(str); i++) {
-        last_word += str[i]; 
-        
+    Clean_Whitespace(str); 
+    Fix_Case(str); 
+    int i = 0; 
+    int counter = 0; 
+    for(int j = 0; str[j]; j++) {
+        if(str[j - 1] == ' ') {
+           i = j; 
+        }
     }
+    while(str[i] != '\0') {
+        str[counter++] = str[i++]; 
+    }
+    str[counter] = '\0';
     return;
 }
 
@@ -91,7 +122,7 @@ long long String_To_Dollars(char str[])  {
     else if(str[sizeof(str) - 1] == "k" || str[sizeof(str) - 1] == "K") {
         return atol(str) * 1000; 
     }
-    return 0;
+    return atol(str);
 }
 
 
@@ -102,6 +133,56 @@ long long String_To_Dollars(char str[])  {
  */
 void Split(char csv[10][1024], int num_movies, char titles[10][1024], int years[10], char directors[10][1024], float ratings[10], long long dollars[10]) {
     // do your work here
+    char strYears[10][1024]; 
+
+    for(int i = 0; i < num_movies; i++) {
+        int j = 0; 
+        // title
+        while(csv[i][j] != ',') {
+            titles[i][j] = csv[i][j++]; 
+        }
+        Clean_Whitespace(titles[i]);
+        Fix_Case(titles[i]);
+        j++; 
+        // years
+        while(csv[i][j] != ',') {
+            strYears[i][j] = csv[i][j++]; 
+        }
+        Clean_Whitespace(strYears[i]); 
+        int year = String_To_Year(strYears[i]); 
+        years[i] = year; 
+        j++; 
+        // skip the runtime 
+        while(csv[i][j] != ',') {
+            j++; 
+        }
+        j++; 
+        // directors
+        while(csv[i][j] != ',') {
+            directors[i][j] = csv[i][j++]; 
+        }
+        Clean_Whitespace(directors[i]); 
+        Director_Last_Name(directors[i]); 
+        Fix_Case(directors[i]);
+        j++; 
+        // floats
+        char strFloats[10][1024]; 
+        while(csv[i][j] != ',') {
+            strFloats[i][j] = csv[i][j++]; 
+        }
+        Clean_Whitespace(strFloats[i]); 
+        float rating = String_To_Rating(strFloats[i]); 
+        ratings[i] = rating; 
+        j++; 
+        // dollars
+        char strDollars[10][1024]; 
+        while(csv[i][j]) {
+            strDollars[i][j] = csv[i][j++]; 
+        }
+        Clean_Whitespace(strDollars[i]); 
+        long long dollar = String_To_Dollars(strDollars[i]); 
+        dollars[i] = dollar; 
+    }
     return;
 }
 

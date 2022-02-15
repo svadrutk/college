@@ -23,27 +23,21 @@ Prove that if $x$ is a nonzero rational number and $y$ is irrational, then their
 
 ---
 
-We will use **proof by contrapositive**. 
+We will use **proof by contradiction**. 
 
-We can write the above expression as 
-$$
-\forall x \forall y (R(x) \and \lnot R(y) \implies Q(x,y))
-$$
-where 
-$$
-R(x): x \in \mathbb{Q}, x \neq 0 \\
-Q(x,y): xy \in \mathbb{P}
-$$
-turning that into a contrapositive, 
-$$
-\forall x \forall y(\lnot Q(x,y) \implies \lnot R(x) \or R(y))
-$$
+Let $x$ be irrational and $y$ be rational; then, assume $xy$ is rational. 
 
+This implies that 
 $$
-\forall x \forall y(Q(x,y) \or (\lnot R(x) \or R(y))
+y = \frac{a}{b}, \ xy = \frac{c}{d}
 $$
+for some integers $a,b,c,d$.  
+$$
+x \cdot y = xy  \rightarrow \frac{xy}{y} = x \rightarrow \frac{cb}{da} = x
+$$
+This is a contradiction, since it implies that an irrational number $x$ can be represented as a ratio of 2 integers. ∎
 
-The second part of the expression is a tautology; this expression is true. Therefore, if the contrapositive is true, the original expression is true as well. ∎
+
 
 ### Problem 3
 

@@ -26,8 +26,23 @@ int main() {
 
     Read_CSV("movies1.csv", csv, &num_movies);
     Split(csv, num_movies, titles, years, directors, ratings, dollars);
-    Print_Table(num_movies, titles, years, directors, ratings, dollars);
+    // Print_Table(num_movies, titles, years, directors, ratings, dollars);
 
+    // char str[] = "   test      test   \t ";
+    // printf("------ before everything -------\n");
+    // printf(str); 
+    // printf("\n");
+    // Clean_Whitespace(str);
+    // printf("------ after Clean_Whitespace --------");
+    // printf("\n");
+    // printf(str); 
+    // printf("\n");
+    // Fix_Case(str); 
+    // printf("------ after Fix_Case -------");
+    // printf("\n");
+    // printf(str); 
+    // printf("\n");
+    
 
 
 
