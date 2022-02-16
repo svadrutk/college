@@ -59,5 +59,4 @@ void Split(char csv[10][1024], int num_movies, char titles[10][1024], int years[
 void Print_Table(int num_movies, char titles[10][1024], int years[10], char directors[10][1024], float ratings[10], long long dollars[10]);
 
 
-
 #endif

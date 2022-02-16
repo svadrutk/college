@@ -26,7 +26,7 @@ void Clean_Whitespace(char str[]) {
         str[i] = str[i + index];
         i++;
     }
-    
+    str[i] = '\0';
     int j = 0; 
     // get rid of whitespace between the words 
     for(i = 0; str[i]; i++) {
@@ -34,6 +34,7 @@ void Clean_Whitespace(char str[]) {
             str[j++] = str[i];
         }
     }
+    str[j] = '\0';
     // get rid of trailing whitespace
     while(str[j] == ' ' || str[j] == '\t' || str[j] == '\n') {
         j--; 
@@ -51,7 +52,8 @@ void Fix_Case(char str[]) {
     if(str[0] >= 97 && str[0] <= 122) {
         str[0] -= 32; 
     }
-    for(int i = 1; i < sizeof(str); i++) {
+    int i = 1; 
+    while(str[i] != '\0') {
         if(str[i-1] == ' ') {
             if(str[i] >= 97 && str[i] <= 122) {
                 str[i]-= 32; 
@@ -62,6 +64,7 @@ void Fix_Case(char str[]) {
                 str[i] += 32; 
             }
         }
+        i++;
     }
     return;
 }
@@ -116,13 +119,21 @@ float String_To_Rating(char str[]) {
 */
 long long String_To_Dollars(char str[])  {
     // do your work here
-    if(str[sizeof(str) - 1] == "m" || str[sizeof(str) - 1] == "M") {
-        return atol(str) * 1000000; 
+    char lastChar;
+    int i = 0;
+    while(str[i+1] != '\0') {
+        lastChar = str[i];
+        i++;
     }
-    else if(str[sizeof(str) - 1] == "k" || str[sizeof(str) - 1] == "K") {
-        return atol(str) * 1000; 
+    if(lastChar == 'm' || lastChar == 'M') {
+        return (atoll(str) * 1000000); 
     }
-    return atol(str);
+    else if(lastChar == 'k' || lastChar == 'K') {
+        return (atoll(str) * 1000); 
+    }
+    else {
+        return atoll(str);
+    }
 }
 
 
@@ -134,57 +145,75 @@ long long String_To_Dollars(char str[])  {
 void Split(char csv[10][1024], int num_movies, char titles[10][1024], int years[10], char directors[10][1024], float ratings[10], long long dollars[10]) {
     // do your work here
     char strYears[10][1024]; 
+    char strFloats[10][1024]; 
+    char strDollars[10][1024]; 
 
     for(int i = 0; i < num_movies; i++) {
         int j = 0; 
+        int k = 0; 
         // title
         while(csv[i][j] != ',') {
-            titles[i][j] = csv[i][j++]; 
+            titles[i][k] = csv[i][j];
+            j++; 
+            k++;
         }
         Clean_Whitespace(titles[i]);
         Fix_Case(titles[i]);
         j++; 
+        k = 0; 
         // years
         while(csv[i][j] != ',') {
-            strYears[i][j] = csv[i][j++]; 
+            strYears[i][k] = csv[i][j];
+            j++; 
+            k++;
         }
+        // printf(strYears[i]);
+        // printf("\n");
         Clean_Whitespace(strYears[i]); 
         int year = String_To_Year(strYears[i]); 
-        years[i] = year; 
+        years[i] = year;         
         j++; 
         // skip the runtime 
         while(csv[i][j] != ',') {
             j++; 
         }
         j++; 
+        k = 0; 
         // directors
         while(csv[i][j] != ',') {
-            directors[i][j] = csv[i][j++]; 
+            directors[i][k] = csv[i][j];
+            j++; 
+            k++; 
         }
         Clean_Whitespace(directors[i]); 
         Director_Last_Name(directors[i]); 
         Fix_Case(directors[i]);
         j++; 
         // floats
-        char strFloats[10][1024]; 
+        k = 0; 
         while(csv[i][j] != ',') {
-            strFloats[i][j] = csv[i][j++]; 
+            strFloats[i][k] = csv[i][j];
+            j++; 
+            k++;
         }
         Clean_Whitespace(strFloats[i]); 
         float rating = String_To_Rating(strFloats[i]); 
         ratings[i] = rating; 
         j++; 
         // dollars
-        char strDollars[10][1024]; 
+        k = 0; 
         while(csv[i][j]) {
-            strDollars[i][j] = csv[i][j++]; 
+            strDollars[i][k] = csv[i][j];
+            j++; 
+            k++;
         }
-        Clean_Whitespace(strDollars[i]); 
+        Clean_Whitespace(strDollars[i]);
         long long dollar = String_To_Dollars(strDollars[i]); 
         dollars[i] = dollar; 
     }
     return;
 }
+
 
 
 
@@ -200,6 +229,81 @@ void Split(char csv[10][1024], int num_movies, char titles[10][1024], int years[
  */
 void Print_Table(int num_movies, char titles[10][1024], int years[10], char directors[10][1024], float ratings[10], long long dollars[10]) {
     // do your work here
+    printf("Id "); 
+    // find longest movie length
+    int titleCounter = 7; 
+    int counterB = 0; 
+    int i = 0; 
+    while(i < num_movies) {
+        counterB = 0;
+        int j = 0; 
+        while(titles[i][j]) {
+            counterB++; 
+            j++;
+        }
+        if(counterB > titleCounter) {
+            titleCounter = counterB; 
+        }
+        i++;
+    }
+    if(titleCounter == 7) {
+        printf("%-7s", "Title"); 
+    } else {
+        titleCounter += 2; 
+        printf("%-*s",titleCounter, "Title");
+    }
+    // year column
+    printf("Year  "); 
+    // director column 
+    int dirCounter = 0; 
+    counterB = 0; 
+    i = 0; 
+    while(i < num_movies) {
+        counterB = 0;
+        int j = 0; 
+        while(directors[i][j]) {
+            counterB++; 
+            j++;
+        }
+        if(counterB > dirCounter) {
+            dirCounter = counterB; 
+        }
+        i++;
+    }
+    if(dirCounter == 10) {
+        printf("%-10s", "Director");
+    } else {
+        dirCounter += 2; 
+        printf("%-*s", dirCounter, "Director");
+    }
+    printf("Rating"); 
+    printf("    Revenue");
+    printf("\n");
+    // do the actual table
+    for(int i = 0; i < num_movies; i++) {
+        printf("%d", i+1);
+        printf("  ");
+        if(titleCounter == 7) {
+        printf("%-7s", titles[i]); 
+        } else {
+        printf("%-*s",titleCounter-2, titles[i]);
+        }
+        printf("  ");
+        printf("%d", years[i]);
+        printf("  "); 
+        if(dirCounter == 10) {
+        printf("%-10s",directors[i]);
+        } else {
+        printf("%-*s", dirCounter-2, directors[i]);
+        }
+        if(dirCounter != 10) {
+            printf("  ");
+        }
+        printf("%6.1f", ratings[i]);
+        printf("%11ld", dollars[i]);
+        printf("\n");
+
+    }
     return;
 }
 
