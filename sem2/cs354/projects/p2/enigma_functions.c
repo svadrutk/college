@@ -28,7 +28,6 @@ void Get_Message(char msg[]){
         pointer++; 
     }
     *pointer = '\0';
-    puts(msg);
 }
 
 // This function reads up to 4 characters from the keyboard
@@ -39,13 +38,15 @@ void Get_Message(char msg[]){
 // the \n entered by the user. 
 // The function returns the number of active rotors.
 int Get_Which_Rotors(char which_rotors[]){ 
-    fgets(which_rotors, 5, stdin);
+    fgets(which_rotors, 80, stdin);
     char* pt = which_rotors; 
+    int i = 0; 
     while(*pt != '\n') {
         pt++; 
+        i++; 
     }
     *pt = '\0';
-    return atoi(which_rotors); 
+    return i; 
 } 
 
 // This function reads an integer from the keyboard and returns it 
@@ -73,9 +74,6 @@ void Set_Up_Rotors(char encryption_rotors[4][27], char which_rotors[5]) {
         strcpy(encryption_rotors[c], ROTOR_CONSTANTS[b]);
         c++;
     }
-    // print out encryption_rotors
-    puts(encryption_rotors[3]);
-
 }
 
 // This function rotates the characters  each of the active encryption rotors
@@ -95,7 +93,6 @@ void Apply_Rotation(int rotations, char encryption_rotors[4][27]) {
             encryption_rotors[j][26] = '\0';
         }
     }
-    puts(encryption_rotors[1]);
     return;
 }
 
@@ -104,13 +101,23 @@ void Apply_Rotation(int rotations, char encryption_rotors[4][27]) {
 // Do not change spaces, make sure your encryped_msg is a \0 terminated string
 void Encrypt(char encryption_rotors[4][27], int num_active_rotors, char msg[], char encrypted_msg[]){
     int a = 0; 
-    while(msg[a] != '\0') {
-        char temp = msg[a]; 
-        for(int j = 0; j < num_active_rotors; j++) {
-            temp = encryption_rotors[j][(temp - 'A')]; 
+    encrypted_msg[strlen(msg)];
+    while(msg[a] != '\0') { // while loop that loops through msg
+        if(msg[a] == ' ') {
+            encrypted_msg[a] = ' '; 
+            a++; 
         }
-        encrypted_msg[a] = temp; 
+        else {
+        char tmp = msg[a]; // temporary char
+        for(int i = 0; i < num_active_rotors; i++) { // while string exists
+            
+            int b = tmp - 'A'; // make integer that calculates place in array 
+
+            tmp = encryption_rotors[i][b]; // go through each encryption rotor and find the corresponding char
+        }
+        encrypted_msg[a] = tmp; // 
         a++; 
+        }
     }
     encrypted_msg[a] = '\0';
     return;
@@ -123,6 +130,27 @@ void Encrypt(char encryption_rotors[4][27], int num_active_rotors, char msg[], c
 // remember the encryption rotors must be used in the reverse order to decrypt a message
 // Do not change spaces, make sure your decrytped_msg is a \0 terminated string
 void Decrypt(char encryption_rotors[4][27], int num_active_rotors, char encrypted_msg[], char decrypted_msg[]) {
+    int a = 0; 
+    decrypted_msg[strlen(encrypted_msg)]; 
+    while(encrypted_msg[a] != '\0') {
+        if(encrypted_msg[a] == ' ') {
+            decrypted_msg[a] = ' '; 
+            a++; 
+        }
+        else {
+            char tmp = encrypted_msg[a]; 
+            int index = num_active_rotors - 1; 
+            int counter; 
+            for(index; index > -1; index--) {
+                char * p = strchr(encryption_rotors[index], tmp);
+                counter = p - encryption_rotors[index];
+                tmp = ROTOR_CONSTANTS[0][counter]; 
+            }
+            decrypted_msg[a] = tmp;
+            a++; 
+        }
+    }
+    decrypted_msg[a] = '\0'; 
     return;
 }
 
