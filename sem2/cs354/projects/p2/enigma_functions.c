@@ -21,7 +21,7 @@ const char *ROTOR_CONSTANTS[] = {
 // Do not include the \n entered from the keyboard
 void Get_Message(char msg[]){
     // read in data
-    fgets(msg, 200, stdin); 
+    fgets(msg, 80, stdin); 
     // remove newline
     char* pointer = msg; 
     while(*pointer != '\n') {
@@ -45,7 +45,6 @@ int Get_Which_Rotors(char which_rotors[]){
         pt++; 
     }
     *pt = '\0';
-    printf(which_rotors);
     return atoi(which_rotors); 
 } 
 
@@ -54,34 +53,49 @@ int Get_Which_Rotors(char which_rotors[]){
 // encryption rotors.  The input will be between 0 and 25 inclusive
 int Get_Rotations(){
     int a; 
-    scanf('%d', &a); 
+    scanf("%d", &a); 
     return a;
 }
 
 // TODO 
 
 // This function copies the rotors indicated in the which_rotors string 
-// into the encryption_rotors.  For example if which rotors contains the string 
+// into the encryption_rotors.  For example if which_rotors contains the string 
 // {'3', '1', '\0'} Then this function copies the third and first rotors into the 
 // encryption rotors array in positions 0 and 1.  
 // encryptions_rotors[0] = "BDFHJLCPRTXVZNYEIWGAKMUSQO"
 // encryptions_rotors[1] = "EKMFLGDQVZNTOWYHXUSPAIBRCJ"
-void Set_Up_Rotors(char encryption_rotors[4][27], char which_rotors[5]){
-    int a = 0; 
-    while(a != '\0') {
-        encryption_rotors[a] = ROTOR_CONSTANTS[which_rotors[a]]; 
-        a++; 
+void Set_Up_Rotors(char encryption_rotors[4][27], char which_rotors[5]) {
+    char *p; 
+    for(p = which_rotors; *p; p++) {
+        int b = *p - '0'; 
+        int c; 
+        strcpy(encryption_rotors[c], ROTOR_CONSTANTS[b]);
+        c++;
     }
-    return;
+    // print out encryption_rotors
+    puts(encryption_rotors[3]);
+
 }
 
-
-// This function rotates the characters in each of the active encryption rotors
+// This function rotates the characters  each of the active encryption rotors
 // to the right by rotations.  For example if rotations is 3 encryption_rotors[0]
 // contains "BDFHJLCPRTXVZNYEIWGAKMUSQO" then after rotation this row will contain
 // SQOBDFHJLCPRTXVZNYEIWGAKMU.  Apply the same rotation to all for strings in 
 // encryption_rotors
 void Apply_Rotation(int rotations, char encryption_rotors[4][27]) {
+    for(int i = 0; i < rotations; i++) {
+        for(int j = 0; j < 4; j++) {
+            char c = encryption_rotors[j][25];
+            char tmp = encryption_rotors[j][0];
+            for(int i = 25; i > 0; i--) {
+                encryption_rotors[j][i] = encryption_rotors[j][i - 1];
+            }
+            encryption_rotors[j][0] = c; 
+            encryption_rotors[j][26] = '\0';
+        }
+    }
+    puts(encryption_rotors[1]);
     return;
 }
 
@@ -89,6 +103,16 @@ void Apply_Rotation(int rotations, char encryption_rotors[4][27]) {
 // The encrypted message is stored in the string encryped_msg 
 // Do not change spaces, make sure your encryped_msg is a \0 terminated string
 void Encrypt(char encryption_rotors[4][27], int num_active_rotors, char msg[], char encrypted_msg[]){
+    int a = 0; 
+    while(msg[a] != '\0') {
+        char temp = msg[a]; 
+        for(int j = 0; j < num_active_rotors; j++) {
+            temp = encryption_rotors[j][(temp - 'A')]; 
+        }
+        encrypted_msg[a] = temp; 
+        a++; 
+    }
+    encrypted_msg[a] = '\0';
     return;
 }
 
