@@ -1,0 +1,3 @@
+ # QCC 8
+
+This week, we look at how data taken from students, how it's used, and the ethics of using said data. In a Deadspin article, "Why Is This Wearable-Tech Company Helping College Teams Track How Often Athletes Sleep, Drink, And Have Sex?", Alex Shultz discusses how WHOOP, a wearable wristband developed by Harvard undergrads, has met with controversy over privacy concerns. For example, an athlete could declare for the NBA draft, but his data could be shared with scouts who discover a problem with him; this could spread through the league, and the athlete could be out of a professional career.

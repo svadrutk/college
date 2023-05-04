@@ -1,0 +1,240 @@
+---
+title: "STAT340 HW03: Testing I"
+author: "Svadrut Kukunooru"
+date: "October 2022"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+------------------------------------------------------------------------
+
+TODO: If you worked with any other students on this homework, please list their names and NetIDs here.
+
+------------------------------------------------------------------------
+
+## Instructions
+
+Update the "author" and "date" fields in the header and complete the exercises below.
+Knit the document, and submit **both the HTML and RMD** files to Canvas.
+
+**Due date:** October 6, 2022 at 11:59pm.
+
+------------------------------------------------------------------------
+
+## 1) Permutation testing
+
+Below are data arising from a (fictionalized) data source: the number of defects per day on an assembly line before (`before`) and after (`after`) installation of a new torque converter (this is a totally fictional "part" of an assembly line-- just treat these as "control" and "treatment" groups, respectively).
+
+```{r}
+before <- c(2, 3, 8, 3, 4, 5, 6, 3, 5, 5, 2, 4, 3, 5, 4, 1, 3, 5, 8, 4, 4, 2, 2, 4, 6, 3, 4, 3, 4, 6, 5, 4, 5, 4, 6, 6, 3, 7, 0, 6);
+after <- c(1, 4, 2, 3, 6, 2, 5, 7, 3, 5, 3, 2, 6, 5, 3, 2, 6, 4, 4, 3, 4, 5, 2, 7, 2, 2, 8, 2, 7, 5 );
+```
+
+a)  Use a permutation test to assess the claim that installation of the new part changed the prevalence of defects. That is, test the null hypothesis that the distribution of defects is the same before and after installation of the new part.
+
+**Hint:** be careful of the fact that these two different groups have different sizes!
+
+**Note:** You do not *have* to produce a p-value, here, though that would be a very reasonable thing to do!
+
+```{r}
+# TODO: code goes here.
+
+# Assume that the null hypothesis is that the distribution of defects is the same before and after installation of the new part. 
+
+# Therefore, we must assume that the null hypothesis is true, and work with the assumption that the distributions are the same. 
+
+# If the distributions are the same, this means that each distribution has an equal probability of having defects. 
+
+permute_and_compute <- function( ctrl_data, trmt_data ) {
+  # ctrl_data and trmt_data are vectors storing our control and treatment data
+  # We are going to pretend that these two data sets came from the same
+  # distribution. That means
+  # 1) pooling them and randomly reassigning them
+  #     to the treatment and control groups.
+  # and then
+  # 2) Computing our test statistic (the difference in means) on that
+  #     new "version" of the data.
+  
+  # Pool the data
+  pooled_data <- c( ctrl_data, trmt_data );
+  # Randomly shuffle the data and assign it to control and treatment groups.
+  n_ctrl <- length( ctrl_data );
+  n_trmt <- length( trmt_data );
+  n_total <- n_ctrl + n_trmt;
+  # Now, let's shuffle the data, and assign the first n_ctrl elements
+  # to the control group, and the rest to the treatment group.
+  # We're going to do this using the sample() function.
+  # To randomly shuffle the data, it's enough to sample from the
+  # original data (i.e., the pooled data) WITHOUT replacement.
+  # The result is that shuffled_data contains the same elements as
+  # pooled_data, just in a (random) different order.
+  shuffled_data <- sample( pooled_data, size=n_total, replace=FALSE );
+  # Now, the first n_ctrl of these data points are our new control group
+  # and the remaining elements are assigned to our treatment group.
+  shuffled_ctrl <- shuffled_data[1:n_ctrl];
+  shuffled_trmt <- shuffled_data[(n_ctrl+1):n_total];
+  # Okay, last step: compute the difference in means of our two samples.
+  return( mean(shuffled_trmt)-mean(shuffled_ctrl) );
+}
+
+NMC <- 1e5; # Might want to increase this to more like 1e5 for better accuracy
+test_statistics <- rep( 0, NMC ); # Vector to store our "fake" test statistics
+
+# Now, NMC times, shuffle the data, recompute the test statistic, and record.
+for(i in 1:NMC ) {
+  test_statistics[i] <- permute_and_compute( before, after );
+}
+
+# Now, let's make a histogram of those permuted test statistics.
+hist( test_statistics )
+abline( v=mean(after)-mean(before), lw=3, col='red')
+```
+
+b)  Explain, briefly, what you did above and why. Imagine that you are trying to explain to someone who isn't your statistics professor what exactly you are doing in a permutation test. Explain your conclusion based on your test above. Three to five sentences should be plenty, but you are free to write as much or as little as you think is necessary to clearly explain your findings.
+
+------------------------------------------------------------------------
+
+Assuming that the null hypothesis is true, the distribution of both groups are identical.
+This means that if the values in each group are randomly pooled and placed in two groups, the distributions will be the same.
+I made a histogram of this and compared the average to the original average between the two files.
+Since these were similar, we do not reject the null hypothesis.
+
+------------------------------------------------------------------------
+
+## 2) Extrasensory perception?
+
+There has been a great deal of effort over the years to prove the existence or non-existence of [extra-sensory perception (ESP)](https://en.wikipedia.org/wiki/Extrasensory_perception).
+
+Sam claims to have ESP, and offers to demonstrate it via the following experiment: we will start with a standard deck of playing cards.
+We will shuffle the deck and look at the cards, one at a time, in order, not showing Sam the card.
+As we look at each card, Sam will guess the card (both the rank and the suit), and we will record whether or not Sam has guessed correctly.
+We *will not* tell Sam if the guess was correct, simply record whether or not it was correct without giving feedback.
+
+**Note:** A standard deck of playing cards consists of 52 cards, 4 suits, 13 ranks; each card has a suit and a rank, with each rank-suit combination appearing exactly once.
+Note that as a result, each of the 52 cards in the deck is unique.
+See [here](https://en.wikipedia.org/wiki/Standard_52-card_deck) for additional background and information.
+
+Suppose that we conduct this experiment and we find that Sam correctly guesses four (4) of the 52 cards correctly.
+Use the techniques and ideas introduced so far this semester to assess how likely or unlikely this outcome (or the outcome in which Sam gets even more cards correct) is under the null hypothesis that Sam guesses each of the 52 cards exactly once each, in a random order.
+That is, we are assuming that Sam is guessing by randomly choosing an ordering of the cards in the deck and guessing in that order.
+
+In addition to code, please include a detailed explanation of your thought process, including motivating and/or clarifying your modeling choices.
+Think carefully about how to model a randomly shuffled deck of cards-- thinking back to our birthday example from last week might prove helpful.
+
+Your response will be graded both on its correctness (though note that there is no single strictly correct answer, here) and on the clarity of your explanation.
+Try writing as though you were explaining your choices to a student who has already taken this course previously.
+
+------------------------------------------------------------------------
+
+TODO: explanations and code go here.
+
+```{r}
+
+#TODO: code goes here
+
+# A function to generate a deck of cards randomly, in a certain order. 
+generate_cards <- function() {
+  cards <- c( 1:52 ); 
+  return( c(sample( cards, size=n, replace=FALSE )) );
+  
+}
+
+# The same function can be used to generate the guesses for the card. 
+
+generate_guesses <- function() {
+  return( generate_cards(52) )
+}  
+
+# You can count the amount of correct guesses by comparing the two vectors. 
+count_correct <- function( true_cups, guess_cups ) {
+  return( sum( true_cups==guess_cups) )
+}
+
+# You can use Monte Carlo testing to see the approximate probability of picking 4 cards correctly. 
+NMC <- 2000;
+
+ncorrect <- rep(0, NMC); # We'll store results in this vector
+for (i in 1:NMC ) {
+  truecards <- c(sample(c(1:52), size = 52, replace=FALSE))
+  guesscards <- c(sample(c(1:52), size = 52, replace=FALSE))
+  ncorrect[i] <- count_correct( truecards, guesscards );
+}
+
+hist( ncorrect )
+sum( ncorrect==4 )/NMC
+# Since the probability is approximately 2%, the probability that Sam picked 4 cards correctly purely by chance is very low; therefore, we do not reject the null hypothesis. 
+
+```
+
+Feel free to add more code blocks and/or more text blocks as needed.
+
+------------------------------------------------------------------------
+
+## 3) Just lucky?
+
+The [National Football League (NFL)](https://en.wikipedia.org/wiki/National_Football_League) is the top league in American football.
+The league consists of two conferences, the American Football Conference (AFC) and the National Football Conference (NFC).
+Since 1967, the top team from each of these conferences play against one another in the [Superbowl](https://en.wikipedia.org/wiki/Super_Bowl).
+
+a)  As of writing this homework, there have been fifty six (56) Superbowls played. The NFC team has won 29 of these 56 games. Using everything you have learned so far this semester, assess whether or not this constitutes a "surprising" amount of games. Please include a clear explanation of your thought process and how you arrived at your conclusion. As is often the case in these homeworks, there is no strictly right or wrong answer, here, so long as your reasoning is sound and your explanation is clearly written.
+
+------------------------------------------------------------------------
+
+I feel like the NFC winning 29 out of 56 games is not a "surprising" amount of games, since due to hypothesis testing, the probability that the NFC wins 29 out of 56 games is about a tenth, which is relatively large.
+
+------------------------------------------------------------------------
+
+```{r}
+
+NMC <- 2000;
+
+ncorrect <- rep(0, NMC);
+# Monte Carlo
+for(i in 1:NMC) {
+  # make a random vector of 56 games, with 1s representing wins. 
+  arr <- rbinom(56, 1, 0.5)
+  ncorrect[i] <- sum(arr == 1)
+}
+# createa histogram 
+hist( ncorrect )
+# Find the chance of the NFC winning 29 games. 
+sum(ncorrect == 29)/NMC
+
+```
+
+b)  Among those 29 wins by NFC teams, the NFC team won the Superbowl every year from 1985 to 1997 (13 consecutive Superbowls; coincidentally, the last of these was a victory by Wisconsin's own Green Bay Packers over my hometown team the New England Patriots). Under the assumption that each year's Superbowl is independent of the others and that the AFC and NFC teams are equally likely to win any given Superbowl, assess how surprising this result is. That is, associate a p-value to the event that the NFC team won all 13 Superbowls in the span 1985 to 1997. Once again, clearly explain your reasoning to get full credit.
+
+------------------------------------------------------------------------
+
+Calculating this is simply calculating 0.5 to the power of 13, since there are only two outcomes to a league winning the Super Bowl -- the NFC or AFC.
+Therefore, the solution is 0.0001220703.
+
+------------------------------------------------------------------------
+
+```{r}
+# TODO: code goes here.
+0.5 ^ 13
+```
+
+c)  **Bonus:** (not worth any points; just a fun exercise) Now, let's zoom out. Write a simulation to estimate how often, under our "independent coinflips" model of the Superbowl, it happens that either of the two conferences (AFC or NFC) wins at least 13 consecutive games. **Hint:** you may find the following function useful, which takes a vector of `0`s and `1`s (e.g., a sequence of Bernoulli RVs) and outputs the length of the longest run.
+
+```{r}
+longestRun = function(x){
+    return( max( 0, with(rle(x), lengths) ) )
+}
+
+# Example: here's a vector encoding the Superbowl history.
+# 0s are AFC, 1s are NFC.
+superbowls <- c( 1,1,0,0,0,1,0,0,0,0,0,1,0,0,0,
+                 1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,
+                 1,0,0,1,0,0,1,0,0,0,0,1,0,1,1,
+                 1,0,1,0,0,0,1,0,0,1,1)
+longestRun(superbowls)
+```
+
+```{r}
+# TODO: code goes here,
+# if you choose to do this OPTIONAL, NOT WORTH ANY POINTS bonus problem
+```

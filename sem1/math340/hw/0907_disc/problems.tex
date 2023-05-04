@@ -1,0 +1,70 @@
+\documentclass[letterpaper]{report}
+
+\setlength\parindent{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+\title{Worksheet 5}
+\author{Svadrut Kukunooru}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+    \subsection{Problem 1}%
+    \label{sub:Problem 1}
+    Given the matrix
+    \[
+    \begin{bmatrix} 
+        3 & 1 & 2 \\
+        2 & 1 & 2 \\
+        1 & 2 & 2
+    \end{bmatrix} 
+    \] 
+    Find the reduced row echelon form of the given matrix. 
+\[
+\begin{bmatrix} 
+    3 & 1 & 2 \\
+    2 & 1 & 2 \\
+    1 & 2 & 2 
+\end{bmatrix} \to
+\begin{bmatrix} 
+    2 & 1 & 2 \\
+    3 & 1 & 2 \\
+    1 & 2 & 2 
+\end{bmatrix} \to 
+\begin{bmatrix} 
+    2 & 1 & 2 \\
+    1 & 0 & 0 & \\
+    -1 & 1 & 0 \\
+\end{bmatrix} \to
+\begin{bmatrix} 
+    2 & 1 & 2 \\
+    1 & 0 & 0 & \\
+    0 & 1 & 0 
+\end{bmatrix}  \to
+\] 
+\[
+\begin{bmatrix} 
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    2 & 1 & 2 
+\end{bmatrix} \to 
+\begin{bmatrix} 
+    1 & 0 & 0 & \\
+    0 & 1 & 0 \\
+    0 & 1 & 2
+\end{bmatrix}  \to
+\begin{bmatrix} 
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 
+\end{bmatrix} 
+\] 
+Is this matrix invertible? \\ \\ 
+Since this matrix does not have any zero rows, it is invertible. \\ \\ 
+
+Write down the elementary matrices corresponding to the elementary row operations you used in (a
+\end{document}

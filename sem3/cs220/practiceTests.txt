@@ -1,0 +1,86 @@
+Fall 2019 Practice Exam 
+1. B
+3. A 
+4. B (WRONG: The "i" in iloc stands for integer. This is a dumb fucking question) 
+5. A 
+6. A 
+7. D 
+8. E 
+9. B
+10. D
+17. E
+18. B
+19. D
+20. B
+21. B
+22. B (WRONG: read the fucking question lmao) 
+23. A
+24. A (WRONG: the way you increase font size for all plots is by calling matplotlib.rcParams and changing the parameters inside the array) 
+25. A (WRONG: set_index is used to set a list/series/dataframe as an index of a data frame. 
+26. B
+27. C
+28. E
+29. C
+30. C
+31. B
+32. B
+33. E
+
+Fall 2021 Practice Exam 
+1. D
+2. C
+3. D
+4. B
+5. B
+6. E
+7. B (WRONG: remember that the parameter inside pop() refers to the index. 
+8. D (WRONG: remember that .items() refers to dictionaries, not lists.) 
+9. B
+10. D
+11. B
+12. C 
+13. E
+14. B
+15. D
+16. A (WRONG: don't forget to set ax to make a non-null axes object.) 
+17. C 
+18. B
+19. A
+20. B
+21. B
+23. E 
+24. A
+25. C
+26. B
+27. D (WRONG: just review Series lil bro) 
+28. C
+29. A
+30. B
+32. D
+33. B
+34. C
+35. B
+
+Spring 2019 Practice Exam 
+1. B
+2. C
+5. B
+6. B (WRONG: stack frames represent functions; therefore, every variable is associated with exactly one function.) 
+8. C
+9. B
+10. C
+11. E (REMEMBER: make sure that the thing you're looking at is a string or int) 
+12. C
+13. A
+14. C
+15. C
+16. E
+17. A
+18. A
+19. B
+20. C
+21. B
+22. B
+23. C
+24. D
+25. 

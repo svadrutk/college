@@ -1,0 +1,143 @@
+\documentclass[letterpaper]{report}
+
+\setlength\parindent{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+\title{Lec 009: RREFs, Continued}
+\author{Svadrut Kukunooru}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+\textbf{RECAP}: An RREF looks like this: 
+\[
+\begin{bmatrix} 
+    1 & x & x \\
+    0 & 1 & x \\
+    0 & 0 & 1
+\end{bmatrix} 
+.\] 
+The diagonal of ones is called an \textbf{ECHELON}. 
+Note that even though the diagonal of ones might be interrupted, the matrix will still be in RREF, such as: 
+\[
+\begin{bmatrix} 
+    0 & 1 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 1
+\end{bmatrix} 
+.\] 
+\subsection{EXAMPLE PROBLEM}%
+\label{sub:EXAMPLE PROBLEM}
+Solve this system of equations: 
+\begin{equation}
+    \begin{cases}
+        x + 2y + 3z = 9 \\ 
+        2x - y + z = 8 \\
+        3x - z = 3
+    \end{cases}
+\end{equation}
+\begin{equation}
+    \begin{cases}
+        x + 2y + 3z = 9 \\
+        -5y -5z = -10 \\
+        -6y-10z = -24
+    \end{cases}
+\end{equation}
+\begin{equation}
+    \begin{cases}
+        x +  2y + 3z = 9 \\
+        y + z = 2 \\
+        z = 3 
+    \end{cases}
+\end{equation}
+\[\fbox{$
+        x = 2,
+        y = -1,
+        z = 3
+$}\]
+
+Next, convert the following matrix to RREF: 
+\[
+\begin{bmatrix} 
+    1 & 2 & 3 \\ 
+    2 & -1 & 1 \\
+    3 & 0 & -1
+\end{bmatrix} 
+\begin{bmatrix} 
+9 \\ 10 \\ -24
+\end{bmatrix}  \implies
+\begin{bmatrix} 
+    1 & 2 & 3 \\
+    0 & -5 & -5 \\
+    0 & -6 & -10
+\end{bmatrix} 
+\begin{bmatrix} 
+9 \\ 10 \\ -24
+\end{bmatrix} 
+.\] 
+\[
+\implies 
+\begin{bmatrix} 
+    1 & 2 & 3 \\
+    0 & 1 & 1 \\
+    0 & 0 & 1
+\end{bmatrix} 
+\begin{bmatrix} 
+9 \\ 2 \\ 3
+\end{bmatrix} \implies
+\begin{bmatrix} 
+    1 & 2 & 3 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix} 
+\begin{bmatrix} 
+9 \\ -1 \\ 3
+\end{bmatrix} 
+\implies
+\fbox{$
+\begin{bmatrix} 
+    1 & 0 & 0 & 2 \\
+    0 & 1 & 0 & -1 \\
+    0 & 0 & 1 & 3
+\end{bmatrix} $}
+.\] 
+\rule{40}{2} \\ \\ 
+You can see that solving a system of linear equations in the form $A\vec{x} = \vec{b}$ is the same thing as reducing $[A | \vec{b}]$ to its RREF. 
+
+\subsection{EXAMPLE PROBLEM}%
+\label{sub:EXAMPLE PROBLEM}
+\begin{equation}
+    \begin{cases}
+        x + y + z + w = 0 \\
+        x + w = 0 \\
+        x + 2y + z  = 0 
+    \end{cases}
+\end{equation}
+What are the solutions to this system? 
+HINT: The RREF is 
+\[
+\begin{bmatrix} 
+    1 & 0 & 0 & 1 \\
+    0 & 1 & 0 & -1 \\
+    0 & 0 & 1 & 1 
+\end{bmatrix} 
+\begin{bmatrix} 
+0 \\ 0 \\ 0
+\end{bmatrix} 
+.\] 
+Convert the RREF to a system of equations: 
+\begin{equation}
+    \begin{cases}
+        x + w = 0 \\
+        y - w = 0 \\
+        z + w = 0 
+    \end{cases}
+\end{equation}
+A variable is called a \textbf{FREE VARIABLE} if the corresponding column in RREF does not have a leading one. Other wise, it is a \textbf{LEADING VARIABLE}. In the above example $w$ is the free variable and $x,y,z$ are the leading variables. Set parameters for free variables, then express the leading variables in terms of these parameters. 
+
+\end{document}

@@ -1,0 +1,3 @@
+# QCC 11
+
+This week's reading discusses the concept of "agency laundering", or companies using things such as risk assessment algorithms, driver interfaces, teacher evaluation algorithms, and other technological interfaces to obfuscate responsibility and "push" it to another process or technology. For example, say an Uber automated driving system did not recognize a bicyclist and struck and killed them, or a Target advertising algorithm advertised pregnancy products to a minor before the minor had revealed their pregnancy to their parents. In both cases, it is hard to see who is at fault here: the people who made the algorithm, or the algorithm itself? 

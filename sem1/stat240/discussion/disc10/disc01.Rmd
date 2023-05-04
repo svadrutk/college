@@ -1,0 +1,81 @@
+---
+title: "STAT 240 Discussion 10 Instructions"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+library(tidyverse)
+library(lubridate)
+```
+
+Add your names and group number
+
+Group:    
+316B
+
+Names:    
+Chelsea Verheyen    
+Pu Guo    
+Michael Gentlemen   
+William Beck    
+Svadrut Kukunooru   
+
+## Background
+Tumors are abnormal growth tissues in the body, and can be classified as either benign or malignant. Benign tumors are not harmful, while malignant tumors are harmful and typically cancerous. There are many different features that can vary between tumors, such as the radius, texture, perimeter, area, and more. In this report, we examine different breast tumors observed in various patients in Wisconsin to see which feature(s) differ the most between those who have breast cancer and those who don't. We examine the different features of these tumors and their respective means and standard deviations over all the samples, and check which features shows the most difference for benign and malignant sample to identify trends which could possibly be used to help identify the outcome of a given tumor.
+
+This data was collected by UCI to look at the features of different digitized images of a fine needle aspirate (FNA) of a breast mass (tumor). They describe the characteristics of the cell nuclei present in the image and whether the breast mass was malignant (cancerous) or benign (non-cancerous). 10 real-valued features are computed for each cell nucleus: radius, texture, perimeter, area, smoothness, compactness, concavity, concave points, symmetry, and fractal dimension, and we will focus on the first 8 features' mean data. The dataset also contains an ID number for each case, or breast mass that was studied in Wisconsin. The dataset is a CSV file and its size is 32 x 700. It is made available online at their [website](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)). Note that specific units were not given in the dataset.
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+breast_mass_variables = tibble(
+  Name = c("id", "diagnosis", "radius_mean", "texture_mean", "perimeter_mean", "area_mean", "smoothness_mean", "compactness_mean", "concavity_mean", "concave points_mean"),
+  Description = c("ID number of the breast tissue",
+                  "the diagnosis of breast tissues (M = malignant, B = benign)",
+                  "mean of distances from center to points on the perimeter",
+                  "standard deviation of gray-scale values",
+                  "mean size of the core tumor perimeter",
+                  "mean size of the core tumor area",
+                  "mean of local variation in radius lengths",
+                  "mean of perimeter^2 / area - 1.0",
+                  "mean of severity of concave portions of the contour",
+                  "mean for number of concave portions of the contour"))
+
+breast_mass_variables %>% 
+  kable(caption = "Key Variables from the Breast Cancer Wisconsin (Diagnostic) Data Set") %>% 
+  kable_styling(position = "left", full_width = FALSE,
+                bootstrap_options = c("striped"))
+
+```
+
+The remainder of the report will examine the following questions about the trends in these different features of breast tumors in relation to the diagnosis:
+
+1. Which feature differs the most between those who have breast cancer and those who don't?
+2. Which feature differs the least between those who have breast cancer and those who don't?
+3. What features have the highest average difference between those who have breast cancer and those who don't?
+
+
+## One Graph
+Here is a graph that illustrates
+```{r, echo = FALSE, fig.height = 10,fig.width=14, fig.cap = "**Features for benign and  malignant breast cancer**.Each facet of the graph shows how the data in one specific feature is ditributed for benign and malignant cell sample."}
+data = read_csv("../../data/Breast-Cancer-Wisconsin.csv")%>%
+  select(id,diagnosis,ends_with("mean"))%>%select(-symmetry_mean,,-fractal_dimension_mean)
+da = data %>% pivot_longer(!id&!diagnosis,names_to = "features",values_to = "value")%>%mutate(value=round(value,4))
+ggplot(da,aes(x=value,color=diagnosis))+
+  geom_density()+
+  facet_wrap(~features,scales="free")+
+  ylab("Percentage")+
+  ggtitle("Distribution of Features")
+
+```
+Through the graph, we see the distribution of all selected features for all the samples. Clear difference are shown in each subgraphs for benign and malignant tumors, however, similar trends are found for smoothness and textures, area shows the most difference.
+
+
+## Finding a confidence interval for `texture_mean`
+
+```{r}
+dataM <- data %>% filter(diagnosis == 'M') 
+dataB <- data %>% filter(diagnosis == 'B')
+t.test(dataB$texture_mean)
+t.test(dataM$texture_mean)
+```

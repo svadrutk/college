@@ -1,0 +1,3 @@
+# QCC 6
+
+This week, we dived a bit more into Machine Bias -- specifically, algorithms that create risk assessments for defendants in court, which affects their judging and sentencing. These algorithms often make decisions based on race, even though many companies that make the algorithms, such as Northpointe, say that their product "is a set of scores derived from 137 questions...Race is not one of the questions." People also pointed out that the characteristics the algorithm *did* use did not arrive at an accurate solution; for example, judge Mark Boessenecker says that "a guy who has molested a small child...could still come out as low risk because he probably has a job...meanwhile, a drunk guy will look high risk because he's homeless.". 

@@ -1,0 +1,310 @@
+\documentclass[letterpaper]{report}
+
+\setlength\parindent{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\title{Weekly HW 3}
+\author{Svadrut Kukunooru}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\subsection{Section 1.6, Problem 10}%
+\label{sub:Section 1.6, Problem 10}
+In the following problem, let $f : \mathbb{R}^7 \to \mathbb{R}^3$ for the matrix transformation defined by $f(x) = Ax$, where 
+\[
+A = 
+\begin{bmatrix} 
+    1 & 2 \\
+    0 & 1 \\
+    1 & 1
+\end{bmatrix} 
+\] 
+Determine whether the matrix $w = \begin{bmatrix} 
+1 \\ 1 \\ 1
+\end{bmatrix}$ is in the range of $f$.
+\[
+\begin{bmatrix} 
+    1 & 2 \\
+    0 & 1 \\
+    1 & 1
+\end{bmatrix} 
+\begin{bmatrix} 
+x \\ y
+\end{bmatrix} = 
+\begin{bmatrix} 
+1 \\ 1 \\ 1
+\end{bmatrix} 
+\] 
+\begin{equation}
+    \begin{cases}
+        x + 2y = 1 \\
+        y = 1 \\
+        x + y = 1
+    \end{cases}
+\end{equation}
+Since this system of equations is impossible to solve, \fbox{the matrix $w$ is NOT in the range of $f$.}
+
+\subsection{Section 2.1, Problem 6}%
+\label{sub:Section 2.1, Problem 6}
+Find the reduced row echelon form of each of the given matrices. Record the row operations you perform, using the notation for elementary row operations. 
+        \[
+        \begin{bmatrix}
+            -1 & 2 & -5 \\
+            2 & -1 & 6 \\
+            2 & -2 & 7
+        \end{bmatrix}
+   \] 
+\[
+\begin{bmatrix} 
+    -1 & 2 & -5 \\
+    0 & 3 & -4 \\
+    2 & -2 & 7
+\end{bmatrix} \to (R_3 + 2R_1 = R_3, -R_1 = R_1) \to
+\begin{bmatrix} 
+    1 & -2 & 5 \\
+    0 & 3 & -4 \\
+    0 & 2 & -3
+\end{bmatrix} 
+\] 
+\[
+\begin{bmatrix} 
+    1 & -2 & 5 \\
+    0 & 3 & -4 \\
+    0 & 2 & -3
+\end{bmatrix} 
+\to (R_2 - R_3= R_2) \to 
+\begin{bmatrix} 
+    1 & -2 & 5 \\
+    0 & 1 & -1 \\
+    0 & 2 & -3
+\end{bmatrix} 
+\] 
+\[
+\begin{bmatrix} 
+    1 & -2 & 5 \\
+    0 & 1 & -1 \\
+    0 & 2 & -3
+\end{bmatrix} \to 
+(R_3 - 2R_2 = R_3) \to
+\begin{bmatrix} 
+    1 & -2 & 5 \\
+    0 & 1 & -1 \\
+    0 & 0 & -1
+\end{bmatrix}
+\] 
+\[
+\begin{bmatrix} 
+    1 & -2 & 5 \\
+    0 & 1 & -1 \\
+    0 & 0 & -1
+\end{bmatrix}
+\to (R_1 + 2R_2= R_1) \to 
+\begin{bmatrix} 
+    1 & 0 & 3 \\
+    0 & 1 & -1 \\
+    0 & 0 & -1  
+\end{bmatrix} 
+\] 
+\[
+\begin{bmatrix} 
+    1 & 0 & 3 \\
+    0 & 1 & -1 \\
+    0 & 0 & -1
+\end{bmatrix} \to (-R_3 = R_3) \to 
+\begin{bmatrix} 
+    1 & 0 & 3 \\
+    0 & 1 & -1 \\
+    0 & 0 & 1
+\end{bmatrix} 
+\] 
+\[
+\begin{bmatrix} 
+    1 & 0 & 3 \\
+    0 & 1 & -1 \\
+    0 & 0 & 1
+\end{bmatrix} \to (R_2 + R_3 = R_2) \to 
+\begin{bmatrix} 
+    1 & 0 & 3 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix} 
+\] 
+\[
+\begin{bmatrix} 
+    1 & 0 & 3 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix} \to 
+(R_1 - 3R_3 = R_1) \to
+\fbox{$
+\begin{bmatrix} 
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix} = I_3 $}
+\] 
+\noindent\makebox[\linewidth]{\rule{\linewidth}{0.4pt}}
+    \[
+    \begin{bmatrix} 
+        1 & 1 & -1 \\
+        3 & 4 & -1 \\
+        5 & 6 & 3 \\
+        -2 & -2 & 2
+    \end{bmatrix} 
+    \] 
+\[
+\begin{bmatrix} 
+        1 & 1 & -1 \\
+        3 & 4 & -1 \\
+        5 & 6 & 3 \\
+        -2 & -2 & 2
+    \end{bmatrix}
+\to (R_2 - 3R_1 = R_2, R_3 - 5R_1 = R_3, R_4 + 2R_1 = R_4) \to 
+\begin{bmatrix} 
+    1 & 1 & -1 \\
+    0 & 1 & 2 \\
+    0 & 1 & 8 \\
+    0 & 0 & 0 
+\end{bmatrix} 
+\]
+\[ 
+\begin{bmatrix} 
+    1 & 1 & -1 \\
+    0 & 1 & 2 \\
+    0 & 1 & 8 \\
+    0 & 0 & 0 
+\end{bmatrix} 
+    \to (R_1 - R_2 = R_1, R_3-R_2 = R_3) \to  
+\begin{bmatrix} 
+    1 & 0 & -3 \\
+    0 & 1 & 2 \\
+    0 & 0 & 6 \\
+    0 & 0 & 0
+\end{bmatrix} 
+\] 
+\[
+\begin{bmatrix} 
+    1 & 0 & -3 \\
+    0 & 1 & 2 \\
+    0 & 0 & 6 \\
+    0 & 0 & 0
+\end{bmatrix} 
+    \to (R_3 \times \frac{1}{6} = R_3) \to 
+    \begin{bmatrix} 
+        1 & 0 & -3 \\
+        0 & 1 & 2 \\
+        0 & 0 & 1 \\
+        0 & 0 & 0
+    \end{bmatrix} 
+\] 
+\[
+    \begin{bmatrix} 
+        1 & 0 & -3 \\
+        0 & 1 & 2 \\
+        0 & 0 & 1 \\
+        0 & 0 & 0
+    \end{bmatrix} 
+    \to (R_2 - 2R_3 = R_2, R_1 + 3R_3 = R_1) \to 
+    \fbox{$
+    \begin{bmatrix} 
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1 \\
+        0 & 0 & 0
+\end{bmatrix} $}
+\] 
+\subsection{Section 2.2, Problem 9}%
+\label{sub:Section 2.2, Problem 9}
+In this exercise, solve the linear system, with the given augmented matrix, if it is consistent.
+\[
+\begin{bmatrix} 
+    1 & 2 & 1 & | & 7 \\
+    2 & 0 & 1 & | & 4 \\
+    1 & 0 & 2 & | & 5 \\
+    1 & 2 & 3 & | & 11 \\
+    2 & 1 & 4 & | & 12 
+\end{bmatrix} 
+\]
+\[
+\begin{bmatrix} 
+    1 & 2 & 1 & | & 7 \\
+    2 & 0 & 1 & | & 4 \\
+    1 & 0 & 2 & | & 5 \\
+    1 & 2 & 3 & | & 11 \\
+    2 & 1 & 4 & | & 12 
+\end{bmatrix} \to 
+(R_2 - 2R_1 = R_2, R_3 - R_1 = R_3, R_4 - R_1 = R_4, R_5 - 2R_1 = R_5) \to \]\[ \to
+\begin{bmatrix} 
+    1 & 2 & 1 & | & 7 \\
+    0 & -4 & -1 & | & -10 \\ 
+    0 & -2 & 1 & | & -2 \\
+    0 & 0 & 2 & | & 4 \\
+    0 & -3 & 2 & | & -2
+\end{bmatrix} \to  (R_2 - R_5 = R_2) \to 
+\begin{bmatrix} 
+    1 & 2 & 1 & | & 7 \\
+    0 & -1 & -3 & | & -8 \\
+    0 & -2 & 1 & | & -2 \\
+    0 & 0 & 2 & | & 4 \\
+    0 & -3 & 2 & | & -2
+\end{bmatrix} \to 
+\] 
+\[
+\begin{bmatrix} 
+    1 & 2 & 1 & | & 7 \\
+    0 & -1 & -3 & | & -8 \\
+    0 & -2 & 1 & | & -2 \\
+    0 & 0 & 2 & | & 4 \\
+    0 & -3 & 2 & | & -2
+\end{bmatrix} 
+\to (-R_2 = R_2) \to 
+\begin{bmatrix} 
+    1 & 2 & 1 & | & 7 \\
+    0 & 1 & 3 & | & 8 \\
+    0 & -2 & 1 & | & -2 \\
+    0 & 0 & 2 & | & 4 \\
+    0 & -3 & 2 & | & -2
+\end{bmatrix} 
+\]
+
+I don't really have to simplify the augmented matrix anymore, now that I know that $2z = 4$. Therefore, $z = 2$.
+Using the third line, I conclude that $y = 2$. Testing this with the other equations, this substitution of $z=2$ and $y=2$ yields no inconsistency. Substituting both of these into the first line yields $x$ as 1. 
+\[
+    \fbox{$x=1,y=2,z=2$}
+\] 
+\noindent\makebox[\linewidth]{\rule{\linewidth}{0.4pt}}
+\[
+\begin{bmatrix} 
+    1 & 2 & 1 & | & 0 \\
+    2 & 3 & 0 & | & 0 \\
+    0 & 1 & 2 & | & 0 \\
+    2 & 1 & 4 & | & 0
+\end{bmatrix} 
+\] There is a trivial solution, but I'll attempt to find another solution using row operations and RREFs. 
+\[
+\begin{bmatrix} 
+    1 & 2 & 1 & | & 0 \\
+    2 & 3 & 0 & | & 0 \\
+    0 & 1 & 2 & | & 0 \\
+    2 & 1 & 4 & | & 0
+\end{bmatrix} \to 
+(R_2 - 2R_1 = R_2, R_4 - 2R_1 = R_4) \to 
+\begin{bmatrix} 
+    1 & 2 & 1 & | & 0 \\
+    0 & -1 & -2 & | & 0 \\
+    0 & 1 & 2 & | & 0 \\
+    0 & -3 & 2 & | & 0
+\end{bmatrix} 
+\]
+I don't need to simplify anymore, because I see that there is an inconsistency; both $1y + 2z$ and $-3y + 2z$ are equal to zero, making the system of equations inconsistent. There is only the trivial solution. 
+\[
+    \fbox{$x=0,y=0,z=0$}
+\] 
+\end{document}

@@ -1,0 +1,221 @@
+---
+author: "Svadrut Kukunooru"
+title: "Assignment 4"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, fig.height = 3)
+library(tidyverse)
+library(lubridate)
+library(scales)
+source("../../scripts/viridis.R")
+```
+
+#### Due Sunday, October 10, 11:59 pm CT
+
+### Problems
+### 1
+
+The next few questions involve five data sets involving international flights arriving to Chicago's O'Hare airport from January 1, 2016 through December 31, 2020
+with one separate file for each year.
+Each file has been cleaned from the original HTML.
+
+Each data set is in a separate CSV file:
+`ORD-2016.csv`, `ORD-2017.csv`, `ORD-2018.csv`, `ORD-2019.csv`, and `ORD-2020.csv`.
+
+- Read in the five data sets. 
+- Use `bind_rows()` to combine these data sets into a single data set.  
+- Add columns for *year*, *month* (character valued, use month abbreviations, Jan-Dec), *day* (day of the month), and *wday* (day of the week, character valued, use day abbreviations, Sun - Sat).  
+- Reorder the variables so that these new variables all appear directly after the date column.  
+- Remove the terminal variable.  
+- Rename *all_total* to *passengers*, *all_flights* to *flights*, and *all_booths* to *booths*.  
+- Arrange the rows by date and hour.  
+- Remove the individual data sets from each individual year (use `rm()`).  
+- Print the first 20 rows of the data frame and at least 4 columns.  
+
+```{r}
+ord_2016 = read_csv("../../data/ORD-2016.csv")
+ord_2017 = read_csv("../../data/ORD-2017.csv")
+ord_2018 = read_csv("../../data/ORD-2018.csv")
+ord_2019 = read_csv("../../data/ORD-2019.csv")
+ord_2020 = read_csv("../../data/ORD-2020.csv")
+final = bind_rows(ord_2016, ord_2017, ord_2018, ord_2019, ord_2020) %>%
+  mutate(year = year(date)) %>% 
+  mutate(month = month(date)) %>% 
+  mutate(mon = month.abb[month]) %>% 
+  select(-(month)) %>% 
+  mutate(day = mday(date)) %>% 
+  mutate(wday = weekdays(date, abbreviate=TRUE)) %>% 
+  subset(select = c(1,2,3,22,23,24,25,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21)) %>% 
+  subset(select=-(terminal)) %>% 
+  rename(passengers = all_total, flights = all_flights, booths = all_booths) %>%   group_by(date, hour) %>% 
+  arrange(date, hour)
+
+rm(ord_2016, ord_2017, ord_2018, ord_2019, ord_2020)
+print(final, n = 20)
+
+```
+
+- After these changes, how many rows and columns are in the complete data set?
+
+31928 x 24
+
+### 2
+
+> Are there any dates in the range from January 1, 2016 through December 31, 2020 that are missing? If so, which ones?
+
+```{r}
+dates = final$date
+dates = as.Date(final$date)
+date_range = seq(min(dates), max(dates), by=1)
+date_range[!date_range %in% dates] 
+```
+"2016-03-07" "2016-03-08" "2016-03-09" "2018-05-08" "2019-10-28"
+"2019-10-29" "2019-10-30" "2020-02-08"
+
+### 3
+
+>  Analysis of monthly international arrivals.
+
+- Display the total number of passengers by month and year with a bar chart where month is the primary variable on the x-axis and there is a separate bar (i.e, not stacked) and filled with a different color for each year.  
+- Add meaningful axis and legend labels and a title to this graph. (Consider using the the function `guides()` to change the legend title.)
+- Change the scale on the y axis so that values are printed as numbers with commas and not using scientific notation. (See the help for the **ggplot2** function `scale_y_continuous()` and the **scales** function `label_comma()`.)  
+-  Answer the question below.
+
+**In the 2020 months, how do the passenger totals compare to the previous year?  Describe any other patterns you notice.**
+
+```{r}
+passengers = final %>% group_by(mon, year) %>%
+  summarize(pass = sum(passengers))
+ggplot(data = passengers) +
+  geom_bar(mapping = aes(x = mon, y = pass, fill = as.character(year) ), stat="identity",position="dodge") + guides(fill = guide_legend(title = "Legend")) + xlab("Month") + ylab("Passengers") + ggtitle("Passengers vs. Month at ORD") + scale_y_continuous(labels = comma)
+```
+
+### 4
+
+> Investigate the average number of passengers per day of the week.
+
+- Create a table that contains the average number of passengers arriving for each day of the week (Sun - Sat) for each year (2016--2020). (This table should have three columns: the year, the day of the week, and the number of passengers.)
+- Create a graphic that displays a bar for each day of the week with the height of the bar at the average number of passengers for that day of the week with a separate facet for each year.
+-  Choose fill colors for the bars according to year.
+-  Add descriptive axis labels and a title.  
+-  Try `guides(fill = guide_legend(title="Year"))` to improve the legend appearance.  
+-  Answer the questions below.
+
+```{r}
+wday = final %>%
+  select(year, wday, passengers) %>% 
+  group_by(year, wday) %>% 
+  summarise(passengers = mean(passengers))
+
+ggplot(data = wday) +
+  geom_bar(mapping = aes(x = wday, y = passengers, fill=year), stat="identity", position="dodge") + facet_wrap(~ year, nrow = 4) + xlab("Weekday") + ylab("Passengers") + ggtitle("Passengers vs Weekday by Year") + guides(fill = guide_legend(title="Year"))
+```
+
+Which day of the week has the highest average number of passengers for each year?
+
+Saturday
+
+Which day of the week has the lowest average number of passengers for each year?
+
+Tuesday
+
+### 5
+
+>  Analysis of monthly international arrivals.
+
+- Display the total number of passengers by month and year with a bar chart where month is the primary variable on the x-axis and there is a separate bar (i.e, not stacked) and filled with a different color for each year.  
+- Add meaningful axis and legend labels and a title to this graph. (Consider using the `scale_fill_discrete()` function to control the legend title, or `guides()` which can offer even finer control over legend characteristics.) 
+- Change the scale on the y axis so that values are printed as numbers with commas and not using scientific notation. (See the help for the **ggplot2** function `scale_y_continuous()` and the **scales** function `label_comma()`.)  
+-  Answer the question below.
+
+
+In 2020, how do the passenger totals compare to the previous year?  Describe any other patterns you notice.
+
+The number of passengers is much less than the previous year, probably due to the pandemic. 
+
+
+### 6
+
+> Average waiting time comparison between US and Non-US passport holders by season.
+
+- Add a `season` column to the combined data set which is "Spring" for March - May, "Summer" for June - August, "Fall" for September - November, "Winter" for December - February.  **Hint:** There are different ways to define this new variable, but you may want to look into the function `case_when()` to set values of the `season`.  Run `?case_when()` in your console for more information.  
+- Make a scatter plot with the average time for US passengers on the x-axis and the average time for non-US passengers on the y-axis with a point for each row of the data set.
+-  Use different colors for each season.  
+- Plot the data from different years in different facets.  
+- Add a straight line to each plot that passes through the origin with a slope of one (explore `geom_abline()` to do this).  
+-  Add straight regression lines to each plot, separately for each season (`geom_smooth()` with `method = "lm"`).  
+- Answer the questions below.
+
+```{r} 
+seasons = final %>% 
+  mutate(season = 
+           case_when(
+             mon == "Dec" | mon == "Jan" | mon == "Feb" ~ "Winter", 
+             mon == "Mar" | mon == "Apr" | mon == "May" ~ "Spring", 
+             mon == "Jun" | mon == "Jul" | mon == "Aug" ~ "Summer", 
+             mon == "Sep" | mon == "Oct" | mon == "Nov" ~ "Fall"
+           )) %>% group_by(season, year) %>% summarise(non_us_avg_wait = mean(non_us_avg_wait), us_avg_wait = mean(us_avg_wait))
+
+ggplot(data = seasons, aes(x = us_avg_wait, y = non_us_avg_wait)) + 
+  geom_point(stat="identity", aes(color = season)) + facet_wrap(~ year, nrow = 4) + xlab("US Passenger Average Wait Time") + ylab("International Average Wait Time") + ggtitle("Wait Times") + geom_abline(slope = 1) + geom_smooth(method = "lm")
+
+```
+
+Are there any noteworthy patterns to the data?
+It seems that the average wait time for passengers in general is at its highest in the summer and is lowest in fall or winter. 
+
+What are the primary differences between US and Non-US passengers, and are the patterns different for different seasons?
+
+US Passengers in general have to wait a lesser time than international passengers, but the patterns do not differ much for different seasons; the wait time just increases. 
+
+
+### 7
+
+Calculate separately for each year, the fraction of cases (a case is a single hour on a single date) for which the average time to get through passport control is greater for non US passport holders than it is for passport holders. Comment on how these values relate to the graphs in the previous problem.
+
+```{r}
+final2 <- final[final$us_avg_wait < final$non_us_avg_wait,]
+final3 <- final2 %>% select(date) %>% mutate(year = year(date)) %>% group_by(year) %>% summarise(frequency = n()) %>% select(frequency)
+
+final4 <- final %>% select(date) %>% mutate(year = year(date)) %>% group_by(year) %>% summarise(frequency = n()) %>% select(frequency)
+
+frequency <- final3/final4
+frequency$year <-  c("2016", "2017", "2018", "2019", "2020")
+frequency
+rm(final2, final3, final4)
+```
+As I said before, the average wait time for passport-holding residents was almost always less than international passengers, throughout the years. 
+
+### 8
+
+- Add a column named `booth_rate` to the data set which estimates the average number of passengers per booth per hour. For example, if 1000 passengers arrive between 05:00 and 06:00, the average wait time is 40 minutes, and there are 10 booths open, then an estimate of the total number of passengers per booth per hour could be computed like this: 1000/10 = 100 passengers per booth; (40 minutes per passenger / 1 hour per 60 minutes) = 2/3 hours per passenger; booth rate = 100 / (2/3) = (1000 * 60) / (10 * 40) = 150 passengers per booth per hour. This is an estimate because it assumes available booths change on the hour and it ignores how rates change when passenger wait durations stretch into the next time period.  
+- Add another column called `time_of_day` which takes the value "overnight" from 1am to 5am, "early morning" from 5am to 8am, "morning" from 8am to noon, "afternoon" from noon to 5pm, and "early evening" from 5pm to 8pm, and "late evening" from 8pm to 1am.  
+- Use `reorder()` to put the `time_of_day` variable in this order.  
+-  Filter out cases where there are fewer than 200 total passengers, the average wait time is zero, or the booth rate is over 500.  
+-  Make side-by-side boxplots of the booth rate versus the day of the week using different colors for each day of the week, and different facets for each time of day.  
+-  Answer the question below.
+
+```{r}
+timeOfDay <- final %>%
+  mutate(booth_rate = (passengers * 60)/ (booths * all_avg_wait)) %>%
+  mutate(time_of_day = case_when(
+    hour == "0100 - 0200" | hour == "0200 - 0300" | hour == "0300 - 0400" | hour == "0400 - 0500"~ "overnight",
+    hour == "0500 - 0600" | hour == "0600 - 0700" | hour == "0700 - 0800" ~ "early morning",
+    hour == "0800 - 0900" | hour == "0900 - 1000" | hour == "1000 - 1100" | hour == "1100 - 1200" ~ "morning",
+    hour == "1200 - 1300" | hour == "1300 - 1400" | hour == "1400 - 1500" | hour == "1500 - 1600" | hour == "1600 - 1700" ~ "afternoon",
+    hour == "1700 - 1800" | hour == "1800 - 1900" | hour == "1900 - 2000" ~ "early evening",
+    hour == "2000 - 2100" | hour == "2100 - 2200" | hour == "2200 - 2300" | hour == "2300 - 0000" | hour == "0000 - 0100" ~ "late evening")) %>%
+  filter(passengers > 200, all_avg_wait!=0, booth_rate < 500)
+
+ggplot(data = timeOfDay) +
+  geom_boxplot(mapping = aes(x = wday, y = booth_rate, fill = wday)) +
+  facet_wrap(~time_of_day) + xlab("Weekday") + ylab("Booth Rate") + ggtitle("Booth Rate vs Weekday by Time of Day")
+```
+
+
+Which time of day has the lowest booth rate?
+
+
+Early Morning

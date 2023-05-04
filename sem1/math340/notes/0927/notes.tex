@@ -1,0 +1,99 @@
+\documentclass[letterpaper]{report}
+
+\setlength\parindent{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+\title{Lecture 010}
+\author{Svadrut Kukunooru}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+    \textbf{EXERCISE}: Let $A$ be a generic 3x3 matrix; i.e. 
+    \[
+    \begin{bmatrix} 
+        a_{11} & a_{12} & a_{13} \\
+        a_{21} & a_{22} & a_{23} \\
+        a_{31} & a_{32} & a_{33} 
+    \end{bmatrix} 
+    .\] 
+Also, let
+\[
+E_1 = 
+\begin{bmatrix} 
+    1 & 0 & 0 \\
+    0 & 0 & 1 \\
+    0 & 1 & 0
+\end{bmatrix}, E_2 = 
+\begin{bmatrix} 
+    1 & 0 & 0 \\
+    0 & 3 & 0 \\
+    0 & 0 & 1 
+\end{bmatrix}, E_3 = 
+\begin{bmatrix} 
+    1 & 0 & 0 \\
+    0 & 1 & 3 \\
+    0 & 0 & 1
+\end{bmatrix} 
+.\] 
+Compute $E_1A, E_2A, E_3A$. 
+\[
+E_1A = 
+\begin{bmatrix} 
+    a_{11} & a_{12} & a_{13} \\
+    a_{31} & a_{32} & a_{33} \\
+    a_{21} & a_{22} & a_{23}
+\end{bmatrix}, E_2A = 
+\begin{bmatrix} 
+    a_{11} & a_{12} & a_{13} \\
+    3a_{21} & 3a_{22} & 3a_{23} \\
+    a_{31} & a_{32} & a_{33}
+\end{bmatrix}, E_3A = 
+\begin{bmatrix} 
+    a_{11} & a_{12} & a_{13} \\
+    a_{23} + 3a_{31} & a_{22} + 3a_{32} & a_{23}+ a_{33} \\
+    a_{31} & a_{32} & a_{33} 
+\end{bmatrix} 
+.\] 
+Note that $E_1A$ is just rows 2 and 3 switched, $E_2A$ is row 2 scaled by 3, and $E_3A$ is just adding 3 copies of row 3 to row 2. \\ \\
+\textbf{TAKEAWAY}: Elementary row operations can be realized by left multiplication by matrices. \\ \\
+Also note that such matrices that realize elementary row operations are called \textbf{ELEMENTARY MATRICES}. Recall that an elementary row operation is one of the following: 
+\begin{itemize}
+    \item Switch two rows
+    \item Scale a row by a nonzero number
+    \item Add (a multiple of) one row to another
+\end{itemize}
+\subsection{EXAMPLE PROBLEM}%
+\label{sub:EXAMPLE PROBLEM}
+Suppose I have an elementary row operation $T$. How do I find a matrix $E$ which realizes $T$? That is, $T$ applied to a matrix $A=EA$. \\ \\ 
+$E = $ apply $T$ to the identity matrix $I_m$ so that $E$ is $m\times m$
+\subsection{EXAMPLE PROBLEM}%
+\label{sub:EXAMPLE PROBLEM}
+Reduce $A$ to RREF and record the elementary matrices of your steps. 
+\[
+A = 
+\begin{bmatrix} 
+    3 & 5 \\
+    2 & 4
+\end{bmatrix} \implies 
+\begin{bmatrix} 
+    1 & 1 \\
+    2 & 4
+\end{bmatrix} \implies 
+\begin{bmatrix} 
+    1 & 1 \\
+    0 & 2
+\end{bmatrix} \implies
+\begin{bmatrix} 
+    1 & 1 \\
+    0 & 1
+\end{bmatrix} 
+.\] 
+\textbf{THEOREM}: Suppose $E_1, E_2,\ldots E_{12}$ are elementary row operations which reduce a square matrix $A$ to its RREF. \\ \\ 
+Then (a) $A$ is only invertible if its RREF is the identity matrix. 
+and (b) When this happens, $A&{-1} = E_E_{r-1}\ldots E_1
+\end{document}

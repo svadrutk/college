@@ -1,0 +1,3 @@
+# QCC 3
+
+A healthcare desert is defined as a region that is far enough away from a form of healthcare that it poses a risk to people in that area. These healthcare deserts usually are created in poorer areas that have lower socioeconomic classes, with higher crime rates, larger Black and Latino populations, and a lack of health insurance. Healthcare deserts are either caused by hospital closures because people can't afford to pay the hospital enough to keep it running, or insurance gaps, where programs like Medicaid don't cover people who do not have enough money to pay for care. 

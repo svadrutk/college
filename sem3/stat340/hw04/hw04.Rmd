@@ -1,0 +1,131 @@
+---
+title: "STAT340 HW04: Testing II"
+author: "Svadrut Kukunooru"
+date: "October 2022"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+------------------------------------------------------------------------
+
+TODO: If you worked with any other students on this homework, please list their names and NetIDs here.
+
+------------------------------------------------------------------------
+
+## Instructions
+
+Update the "author" and "date" fields in the header and complete the exercises below.
+Knit the document, and submit **both the HTML and RMD** files to Canvas.
+
+**Due date:** October 13, 2022 at 11:59pm.
+
+------------------------------------------------------------------------
+
+## 1) Constructing a Rejection Region
+
+This problem will give you some practice thinking about hypothesis testing and choosing rejection thresholds.
+Let's suppose we're running a statistical test with a test statistic $T$.
+
+a)  Suppose that under our null hypothesis, $T$ has an exponential distribution with rate parameter $\lambda = 1$, in which larger values of $T$ correspond to more "unusual" data. Use R to compute the rejection threshold such that our test has level $\alpha = 0.05$.
+
+```{r}
+# TODO: code goes here.
+qnorm(0.05, 1, 1, lower.tail=FALSE)
+```
+
+b)  Suppose that we are continuing to use the same test statistic $T$ above, so that $T$ is distributed as a rate-$1$ exponential and larger values of $T$ correspond to more "unusual" observations, but now we want to conduct our test at level $\alpha=0.01$. Use R to compute a rejection threshold for this test. How does this rejection threshold compare with the one computed in part (a)? Does this surprise you? Why or why not?
+
+```{r}
+# TODO: code goes here.
+qnorm(0.01, 1, 1, lower.tail=FALSE)
+```
+
+------------------------------------------------------------------------
+
+Since the probability of a Type I error is lower (0.01) than the previous question (0.05), the rejection threshold is allowed to be higher.
+
+------------------------------------------------------------------------
+
+c)  Suppose now that we use a different test statistic $T'$, which has a central $t$-distribution with $12$ degrees of freedom under the null hypothesis, in which larger values of $T'$ correspond to more "unusual" outcomes. Use R to determine a rejection threshold for this test statistic so that our test has level $\alpha=0.05$. **Hint:** see `?qt` for information on quantiles of the t-distribution. A central t-distribution is obtained by setting the `ncp` parameter equal to zero (this is the default behavior, so you can just leave this parameter unspecified). The degrees of freedom are controlled by the `df` parameter.
+
+```{r}
+# TODO: code goes here.
+qt(0.05/2, 12, lower.tail=FALSE)
+```
+
+## 2) Short answers: p-values and testing
+
+Answer each of the following short-answer prompts.
+Two or three sentences for each is plenty.
+
+a)  A common misconception by beginner statisticians is that a p-value represents the probability that the null hypothesis is true. Explain briefly why this understanding is incorrect. Specifically, how is the correct definition of a p-value as discussed in your readings and in lecture, different from this incorrect understanding?
+
+------------------------------------------------------------------------
+
+The p-value is a statistical measurement used for the purpose of validation for a certain set of observed data.
+If the null hypothesis states that there is no relationship between the interested variables, the p-value indicates how likely a particular set of observations were to occur if the null hypothesis were true.
+
+------------------------------------------------------------------------
+
+b)  Alice and Bob are both conducting a one-sided test of the same null hypothesis $H_0$, using a test statistic $T$, in which larger values of $T$ correspond to more unusual or extreme observations. That is, Alice and Bob both will reject $H_0$ for suitably large values of $T$. However, Alice and Bob specify different levels for their tests. Alice and Bob both see $T$ computed on the same data. Alice rejects $H_0$ in light of this data while Bob chooses not to reject $H_0$. What can we conclude about Alice's $\alpha$-level compared to Bob's? Why?
+
+------------------------------------------------------------------------
+
+Alice's alpha level is lower than Bob's alpha level because Bob does not reject the null hypothesis, and Alice does.
+Therefore, her alpha level assumes that she has a low chance of committing a Type I error at that value, so she can reject it.
+
+------------------------------------------------------------------------
+
+c)  By definition, decreasing the level of a test (i.e., decreasing $\alpha$) decreases the probability of a Type I error (i.e., mistakenly rejecting the null when the null is true). We said in lecture that generally speaking, decreasing $\alpha$ will also *increase* the probability of a Type II error. Why should this be true?
+
+**Note:** this is a tricky question!
+Generally speaking, if $\alpha$ is smaller, then we need to see more extreme values of our test statistic in order to reject the null hypothesis.
+Now, if we require more extreme values of our test statistic to reject the null hypothesis, what happens to our willingness/ability to reject the null hypothesis when it is *not* true?
+
+------------------------------------------------------------------------
+
+A Type II error is when we fail to reject a false null hypothesis.
+Higher values of alpha make it easier to reject the null hypothesis, so choosing lower values for alpha can increase the probability of a Type II error.
+
+------------------------------------------------------------------------
+
+## 3) Testing coin flips
+
+Of the six sequences below, **only one** of them is actually randomly generated from a fair coin (i.e., one in which $\Pr[\text{heads}]=\Pr[\text{tails}]$ and coin flips are independent from one toss to the next).
+Use a combination of everything you know (common sense, Monte Carlo, hypothesis testing, etc.) to identify which is actually random, and explain your reasoning.
+**Note:** there are no strictly right or wrong answers here (though of course there are better and worse answers).
+Just make sure that your reasoning is sound and clearly explained.
+
+If you are up for an additional challenge (**optional**-- not worth any points), try to associate probabilities (e.g., p-values) to your claim(s).
+
+```{r}
+flips1 <- "HTHTHTHTHTHTHTHTHTHTHTHTHTHTHTHTHHTHTHTHTHTHTHTTHTHTHTHTHTHTHHTHTHTHTHTHTHTHTHTHTHTHTHTHTHHTTHTHTHTHTHTHTHTHTHTHTHTHTHHTHTHTHTHTHTHTHTHTHTHTHTTHTHTHTHTHTHTHTHTHTHTHTHTHHTHTHTHTHTHTHTHTHTHTHTHHTHTHTHTH"
+
+flips2 <- "HHHTHTTTHHTHHTHHHTTTTHTHTHHTTHTHHHTHHTHTTTHTHHHTHTTTHTHTHHTHTHTTHTHHTHTHTTTHTHHHTHTHTTHTHTHHTHTHTHHHTHTTTHTHHTHTHTHHTTTHTHHTHHTTTTHTHTHHHTHTTHTHHTHTHTTHTHHTHTHHHTHHHTHTTTHTTHTTTHTHHHTHTHTTHTHHTHHTHTTT"
+
+flips3 <- "HHTHTHTTTHTHHHTHHTTTHTHHTHTTTHTHTHHTHTHTTHTHHHHHHTTTHTHTHHTHTTTHTHHTHTHTTTHTHHHTTHTTTHTHTHHHHTHTTHHTTTTTHTHHHTHTHTTTTTHHHTHHTHHTHHHTTTTHTHTHHHTHHTTTTTHTHHHTHTHTHTTTHTHHHTHTHTHTTHTHHTHTHTHTTTTHTHHHTHTH"
+
+flips4 <- "HTHHHHHHHTHTTHHTTHHHTHTHTTTHHTHHHTHHTTHTTTTTTTTTHTHHTTTTTHTHTHTHHTTHTTHTTTTTHHHTHTTTHTHTHHHTHTTTTHTHTHHTTHTHTTHHTHTHHHHTHTTHHTTHTTHTTHTHHHHHHTTTTTTHHHTTHTHHHHTTTHTTHHHTTHTHHTTTHHTHHTTTHTHHTHHHTHHTTHHH"
+
+flips5 <- "HHHHHHHHHHHTTTTTTTTTTTHHHHHHHHHHHHTTTTTTTTTTTHHHHHHHHHHHHHTTTTTTTTTTHHHHHHHHHHTTTTTTTTHHHHHHHHTTTTTTTHHHHHHHHHTTTTTTTTTHHHHHHHHTTTHHHHHHHHHHHTTTTTTTTTTTHHHHHHHHHHHHTTTTTTTTTTTHHHHHHHHHHHHHTTTTTTTTTTHH"
+
+flips6 <- "TTHTTTHTTTTTTTHTHTHTHTTHTTHTHHTHHTTTHHTHTTTHTHHTHHHTHTTHHTHHTTHTHTTTTHTHTTTHHTTTTTTTTHTHHTTHTTTTTTHTHTHTHTTTHTTHHTTHTTTHHTTTHTTHTTTTHTTTTHHTTTHTHTHHHTTTTTTHTHHTTTTTTTTTTTTHHHTTTHHHTTTHTTTHTHTTHTTTTTHT"
+
+# you can use the function below to split the above strings into vectors of flips
+split <- function(str) {
+  return(strsplit(str, split = "")[[1]])
+}
+# Example: split the first sequence into a vector of characters.
+split(flips1)
+```
+
+------------------------------------------------------------------------
+
+flips5 is definitely not generated from a random coin because the probability of having a long string of consecutive heads and then a long string of consecutive tails is extremely low.
+The same can be said for flips1 -- the probability of an actually fair coin having heads and tails consecutively after one another is extremely low.
+There is no way to tell if the other sequences are actually random because of Kolmogorov Complexity; if any prefix of the sequence has small Kolmogorov complexity, then at least that part of the sequence is not very random.
+However, since Kolmogorov complexity is incomputable, there is no way to tell if the sequences are random or not.
+
+------------------------------------------------------------------------

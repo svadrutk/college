@@ -1,0 +1,192 @@
+Select where the source operands are for the following two LC-3 Instructions: 
+
+0001 111 010 0 00 011
+This is an ADD function, with the two sources being R2 and R3. Therefore, for this instruction, the source operands are available directly from a register, since the semantics of ADD are 
+
+RF[DST] <- RF[SRC1] + RF[SRC2]
+
+1010 010 110011110
+
+This is an LDI operation, with the semantics 
+
+RF[DST] <- M[inc(PC) + SEXT(PCOffset9)]
+
+Therefore, you increment the program counter, add the offset in the instruction, use that as the memory address and get the data stored in that memory address, and store it in the specified destination; in this case, R2. 
+
+Therefore, in this operation, the source operands are indirectly available from accessing memory. 
+
+2. Assume that the following shows the contents of the specified registers: 
+
+R1: 0000 0000 0000 1001 
+R2: 0000 0000 0000 0101
+R3: 0000 0000 0000 0010
+
+The machine instructions are loaded as 
+
+1001 010 011 1 11111
+0001 010 010 1 00001 
+0001 011 001 0 00 010
+0000 010 000110000
+
+The first instruction is a NOT instruction. The source is R3, and the destination is R2. 
+
+Recall that all registers are written using a two's complement. 
+
+NOT(R3) = 1111 1111 1111 1101 => R2 
+
+R1: 0000 0000 0000 1001
+R2: 1111 1111 1111 1101 
+R3: 0000 0000 0000 0010
+
+The next instruction is an ADD instruction, with source R2 and destination R2. 
+
+ 1111 1111 1111 1101 
++0000 0000 0000 0001
+---------------------
+ 1111 1111 1111 1110
+
+R1: 0000 0000 0000 1001 
+R2: 1111 1111 1111 1110
+R3: 0000 0000 0000 0010
+
+The next instruction is another ADD instruction, with sources R1 and R2, and destination R3. 
+
+ 1111 1111 1111 1110
++0000 0000 0000 1001 
+--------------------
+ 0000 0000 0000 0111
+
+R1: 0000 0000 0000 1001 
+R2: 1111 1111 1111 1110 
+R3: 0000 0000 0000 0111
+
+The last instruction is BR. As there is no condition code set, all you have to do is increment the Program Counter by 1. As it is at x4003, it is now x4004. THEREFORE, 
+
+R1: x0009
+R2: xFFFE
+R3: x0007
+PC: x4004
+
+--------------------------------------------------------
+
+Assume the following shows the contents of memory locations: 
+
+0x3020: 0000 0000 0000 0101
+0x3021: 0000 0000 0000 1010
+0x3022: 0000 0000 0000 0100 
+0x3023: 0000 0000 0000 1011
+0x3024: 0000 0000 0000 0011
+0x3025: 0000 0000 0000 1100
+
+The machine program below adds some of the integers in the memory shown below. 
+
+
+
+0x3000    1110 001 000011111
+0x3001    0101 011 011 1 00000
+0x3002    0101 010 010 1 00000
+0x3003    0001 010 010 1 00011
+0x3004    0000 010 000000101
+0x3005    0110 100 001 000001
+0x3006    0001 011 011 0 00 100
+0x3007    0001 001 001 1 00001
+0x3008    0001 010 010 1 11111
+0x3009    0000 111 111111010
+0x300A    1111 0000 0010 0101
+
+
+For the first instruction, R1 is assigned a value of x3001 + 000011111 = 
+
+0011 0000 0000 0001
+0000 0000 0001 1111 
+-------------------
+0011 0000 0010 0000
+
+R1: 0011 0000 0010 0000 
+
+For the second instruction, R3 is assigned a value from performing AND on R3 and 0. Therefore, 
+0000 0000 0000 0100 & 
+0000 0000 0000 0000 
+---------------------
+0000 0000 0000 0000 
+
+R1: 0011 0000 0010 0000
+R3: 0000 0000 0000 0000 
+
+For the third instruction ,R2 is assigned a value from performing AND on R2 and 0. Therefore, 
+
+R1: 0011 0000 0010 0000
+R2: 0000 0000 0000 0000 
+R3: 0000 0000 0000 0000
+
+For the fourth instruction, R2 is assigned a value from adding R2 and 00011. Therefore, 
+
+R1: 0011 0000 0010 0000 
+R2: 0000 0000 0000 0011
+R3: 0000 0000 0000 0000 
+
+For the fifth instruction, we simply increment the PC by 1 since the condition is not set. 
+
+
+R1: 0011 0000 0010 0000 
+R2: 0000 0000 0000 0011
+R3: 0000 0000 0000 0000 
+
+For the sixth instruction, you perform an LDR instruction on R4, by taking the BASE found in R1 and adding it to 000001, getting the data in that memory address and put it back to R4. Therefore, 
+
+ 0011 0000 0010 0000 
++0000 0000 0000 0001 
+---------------------
+ 0011 0000 0010 0001 = x3021 => 0000 0000 0000 1010 
+
+R1: 0011 0000 0010 0000 
+R2: 0000 0000 0000 0011
+R3: 0000 0000 0000 0000 
+R4: 0000 0000 0000 1010 
+
+For the seventh instruction you ADD R3 and R4 and put that result in R3. Therefore, 
+
+
+R1: 0011 0000 0010 0000 
+R2: 0000 0000 0000 0011
+R3: 0000 0000 0000 1010
+R4: 0000 0000 0000 1010 
+
+For the eight instruction you ADD R1 to 000001 and put the result in R1. 
+
+R1: 0011 0000 0010 0001
+R2: 0000 0000 0000 0011
+R3: 0000 0000 0000 1010
+R4: 0000 0000 0000 1010 
+
+For the ninth instruction you add R2 to 11111 and put the result in R2. 
+
+ 0000 0000 0000 0011 
++0000 0000 0001 1111 
+--------------------
+ 0000 0000 0010 0010
+
+R1: 0011 0000 0010 0001
+R2: 0000 0000 0010 0010
+R3: 0000 0000 0000 1010
+R4: 0000 0000 0000 1010 
+
+For the tenth instruction you add 0x300A to the offset 111111010. 
+
+0011 0000 0000 1010 
+0000 0001 1111 1010
+-------------------
+0011 0010 0000 0100 => 0x3204
+
+----------------------------------------------------------------
+
+0101 0000 0001 0001 
+0000 0001 1111 1011
+-------------------
+0101 0010 0000 1100     
+
+
+0011 0001 0000 0000 
+0000 0000 0000 1010
+--------------------
+0011 0001 0000 1010

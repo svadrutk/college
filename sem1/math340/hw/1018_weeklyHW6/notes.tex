@@ -1,0 +1,108 @@
+\documentclass[letterpaper]{report}
+
+\setlength\parindent{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+\title{Weekly HW 006}
+\author{Svadrut Kukunooru}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+   \subsection{4.2.15}%
+   \label{sub:4.2.15}
+   Consider the differential equation $y'' - y' + 2y = 0$. A solution is a real-valued function $f$ satisfying the equation. Let $V$ be the set of all solutions to the given differential equation; define + and $\cdot$ as in Exercise 14. Prove that $V$ is a vector space.  \\ \\ 
+
+To prove that $V$ is a vector space, we can use scalar addition and scalar multiplication to prove it. 
+
+Say that we have two solutions to this equation, $y_1$ and $y_2$. 
+
+\[
+    (y_1 + y_2)'' - (y_1 + y_2)' + 2(y_1 + y_2) = 0
+\] 
+\[
+    (y_1'' - y_1' + 2y_1) + (y_2'' - y_2' + 2y_2)
+\] 
+Since both of these mini-equations are in the same format as this equation, 
+\[
+0 + 0 = 0
+\] 
+Using scalar multiplication, 
+\[
+    c(y'' - y' + 2y) = 0
+\] 
+Since the differentiation equation already equals zero, no matter what $c$ is, the solution will always equal zero. Therefore, $V$ is a subspace and therefore a $\fbox{vector space}$.
+\subsection{4.3.17}%
+\label{sub:4.3.17}
+Which of the following subsets of the vector space $M_{nn}$ are subspaces? \\ \\ 
+(a) The set of all $n \times n$ symmetric matrices.  \\ \\ 
+If $A = A^T$ and $B = B^T$ (since both are symmetric)
+\[
+    A^T + B^T = M_{nn}
+\]
+because a transposed symmetric matrix is identical to the original matrix. 
+\\ \\ 
+As for multiplication, multiplying a symmetric matrix by a constant will always result in the same dimensions. 
+\\ \\ 
+(b) The set of all $n \times  n$ diagonal matrices. \\  \\ 
+All diagonal matrices are a subspace of symmetric matrices, which in turn are a subspace of the vector space $M_nn$.  \\ \\ 
+(c) The set of all $n \times n$ nonsingular matrices. \\
+A vector space is required to have a zero vector in it. As a zero vector can never be nonsingular, this set is not a subspace of $M_{nn}$. 
+
+\subsection{4.4.4b}%
+\label{sub:4.4.4b}
+Determine whether the given vector $A$ in $M_{22}$ belongs to span $[A_1, A_2, A_3]$, where 
+\[
+A_1 = 
+\begin{bmatrix} 
+    1 & -1 \\
+    0 & 3
+\end{bmatrix} , 
+A_2 = 
+\begin{bmatrix} 
+    1 & 1 \\
+    0 & 2 \\ 
+\end{bmatrix} , 
+A_3 = 
+\begin{bmatrix} 
+    2 & 2 \\
+    -1 & 1 
+\end{bmatrix} 
+\]
+and 
+\[
+A = 
+\begin{bmatrix} 
+    -3 & -1 \\
+    3 & 2
+\end{bmatrix} 
+\] 
+\[
+\begin{bmatrix} 
+    -3 & -1 \\
+    3 & 2 
+\end{bmatrix} + 3A_3 = 
+\begin{bmatrix} 
+    3 & 5 \\
+    0 & 5 
+\end{bmatrix}  - 2A_2 = 
+\begin{bmatrix} 
+    1 & 3 \\
+    0 & 1
+\end{bmatrix} + A_1 = 
+\begin{bmatrix} 
+    2 & 2 \\
+    0 & 4
+\end{bmatrix} \cdot \frac{1}{2} = 
+\fbox{$
+\begin{bmatrix} 
+    1 & 1 \\
+    0 & 2 
+\end{bmatrix}$}
+\] 
+Therefore, $A$ is in span $[A_1, A_2, A_3]$. 
+\end{document}

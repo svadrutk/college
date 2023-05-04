@@ -1,0 +1,109 @@
+{
+  "main": {
+    "id": "cfb0309b6f7b5943",
+    "type": "split",
+    "children": [
+      {
+        "id": "dfcf65743b49f7b3",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "CS354/005.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "bc236053751d25ba",
+    "type": "split",
+    "children": [
+      {
+        "id": "2acd146348f00d44",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f090ddc5de41f67a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "a519df9c16bb3ed8",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "bf8f1ab1eafd9446",
+    "type": "split",
+    "children": [
+      {
+        "id": "dad039e46e7e3552",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5e0a6062366a5d5d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "CS354/005.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "53d71b2996b3d8bf",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "dfcf65743b49f7b3",
+  "lastOpenFiles": [
+    "CS354/005.md",
+    "CS354/003.md",
+    "CS354/001.md",
+    "CS354/002.md",
+    "CS240/002.md",
+    "CS240/001.md",
+    "CS354/001B.md"
+  ]
+}

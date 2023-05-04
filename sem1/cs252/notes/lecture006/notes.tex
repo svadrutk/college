@@ -1,0 +1,85 @@
+\documentclass[letterpaper]{report}
+
+\setlength\parindent{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb}
+\title{Lecture 005: The Big Ideas}
+\author{Svadrut Kukunooru}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\textbf{In THEORY}, all computers, if give enough \textit{time}and \textit{memory}, are capable of computing anything that can be computed. 
+\\ \\ 
+The A (short for automatic)-Machine, creating by 1940s scientist Alan Turing, is a mathematical model of computation. It, in short, defines a very simple abstract computer. 
+
+\begin{enumerate}
+    \item Reads/writes symbols on an infinite memory tape (refer to the theory above)
+    \item Transitions to a different state based on 
+        \begin{itemize}
+            \item The current state of progress
+            \item A finite table of instructions
+            \item Current symbol on the tape
+        \end{itemize} 
+\end{enumerate}
+Every computation can be performed by some Turing Machine. 
+
+\[
+    A,B \to  T_{add} \to A + B
+.\] 
+
+\[
+    A,B \to T_{mul} \to  A \times B
+.\] 
+However, it is important to note that NOT EVERYTHING is computable! \\ \\ 
+\rule{40}{2} \\ \\ 
+A \textbf{UNIVERSAL TURING MACHINE} is a Turing machine that can implement all other turing machines. Its input includes data AND a program.
+\[
+T_{add}, T_{mul}, \left{A,B,C\right} \to U \to A \cross (B+C)
+\]
+Most modern machines today are universal Turing machines, such as our phones, laptops, etc. In practice, solving problems with computers involves constraints, such as \textbf{time}, \textbf{cost}, and \textbf{power}.  \\\\
+\rule{40}{2} \\ \\ 
+\textbf{ABSTRACTION} manages complexity by focusing on some attributes over others. Solving a problem using a computer is a systematic sequence of transformations between levels of abstraction. 
+\newpage
+The sequence is as follows:  \\ \\ 
+\textbf{PROBLEM STATEMENT}
+\begin{itemize}
+    \item High-level description in a natural language
+    \item Usually ambiguous, imprecise, or maybe incorrect
+\end{itemize}
+\textbf{ALGORITHMS \& DATA STRUCTURES}
+\begin{itemize}
+    \item Step-by-Step procedures and information organization
+    \item Unambiguous, computable, finite specifications
+\end{itemize}
+\textbf{PROGRAM}
+\begin{itemize}
+    \item Statements that are organized into modules (e.g. functions, methods, etc.)
+    \item Variables that are designed to contain data organized into arrays, structures, objects, etc.
+    \item High-level, structured, logical
+\end{itemize}
+\textbf{INSTRUCTION SET ARCHITECTURE (ISA)}
+\begin{itemize}
+    \item Instructions the computer can perform and data types the computer can understand
+    \item Low-level; tied to particular types of machines (e.g. x86, ARM, amd64, etc.)
+\end{itemize}
+\textbf{MICROARCHITECTURE}
+\begin{itemize}
+    \item Detailed processor implementation (e.g. i3,i5, ryzen 5, etc.)
+\end{itemize}
+\textbf{CIRCUITS}
+\begin{itemize}
+    \item Logic gates \& low-level components
+\end{itemize}
+\textbf{DEVICES}
+\begin{itemize}
+    \item 100's of millions of electronic switches turning on and off billions of times a second
+    \item Properties of maeterials, manufacturability
+\end{itemize}
+Note that there are many options at each level of abstraction; different problems, programming languages, devices, processors, wires, etc. 
+\end{document}

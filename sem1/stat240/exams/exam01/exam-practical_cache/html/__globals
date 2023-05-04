@@ -1,0 +1,9 @@
+unnamed-chunk-1	!	%>%	==	$	dim	episode	read_csv	scene	select	utterance
+unnamed-chunk-2	%>%	arrange	desc	friends	group_by	head	n	speaker	summarise
+unnamed-chunk-3	$	Q2A	rm
+unnamed-chunk-4	%>%	~	arrange	case_when	desc	friends	group_by	main	mutate	n	p	rm	select	sum	summarise
+unnamed-chunk-5	%>%	~	$	aes	count	element_blank	facet_wrap	friends	geom_bar	ggplot	ggtitle	group_by	main_characters	n	season	select	speaker	subset	summarise	text	theme	xlab	ylab
+unnamed-chunk-6	%>%	contains	filter	friends	head	main_characters	mutate	season	select	speaker	str_count	text
+unnamed-chunk-7	%>%	ends_with	pivot_longer	prob5
+unnamed-chunk-8	%>%	count	mutate	n	name	prob5B	speaker	str_sub	str_to_title
+unnamed-chunk-9	~	aes	element_blank	facet_wrap	geom_bar	ggplot	ggtitle	n	name	prob5C	theme	xlab	ylab
