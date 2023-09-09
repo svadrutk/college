@@ -1,0 +1,6 @@
+Computers are starting to reason like humans. (n.d.). Retrieved January 27, 2023, from https://www.science.org/content/article/computers-are-starting-reason-humans
+
+Harrison, D. (Director). (n.d.). Can AI Make a Rap Better than Drake [TikTok]. https://www.tiktok.com/@danielharrison/video/7180556813732007169?is_from_webapp=1&sender_device=pc&web_id=7193419282351769130
+
+ChatGPT: The prompt I used was, 
+"write a 500 word essay challenging points in a hypothetical report on the state of artificial intelligence in 2021 written by a panel of computer scientists and engineers."
