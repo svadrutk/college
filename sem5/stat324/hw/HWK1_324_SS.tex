@@ -1,0 +1,319 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Stat 324 Homework \#1},
+  pdfauthor={Svadrut Kukunooru},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Stat 324 Homework \#1}
+\author{Svadrut Kukunooru}
+\date{}
+
+\begin{document}
+\maketitle
+
+*Submit your homework to Canvas by the due date and time. Email your
+lecturer if you have extenuating circumstances and need to request an
+extension.
+
+*If an exercise asks you to use R, include a copy of the code and
+output. Please edit your code and output to be only the relevant
+portions.
+
+*If a problem does not specify how to compute the answer, you many use
+any appropriate method. I may ask you to use R or use manual
+calculations on your exams, so practice accordingly.
+
+*You must include an explanation and/or intermediate calculations for an
+exercise to be complete.
+
+*Be sure to submit the HWK1 Autograde Quiz which will give you 20 of
+your 40 accuracy points.
+
+*50 points total: 40 points accuracy, and 10 points completion
+
+\hypertarget{basics-of-statistics-and-summarizing-data-graphically-i}{%
+\subsection{Basics of Statistics and Summarizing Data Graphically
+(I)}\label{basics-of-statistics-and-summarizing-data-graphically-i}}
+
+\textbf{Exercise 1}. A number of individuals are interested in the
+proportion of citizens within a county who will vote to use tax money to
+upgrade a professional baseball stadium in the upcoming vote. Consider
+the following methods:
+
+The \textbf{Baseball Team Owner} surveyed 8,000 people attending one of
+the baseball games held in the stadium. Seventy eight percent (78\%) of
+respondents said they supported the use of tax money to upgrade the
+stadium.
+
+The \textbf{Pollster} generated 1,000 random numbers between 1-52,661
+(number of county voters in last election) and surveyed the 1,000
+citizens who corresponded to those numbers on the voting roll. Forty
+three percent (43\%) of respondents said they supported the use of tax
+money to upgrade the stadium.
+
+\begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  What is the population of interest? What is the parameter of interest?
+  Will this parameter ever be calculated?
+\end{enumerate}
+\end{quote}
+
+The population of interest is the U.S. citizens and attendees of a
+baseball game held in the stadium. The parameter of interest is the
+proportion of citizens within a county will vote to use tax money to
+upgrade a professional baseball stadium in the upcoming vote.
+
+\begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  What were the sample sizes used and statistics calculated from those
+  samples? Are these simple random samples from the population of
+  interest?
+\end{enumerate}
+\end{quote}
+
+The sample size used was the 1,000 citizens randomly selected using a
+random number generator, as well as the 8,000 people attending a
+baseball game. The statistics calculated from these samples are the
+percentage of people who said they would support using tax money to
+upgrade the baseball stadium. The pollster method uses a simple random
+sample from the population of interest because they use a random number
+generator, but the baseball team owner uses people who attend a certain
+baseball game, which is not a simple random sample because the people in
+the sample are not equally likely to be picked.
+
+\begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  The baseball team owner claims that the survey done at the baseball
+  stadium will better predict the voting outcome because the sample size
+  was much larger. What is your response?
+\end{enumerate}
+\end{quote}
+
+The survey done at the baseball stadium will not better predict the
+voting outcome because the sample sise only consists of people who
+attend a baseball game, which may be biased because they may be bigger
+fans than the rest of the citizens of upgrading the stadium they attend.
+
+\vspace{1cm}
+
+\newpage
+
+\textbf{Exercise 2:} After manufacture, computer disks are tested for
+errors. The table below summarizes the number of errors detected on each
+of the 100 disks produced in a day.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Number of Defects & Number of Disks \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 42 \\
+1 & 30 \\
+2 & 16 \\
+3 & 7 \\
+4 & 5 \\
+\end{longtable}
+
+\begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Describe the type of data that is being recorded about the sample of
+  100 disks, being as specific as possible.
+\end{enumerate}
+\end{quote}
+
+The data being recorded about the sample of 100 disks is the amount of
+defects on the disk.
+
+\begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Code for a frequency histogram showing the frequency for number of
+  errors on the 100 disks is given below.
+\end{enumerate}
+\end{quote}
+
+\begin{quote}
+\begin{quote}
+bi. Knit the document and confirm that the histogram displays in the
+knitted file.
+\end{quote}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{error.data}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{42}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{30}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{16}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{7}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+\FunctionTok{hist}\NormalTok{(error.data, }\AttributeTok{breaks=}\FunctionTok{c}\NormalTok{(}\FunctionTok{seq}\NormalTok{(}\AttributeTok{from=}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\FloatTok{4.5}\NormalTok{, }\AttributeTok{by=}\DecValTok{1}\NormalTok{)), }
+     \AttributeTok{xlab=}\StringTok{"Defects"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Number of Defects"}\NormalTok{, }
+     \AttributeTok{labels=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{50}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HWK1_324_SS_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{quote}
+\begin{quote}
+bii. Describe what the rep() function does in this code chunk.
+\end{quote}
+\end{quote}
+
+The rep() function creates vectors for each column in the histogram;
+e.g., the first \texttt{rep()}, \texttt{rep(0,42)} makes the column for
+the amount of disks that had zero defects, 42.
+
+\begin{quote}
+\begin{quote}
+biii. Describe how this breaks command affects the histogram's
+appearance in this code chunk. How would the histogram look different if
+the breaks() command was not included?
+\end{quote}
+\end{quote}
+
+The histogram would look different in that it would use ranges rather
+than discrete numbers. It would be split into ranges like 0-1, 1-2, 2-3,
+etc.
+
+\begin{quote}
+\begin{quote}
+biv. Describe how setting ylim=c(0,30) instead of ylim=c(0,50) would
+change the histogram's appearance. Which value for ylim is perferable
+for clear communication of the data?
+\end{quote}
+\end{quote}
+
+Setting \texttt{ylim=c(0,30)} would limit the y-axis to a maximum of 30.
+50 would be a preferable value for clear communication of the data.
+
+\vspace{1cm}
+
+\end{document}
