@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<!-- saved from url=(0076)https://graphics.cs.wisc.edu/Courses/559-f2015/Examples/QuadCopter/quad.html -->
+<html lang="en"><!-- CS559 Program 2 Sample Solution - September, 2015 - Michael Gleicher --><!-- Students may refer to this, but not copy it for their assignments --><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>559 Demo - QuadCopter</title>
+<style>.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #0000ff;
+  --rdp-background-color: #e7edff;
+  --rdp-accent-color-dark: #3003e1;
+  --rdp-background-color-dark: #180270;
+  --rdp-outline: 2px solid var(--rdp-accent-color); /* Outline border for focused elements */
+  --rdp-outline-selected: 2px solid rgba(0, 0, 0, 0.75); /* Outline border for focused _and_ selected elements */
+
+  margin: 1em;
+}
+
+/* Hide elements for devices that are not screen readers */
+.rdp-vhidden {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute !important;
+  top: 0;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  border: 0 !important;
+}
+
+/* Buttons */
+.rdp-button_reset {
+  appearance: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  cursor: default;
+  color: inherit;
+  outline: none;
+  background: none;
+  font: inherit;
+
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.rdp-button {
+  border: 2px solid transparent;
+}
+
+.rdp-button[disabled] {
+  opacity: 0.25;
+}
+
+.rdp-button:not([disabled]) {
+  cursor: pointer;
+}
+
+.rdp-button:focus:not([disabled]),
+.rdp-button:active:not([disabled]) {
+  color: inherit;
+  border: var(--rdp-outline);
+  background-color: var(--rdp-background-color);
+}
+
+.rdp-button:hover:not([disabled]) {
+  background-color: var(--rdp-background-color);
+}
+
+.rdp-months {
+  display: flex;
+}
+
+.rdp-month {
+  margin: 0 1em;
+}
+
+.rdp-month:first-child {
+  margin-left: 0;
+}
+
+.rdp-month:last-child {
+  margin-right: 0;
+}
+
+.rdp-table {
+  margin: 0;
+  max-width: calc(var(--rdp-cell-size) * 7);
+  border-collapse: collapse;
+}
+
+.rdp-with_weeknumber .rdp-table {
+  max-width: calc(var(--rdp-cell-size) * 8);
+  border-collapse: collapse;
+}
+
+.rdp-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  text-align: left;
+}
+
+.rdp-multiple_months .rdp-caption {
+  position: relative;
+  display: block;
+  text-align: center;
+}
+
+.rdp-caption_dropdowns {
+  position: relative;
+  display: inline-flex;
+}
+
+.rdp-caption_label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 0.25em;
+  white-space: nowrap;
+  color: currentColor;
+  border: 0;
+  border: 2px solid transparent;
+  font-family: inherit;
+  font-size: 140%;
+  font-weight: bold;
+}
+
+.rdp-nav {
+  white-space: nowrap;
+}
+
+.rdp-multiple_months .rdp-caption_start .rdp-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.rdp-multiple_months .rdp-caption_end .rdp-nav {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.rdp-nav_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--rdp-cell-size);
+  height: var(--rdp-cell-size);
+  padding: 0.25em;
+  border-radius: 100%;
+}
+
+/* ---------- */
+/* Dropdowns  */
+/* ---------- */
+
+.rdp-dropdown_year,
+.rdp-dropdown_month {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.rdp-dropdown {
+  appearance: none;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: inherit;
+  opacity: 0;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.rdp-dropdown[disabled] {
+  opacity: unset;
+  color: unset;
+}
+
+.rdp-dropdown:focus:not([disabled]) + .rdp-caption_label,
+.rdp-dropdown:active:not([disabled]) + .rdp-caption_label {
+  border: var(--rdp-outline);
+  border-radius: 6px;
+  background-color: var(--rdp-background-color);
+}
+
+.rdp-dropdown_icon {
+  margin: 0 0 0 5px;
+}
+
+.rdp-head {
+  border: 0;
+}
+
+.rdp-head_row,
+.rdp-row {
+  height: 100%;
+}
+
+.rdp-head_cell {
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  font-weight: 700;
+  text-align: center;
+  height: 100%;
+  height: var(--rdp-cell-size);
+  padding: 0;
+}
+
+.rdp-tbody {
+  border: 0;
+}
+
+.rdp-tfoot {
+  margin: 0.5em;
+}
+
+.rdp-cell {
+  width: var(--rdp-cell-size);
+  height: 100%;
+  height: var(--rdp-cell-size);
+  padding: 0;
+  text-align: center;
+}
+
+.rdp-weeknumber {
+  font-size: 0.75em;
+}
+
+.rdp-weeknumber,
+.rdp-day {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--rdp-cell-size);
+  max-width: var(--rdp-cell-size);
+  height: var(--rdp-cell-size);
+  margin: 0;
+  border: 2px solid transparent;
+  border-radius: 100%;
+}
+
+.rdp-day_today:not(.rdp-day_outside) {
+  font-weight: bold;
+}
+
+.rdp-day_selected:not([disabled]),
+.rdp-day_selected:focus:not([disabled]),
+.rdp-day_selected:active:not([disabled]),
+.rdp-day_selected:hover:not([disabled]) {
+  color: white;
+  background-color: var(--rdp-accent-color);
+}
+
+.rdp-day_selected:focus:not([disabled]) {
+  border: var(--rdp-outline-selected);
+}
+
+.rdp:not([dir='rtl']) .rdp-day_range_start:not(.rdp-day_range_end) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.rdp:not([dir='rtl']) .rdp-day_range_end:not(.rdp-day_range_start) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.rdp[dir='rtl'] .rdp-day_range_start:not(.rdp-day_range_end) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.rdp[dir='rtl'] .rdp-day_range_end:not(.rdp-day_range_start) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.rdp-day_range_end.rdp-day_range_start {
+  border-radius: 100%;
+}
+
+.rdp-day_range_middle {
+  border-radius: 0;
+}
+</style><style>.hidden-sidebar .Sidebar__TodoListContainer {
+  display: none;
+}
+
+.hidden-sidebar .todo-list-header {
+  display: none;
+}
+
+.hidden-sidebar .to-do-list {
+  display: none;
+}
+
+#tfc-wall-rose {
+  position: relative;
+}
+
+body {
+  --tfc-dark-mode-text-primary: #e4e4e7;
+  --tfc-dark-mode-text-secondary: #71717a;
+  --tfc-dark-mode-bg-primary: #27272a;
+  --tfc-dark-mode-bg-primary-2: #3f3f46;
+  --tfc-dark-mode-bg-secondary: #52525b;
+}
+</style></head>
+
+<body>
+<h1>Simple Canvas Quadcopter</h1>
+<canvas id="myCanvas" width="400" height="400" style="border:1px solid #000000;"></canvas>
+
+<br>
+speed: <input id="slider1" type="range" min="0" max="2" step=".2">
+<br>
+
+<!-- the code for the QuadCopter itself is in a script file -->
+<!-- that file has the interesting part of the assignment -->
+<script src="./559 Demo - QuadCopter_files/script.js"></script>
+<!-- paths give me a way to make something the copter can follow
+  -- but for now, they just go around in circles -->
+<script src="./559 Demo - QuadCopter_files/paths.js"></script>
+<!-- the script that actually does stuff -->
+<script>
+    "use strict";
+    /** sample solution for the CS559 programming assignment 2
+     * students may look at this code, but not copy it verbatim
+     */
+
+    function myApp() {
+        // variables for the "program" - kept inside rather than global
+        var theCanvas;
+        var myContext;
+        // a slider for the speed of the second copter
+        var slider;
+        // keep a list of all the copters - we can add more if we want
+        var theCopters = [];
+
+        // animation loop - clear, update, draw, schedule the next iteration
+        function draw() {
+            myContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
+            theCopters[1].speed = slider.value;
+            myContext.save();
+            theCopters.forEach(function(c) { c.update();})
+            theCopters.forEach(function(c) { c.draw(); })
+            myContext.restore();
+            window.requestAnimationFrame(draw);
+        }
+
+        // set up the elements
+        theCanvas = document.getElementById('myCanvas');
+        myContext = theCanvas.getContext('2d');
+        slider = document.getElementById("slider1");
+        slider.value = 1;
+
+        // make some copters
+        theCopters.push(new QuadCopter(myContext));
+        theCopters.push(new QuadCopter(myContext,100,100,.5));
+
+        // attach them to paths so they fly around
+        theCopters[0].path = new CirclePath(100,100,50);
+        theCopters[1].path = new CirclePath(250,250,75);
+        draw();
+    }
+
+    // start the program when the window is done loading
+    window.onload=myApp;
+</script>
+
+
+<div id="hl-aria-live-message-container" aria-live="polite" class="visually-hidden"></div><div id="hl-aria-live-alert-container" role="alert" aria-live="assertive" class="visually-hidden"></div></body><div id="simplifyJobsContainer" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px; overflow: visible; z-index: 2147483647;"><span><template shadowrootmode="open"><link rel="stylesheet" href="chrome-extension://pbanhockgagggenencehbnadejlgchfc/css/styles.css"><style>
+  :host {
+    all: initial;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: Palanquin, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(203, 213, 225, 1) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: rgba(203, 213, 225, 1);
+    border-radius: 3px;
+    border: 0;
+  }
+</style></template></span></div></html>
