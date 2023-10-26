@@ -189,3 +189,22 @@ for(index in 1:sim_times) {
 }
 hist(sampled_means)
 ```
+
+
+
+
+
+```{r}
+samplesize = 15
+manytimes = 100000
+comp_stat = rep(9, manytimes) 
+
+for (i in 1:manytimes) {
+  samp = rnorm(samplesize, 380, 22) 
+  comp_stat[i] = (mean(samp) - 380) /(sd(samp) / sqrt(samplesize))
+}
+
+mean(comp_stat)
+sd(comp_stat)
+
+```

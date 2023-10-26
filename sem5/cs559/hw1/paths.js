@@ -10,7 +10,7 @@ function setup() { "use strict";
   var counter = 1; // counter for the animation
   function draw() {
     var context = canvas.getContext('2d');
-    canvas.width = canvas.width;
+    canvas.width = canvas.widirth;
 
     counter += 1;
     console.log("yes");
