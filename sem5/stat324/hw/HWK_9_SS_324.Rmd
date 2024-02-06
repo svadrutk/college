@@ -1,0 +1,457 @@
+---
+title: "Stat 324 Homework 9"
+author: "Svadrut Kukunooru"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+*Submit your homework to Canvas by the due date and time.
+**Because this homework is due right before the exam, we will not be able to give extensions on it.**
+
+*If an exercise asks you to use R, include a copy of the code and output. Please edit your code and output to be only the relevant portions.
+
+*If a problem does not specify how to compute the answer, you many use any appropriate method. I may ask you to use R or use manual calculations on your exams, so practice accordingly.
+
+*You must include an explanation and/or intermediate calculations for an exercise to be complete.
+
+*Be sure to submit the HWK 9 Auto grade Quiz which will give you ~20 of your 40 accuracy points.
+
+*50 points total: 40 points accuracy, and 10 points completion
+
+**Exercise 1.** In a study of the relationship of the shape of a tablet to its dissolution time, disk-shaped ibuprofen tablets and oval-shaped ibuprofen tablets were dissolved in water. Researchers wonder if the mean dissolution time is different for the two different shapes. A normality assumption for dissolution time has been used in the past.   The dissolve time, in seconds, for this experiment were as follows:
+
+$$Disk: 268.0, 249.3, 255.2, 252.7, 254.0, 261.6, 248.3, 266.7, 254.8, 255.1, 262.3, 255.3, 251.0, 253.4$$
+$$Oval: 268.8, 260.0, 273.5, 251.7, 278.5, 289.4, 261.6, 253.0, 262.4$$
+
+Numeric summaries of the samples:
+
+| Shape | Sample Mean | Sample Median | Sample Variance | Sample Size (n) |
+| :-: | :-: | :-: | :-: | :-: |
+| Disk | 256.2643 | 254.95| 37.13632 | 14 |
+| Oval | 266.5444 | 262.4 | 150.8803 | 9 |
+
+
+> a. Graph the data as you see fit. How do those graphs align with the normality assumption that has been used in the past?
+
+```{r}
+# Dissolve time data
+disk_data <- c(268.0, 249.3, 255.2, 252.7, 254.0, 261.6, 248.3, 266.7, 254.8, 255.1, 262.3, 255.3, 251.0, 253.4)
+oval_data <- c(268.8, 260.0, 273.5, 251.7, 278.5, 289.4, 261.6, 253.0, 262.4)
+
+# Numeric summaries
+disk_summary <- c(mean(disk_data), median(disk_data), var(disk_data), length(disk_data))
+oval_summary <- c(mean(oval_data), median(oval_data), var(oval_data), length(oval_data))
+
+# Print summaries
+cat("Disk Summary:", disk_summary, "\n")
+cat("Oval Summary:", oval_summary, "\n")
+
+# Create histograms
+par(mfrow=c(1,2))
+hist(disk_data, main="Disk-Shaped Tablets", xlab="Dissolve Time (seconds)", col="lightblue", border="black")
+hist(oval_data, main="Oval-Shaped Tablets", xlab="Dissolve Time (seconds)", col="lightgreen", border="black")
+
+# Create Q-Q plots
+par(mfrow=c(1,2))
+qqnorm(disk_data, main="Q-Q Plot - Disk", col="blue", pch=20)
+qqline(disk_data, col="red")
+qqnorm(oval_data, main="Q-Q Plot - Oval", col="green", pch=20)
+qqline(oval_data, col="red")
+
+```
+
+The Disk-Shaped tablets are more normally distributed than the oval-shaped tablets. 
+
+> b. (OPTIONAL PRACTICE) Perform a two independent sample t test for difference of means at the $1\%$ level **allowing the population variances to differ** and describe what assumptions this test is assuming are met. As part of this test, specify your hypotheses, calculate a test statistic and p value and make a conclusion in the context of the question. Do the calculations by hand and check your computations with t.test() in R.
+
+```{r}
+# Data
+disk <- c(268.0, 249.3, 255.2, 252.7, 254.0, 261.6, 248.3, 266.7, 254.8, 255.1, 262.3, 255.3, 251.0, 253.4)
+oval <- c(268.8, 260.0, 273.5, 251.7, 278.5, 289.4, 261.6, 253.0, 262.4)
+
+# Two-sample t-test with unequal variances
+result <- t.test(disk, oval, var.equal = FALSE)
+
+# Display the result
+print(result)
+
+```
+*Assumptions:*
+
+*Hypotheses:*  
+
+*Computations:*
+
+> **Test Statistic**
+
+
+> **p value (use df=10.56909)**  
+
+
+*Conclusion:*
+
+
+\vspace{.5 cm} 
+
+
+> c. (OPTIONAL PRACTICE) A two-sided t confidence interval for $\mu_D-\mu_O$ allowing population variances to vary is reported as (-16.3038, -4.2566). Identify the level of the [two-sided] confidence interval. You can use the summary measures given earlier. Interpret this confidence interval in the context of the question.
+
+
+
+> d. One of your lab mates suggests not making the normality assumptions necessary for the t test and instead using a bootstrap tool. So, use the bootstrap code provided in lecture to 
+
+```{r}
+boottwo = function(dat1, dat2, nboot) {
+bootstat = numeric(nboot) #Make Empty Vector for t* to fill
+obsdiff = mean(dat1) - mean(dat2)
+n1 = length(dat1)
+n2 = length(dat2)
+for(i in 1:nboot) {
+samp1 = sample(dat1, size = n1, replace = T) #Sample From Sample Data
+samp2 = sample(dat2, size = n2, replace = T)
+bootmean1 = mean(samp1)
+bootmean2 = mean(samp2)
+bootvar1 = var(samp1)
+bootvar2 = var(samp2)
+bootstat[i] = ((bootmean1 - bootmean2) - obsdiff)/sqrt((bootvar1/n1) +
+(bootvar2/n2)) #Compute and Save “bootstrap t” value
+}
+return(bootstat)
+}
+```
+
+>> di. perform a bootstrap hypothesis test of the hypotheses $H_0: \mu_D-\mu_O = 0$ vs  $H_A: \mu_D-\mu_O \ne 0$ at $\alpha=0.01$. Identfyify the assumptions, test statistic, p value, and conclusions using the bootstrap method. (If you did (b), compare your conclusions to the Welch's test)
+
+*Assumptions*
+
+- Two independently drawn random samples 
+- Each sample can be thought of as a collection of IID RVs from the population 
+- Populations have equal variance and the same shape
+
+*Test Statistic*
+
+The test statistic for this hypothesis test is the difference in means ($\mu_D - \mu_0$)
+
+*P-value*
+```{r}
+boot = boottwo(disk_data, oval_data, 30000)
+t_obs = (mean(disk_data) - mean(oval_data) - 0)/(sqrt((var(disk_data)/length(disk_data)) + (var(oval_data)/length(oval_data))))
+summa = sum(boot <= t_obs) + sum(boot >= t_obs)
+pvalue = 2 * (1/summa)
+pvalue
+```
+
+*Conclusion*
+
+Since the p-value is less than the significance level, I can reject the null hypothesis.
+
+>> dii. Construct a 99 \% bootstrap t confidence interval for the true difference in mean dissolution time: $\mu_D-\mu_O$. Interpret the confidence interval in the context of the question
+
+```{r}
+quantile(boot, probs = c(0.005,0.995))
+sqrt(var(disk_data)/length(disk_data) + var(oval_data)/length(oval_data))
+higher = mean(disk_data) - mean(oval_data) - -2.800586 * (sqrt((var(disk_data)/length(disk_data)) + (var(oval_data)/length(oval_data))))
+lower = mean(disk_data) - mean(oval_data) - 3.867212 * (sqrt((var(disk_data)/length(disk_data)) + (var(oval_data)/length(oval_data))))
+
+lower
+higher
+```
+[-27.32095, 2.060569]
+> e. Suppose after the data is collected it comes to your attention that the researcher performed all of the Disk dissolution data collection in the afternoon when it was warmer and the overhead fan was on in the lab. The Oval dissolution data was collected in the morning when the lab was cool and the fan was not running. What, if any, concerns do you have about the data collection? What would you recommend to the researcher?
+
+
+Concerns arise regarding the validity of the data collected for disk-shaped and oval-shaped tablets, as the researcher performed dissolution measurements in different environmental conditions. The disk data, collected in the warmer afternoon with an overhead fan, contrasts with the oval data collected in the cooler morning without fan use. These variations in temperature and airflow could introduce biases, potentially influencing dissolution rates differently for each tablet shape. To address this, it is recommended to standardize environmental conditions, randomize data collection order, and replicate trials under different conditions for a more robust assessment. Clear documentation of environmental factors and consideration of subgroup analysis or statistical adjustments may also enhance the reliability and transparency of the study's findings.
+
+
+\vspace{1cm}
+
+
+**Exercise 2.** The urinary fluoride concentration (ppm) was measured both for a sample of livestock that had been grazing in an area previously exposed to fluoride pollution and for a similar sample that had grazed in an unpolluted region. Due to the smaller sample sizes and some evidence of nonnormality seen in the samples, the researchers plan to perform a Wilcoxon Rank-Sum/Mann-Whitney Test.
+
+|Environment| Sample Values|
+|:-:| :-: | 
+|Polluted |  21.3, 18.7, 23.0, 17.1, 16.8, 20.9, 19.7 |
+|Unpolluted | 14.2, 18.3, 17.2, 18.4, 20.0 |
+
+
+> a. What assumptions must be made for a Wilcoxon Rank Sum Test to be reasonable?
+
+For a Wilcoxon Rank Sum Test to be reasonable, the key assumptions are:
+
+  Independence: Observations within each group must be independent.
+  Random Sampling: Samples should be randomly selected.
+  Scale of Measurement: The dependent variable should be at least ordinal.
+  Mutual Exclusivity: Each observation should belong to only one group.
+  Similar Shape of Distributions: The shapes of the distributions for both groups should be similar.
+  Randomization (for small samples): Random assignment is beneficial for small sample sizes.
+
+  > b. Perform a Wilcoxon Rank Sum Test in R of the research hypotheses: $H_A:$ the distribution of urinary fluoride concentrations in lifestock from polluted grazing pastures is shifted higher compared to the distribution of urinary flouride concentrations in lifestock from unpolluted grazing. Draw a conclusion at the $\alpha=0.05$ level in context. You may need to use `?wilcox.test` to see how to set a one-sided alternative.
+
+```{r}
+# Data
+polluted <- c(21.3, 18.7, 23.0, 17.1, 16.8, 20.9, 19.7)
+unpolluted <- c(14.2, 18.3, 17.2, 18.4, 20.0)
+
+# Wilcoxon Rank Sum Test
+result <- wilcox.test(polluted, unpolluted, alternative = "greater")
+
+# Print the result
+cat("Wilcoxon Rank Sum Test:\n")
+cat("W statistic:", result$statistic, "\n")
+cat("P-value:", result$p.value, "\n")
+
+# Conclusion
+alpha <- 0.05
+if (result$p.value < alpha) {
+  cat("Conclusion: Reject the null hypothesis at the", alpha, "level.\n")
+} else {
+  cat("Conclusion: Fail to reject the null hypothesis at the", alpha, "level.\n")
+}
+
+```
+> c. What statistical error might we have made based on our testing results?
+
+Type II Error. 
+
+
+\vspace{1cm}
+
+
+**Exercise 3** Two body designs are being considered for a new car model. The time (in seconds) to parallel park each body design was recorded for 14 drivers. The following results were obtained. 
+
+
+|Driver:  || 1| 2|3|4|5|6|7|8|9|10|11|12|13|14|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|Model1:  || 37.0| 25.8| 16.2| 24.2| 22.0| 33.4| 23.8| 43.2| 33.6| 24.4| 23.4| 21.2| 36.2| 32.8|
+|Model2: || 17.8| 20.2| 16.8| 41.4| 21.4| 38.4| 16.8| 34.2| 27.8| 23.2| 29.6| 20.6| 32.2| 41.8|
+
+> a. Explain why the researcher should randomly assign half of the drivers to parallel park with Model 1 first and the other half to parallel park with Model 2 first.
+
+The researcher should do this to control order effects and potential biases that may arise from the sequence in which the two models are tested. 
+
+
+> b. Run  the following code to construct a graphical summary of this data. Discuss any notable characteristics of the graph.
+
+```{r, fig.height=2, fig.width=3}
+Model1=c(37.0, 25.8, 16.2, 24.2, 22.0, 33.4, 23.8, 43.2, 33.6, 24.4, 23.4, 21.2, 36.2, 32.8)
+Model2=c(17.8, 20.2, 16.8, 41.4, 21.4, 38.4, 16.8, 34.2, 27.8, 23.2, 29.6, 20.6, 32.2, 41.8)
+Driver=1:14
+
+AllTimes<-c(Model1, Model2)
+BodyDesign<-as.factor(c(rep("Model1", 14), rep("Model2", 14)))
+Driver<-as.factor(rep(Driver,2))
+
+Parking_data<-data.frame(AllTimes, BodyDesign, Driver)
+
+require(ggplot2)
+ggplot(data=Parking_data, aes(x=BodyDesign, y=AllTimes, color=Driver, group=Driver))+
+  geom_point()+
+  geom_line()
+
+```
+
+It appears that a lot of drivers have a wide variety of driving times that is not dependent on which model they are driving. 
+
+> c. Construct the relevent histogram and qqnorm plots to check the normality assumptions of the matched-pair t test. Explain whether or not the normality assumption of the matched-pair t test seems to be well met.
+
+```{r}
+# Sample data (replace this with your actual data)
+differences <- c(1.2, 0.8, -0.5, 1.0, 0.2, -0.1, -0.3, 0.6, 0.9, 0.4)
+
+# Histogram
+hist(differences, main = "Histogram of Differences", xlab = "Differences", col = "lightblue", border = "black")
+
+# QQ plot
+qqnorm(differences, main = "QQ Plot of Differences")
+qqline(differences, col = 2)
+
+```
+
+> d. Does this data give us strong evidence at the 1% level that the mean time to parallel park is different for the two body designs? 
+
+>> d1. Conduct a matched-pair t test of the hypotheses: $H_o: \mu_1-\mu_2 = 0$ or $H_o: \mu_{1-2} = 0$ vs $H_A: \mu_1-\mu_2 \ne 0$ or $H_A: \mu_{1-2} \ne 0$. Compute the test statistic, degrees of freedom, and p value "by hand". Check your answers using t.test(). Draw a conclusion in the context of the question at a 1\% significance level. 
+
+```{r}
+# Sample data (replace this with your actual data)
+model1 <- c(37.0, 25.8, 16.2, 24.2, 22.0, 33.4, 23.8, 43.2, 33.6, 24.4, 23.4, 21.2, 36.2, 32.8)
+model2 <- c(17.8, 20.2, 16.8, 41.4, 21.4, 38.4, 16.8, 34.2, 27.8, 23.2, 29.6, 20.6, 32.2, 41.8)
+
+# Conduct matched-pair t-test
+result <- t.test(model1, model2, paired = TRUE)
+
+# Print the result
+cat("Matched-Pair T-Test Result:\n")
+cat("Test Statistic:", result$statistic, "\n")
+cat("P-value:", result$p.value, "\n")
+
+# Check significance at 1% level
+alpha <- 0.01
+if (result$p.value < alpha) {
+  cat("Conclusion: Reject the null hypothesis at the", alpha, "level.\n")
+} else {
+  cat("Conclusion: Fail to reject the null hypothesis at the", alpha, "level.\n")
+}
+
+```
+
+*Test Statistic*
+
+The t-value
+
+*Degrees of Freedom*
+
+13
+
+*p-value*
+
+```{r}
+# Sample data (replace this with your actual data)
+model1 <- c(37.0, 25.8, 16.2, 24.2, 22.0, 33.4, 23.8, 43.2, 33.6, 24.4, 23.4, 21.2, 36.2, 32.8)
+model2 <- c(17.8, 20.2, 16.8, 41.4, 21.4, 38.4, 16.8, 34.2, 27.8, 23.2, 29.6, 20.6, 32.2, 41.8)
+
+# Calculate differences
+differences <- model1 - model2
+
+# Number of pairs
+n <- length(differences)
+
+# Calculate mean of the differences
+mean_diff <- mean(differences)
+
+# Calculate standard deviation of the differences
+sd_diff <- sd(differences)
+
+# Calculate standard error of the mean
+se <- sd_diff / sqrt(n)
+
+# Calculate t-value
+t_value <- mean_diff / se
+
+# Degrees of freedom
+df <- n - 1
+
+# Calculate two-sided p-value
+p_value <- 2 * pt(abs(t_value), df, lower.tail = FALSE)
+
+# Print results
+cat("Mean of Differences:", mean_diff, "\n")
+cat("Standard Deviation of Differences:", sd_diff, "\n")
+cat("Standard Error of the Mean:", se, "\n")
+cat("t-value:", t_value, "\n")
+cat("Degrees of Freedom:", df, "\n")
+cat("p-value:", p_value, "\n")
+
+```
+
+
+> d2. Construct and interpret a 99% confidence interval for $\mu_{1-2}$, the mean difference in parallel parking time for the two body designs. Compare your findings from (d1) and (d2).
+
+```{r}
+# Calculate margin of error
+margin_of_error <- qt(0.995, df) * se  # 0.995 corresponds to a 99% confidence level
+
+# Calculate confidence interval
+confidence_interval <- c(mean_diff - margin_of_error, mean_diff + margin_of_error)
+
+# Print results
+cat("Mean Difference:", mean_diff, "\n")
+cat("Margin of Error:", margin_of_error, "\n")
+cat("99% Confidence Interval:", confidence_interval, "\n")
+```
+
+*Interpretation*
+
+I fail to reject the null hypothesis at the 1% significance level. 
+
+
+> d3. The scientists decide to also perform a Wilcoxon Signed Rank of the hypotheses: $H_0: Med_{1-2} = 0$ vs $H_A: Med_{1-2} \ne 0$ because they do not want to rely on the normality assumption of the population of differences. Perform the test in R and report the test statistic and p value. Compare the evidence against the null to that found with the t test in part (d1).
+
+*Test Statistic*
+The test statistic for the Wilcoxon Signed Rank test is the sum of the ranks of the absolute differences between pairs. This is reported as `wilcox_test$statistic` in R.
+
+```{r}
+# Sample data (replace this with your actual data)
+model1 <- c(37.0, 25.8, 16.2, 24.2, 22.0, 33.4, 23.8, 43.2, 33.6, 24.4, 23.4, 21.2, 36.2, 32.8)
+model2 <- c(17.8, 20.2, 16.8, 41.4, 21.4, 38.4, 16.8, 34.2, 27.8, 23.2, 29.6, 20.6, 32.2, 41.8)
+
+# Calculate differences
+differences <- model1 - model2
+
+# Wilcoxon Signed Rank Test
+wilcox_result <- wilcox.test(differences, mu = 0, alternative = "two.sided")
+
+# Print the result
+cat("Wilcoxon Signed Rank Test Result:\n")
+cat("Test Statistic:", wilcox_result$statistic, "\n")
+cat("P-value:", wilcox_result$p.value, "\n")
+
+```
+
+*Conclusion*
+
+I do not have enough evidence to reject the null hypothesis. 
+
+*Comparison between Wilcoxon Signed Rank and T test*
+
+In summary, both the Wilcoxon Signed Rank Test and the t-test yield consistent results, indicating no statistically significant difference in median parallel parking time between the two body designs. This suggests that, based on the data, the observed differences are likely due to random variability rather than a meaningful effect. The findings are robust across different statistical approaches, enhancing the reliability of the conclusion.
+
+```{r}
+# Number of students who improved
+n_plus <- 4
+
+# Number of students who scored lower
+n_minus <- 12
+
+# Number of students with no change
+n_zero <- 1
+
+# Total number of students
+n <- n_plus + n_minus + n_zero
+
+# Test statistic
+T <- min(n_plus, n_minus)
+
+# Calculate the p-value for a one-sided Sign Test
+# For less than null hypothesis
+p_value_less <- pbinom(T, size = n, prob = 0.5)
+
+# For greater than null hypothesis
+p_value_greater <- 1 - pbinom(T - 1, size = n, prob = 0.5)
+
+# Print the p-values
+print(p_value_less)
+print(p_value_greater)
+
+```
+
+
+```{r}
+n = 8 
+manytimes = 100000
+stat1 = rep(9, manytimes) 
+stat2 = rep(9, manytimes) 
+
+for (i in 1:manytimes){
+  samp = rnorm(n, mean=50, sd=5) 
+  stat1[i] = (mean(samp) - 50)/(5/sqrt(n))
+  stat2[i] = (mean(samp) - 50)/(sd(samp)/sqrt(n))
+}
+sd(stat1)
+```
+
+```{r}
+Funds=c(2, 5, 7, 19, 23, 57, 83, 120, 221, 359)
+sum(Funds > median(Funds))
+sum(Funds != 85 )
+sum(Funds != median(Funds))
+sum(Funds > 85 )
+(median(Funds)- 85) / (sd(Funds) / sqrt(10))
+```

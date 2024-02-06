@@ -1,0 +1,18 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     MADCounter
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _ErrorChecker, symObjAddr: 0x0, symBinAddr: 0x100001E40, symSize: 0x410 }
+  - { offsetInCU: 0xB4, offset: 0xB4, size: 0x8, addend: 0x0, symName: _ErrorChecker, symObjAddr: 0x0, symBinAddr: 0x100001E40, symSize: 0x410 }
+  - { offsetInCU: 0x1AD, offset: 0x1AD, size: 0x8, addend: 0x0, symName: _ErrorCheckerWithoutExiting, symObjAddr: 0x410, symBinAddr: 0x100002250, symSize: 0x410 }
+  - { offsetInCU: 0x2B9, offset: 0x2B9, size: 0x8, addend: 0x0, symName: _ASCIIProcessor, symObjAddr: 0x820, symBinAddr: 0x100002660, symSize: 0x370 }
+  - { offsetInCU: 0x3AD, offset: 0x3AD, size: 0x8, addend: 0x0, symName: _WordProcessor, symObjAddr: 0xB90, symBinAddr: 0x1000029D0, symSize: 0x420 }
+  - { offsetInCU: 0x45E, offset: 0x45E, size: 0x8, addend: 0x0, symName: _printWords, symObjAddr: 0xFB0, symBinAddr: 0x100002DF0, symSize: 0xF0 }
+  - { offsetInCU: 0x4C0, offset: 0x4C0, size: 0x8, addend: 0x0, symName: _freeWord, symObjAddr: 0x10A0, symBinAddr: 0x100002EE0, symSize: 0x30 }
+  - { offsetInCU: 0x4E6, offset: 0x4E6, size: 0x8, addend: 0x0, symName: _LineProcessor, symObjAddr: 0x10D0, symBinAddr: 0x100002F10, symSize: 0x400 }
+  - { offsetInCU: 0x59D, offset: 0x59D, size: 0x8, addend: 0x0, symName: _printLines, symObjAddr: 0x14D0, symBinAddr: 0x100003310, symSize: 0xF0 }
+  - { offsetInCU: 0x5FF, offset: 0x5FF, size: 0x8, addend: 0x0, symName: _longestWords, symObjAddr: 0x15C0, symBinAddr: 0x100003400, symSize: 0xC0 }
+  - { offsetInCU: 0x652, offset: 0x652, size: 0x8, addend: 0x0, symName: _longestLines, symObjAddr: 0x1680, symBinAddr: 0x1000034C0, symSize: 0xC0 }
+  - { offsetInCU: 0x6A5, offset: 0x6A5, size: 0x8, addend: 0x0, symName: _CodeRunner, symObjAddr: 0x1740, symBinAddr: 0x100003580, symSize: 0x470 }
+  - { offsetInCU: 0x808, offset: 0x808, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x1BB0, symBinAddr: 0x1000039F0, symSize: 0x232 }
+...
