@@ -1,0 +1,5 @@
+# Week 8 Primary Source Analysis
+
+Buddhadāsa Bhikkhu was a prominent figure in Thai Buddhism in the 20th Century, known for making Buddhist teachings accessible and relevant to contemporary society. The main theme in his essays and sermons was to bridge the gap between traditional Buddhist doctrine and the challenges faced by modern society. For example, in one of his essays he talks about the difference between everyday language and dhamma language, saying "everyday language is worldly language, the language of people who do not know dhamma. Dhamma language is the language spoken by people who have gained a deep insight into the truth, dhamma.". 
+
+There are similar versions of this "updating" in other religions. Within Christianity, theologians try to apply biblical teachings to contemporary issuesl ike social justice, environmental stewardship, and interfaith dialogue. Islamic scholars undertak itjihad (independent reasoning) to address new ethical dilemmas and societal challenges while remaining faithful to Quranic principles and prophetic tradition.

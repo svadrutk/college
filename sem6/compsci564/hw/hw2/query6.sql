@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS num_rows_common FROM (SELECT * FROM Sellers INTERSECT SELECT * FROM Bidders) AS common_rows;

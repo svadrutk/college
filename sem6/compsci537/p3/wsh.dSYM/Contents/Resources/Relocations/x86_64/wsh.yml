@@ -1,0 +1,14 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     wsh
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _execute_command, symObjAddr: 0x0, symBinAddr: 0x100003810, symSize: 0x80 }
+  - { offsetInCU: 0x4D, offset: 0x4D, size: 0x8, addend: 0x0, symName: _default_history_size, symObjAddr: 0x738, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offsetInCU: 0x69, offset: 0x69, size: 0x8, addend: 0x0, symName: _history_size, symObjAddr: 0x1720, symBinAddr: 0x100008008, symSize: 0x0 }
+  - { offsetInCU: 0x7E, offset: 0x7E, size: 0x8, addend: 0x0, symName: _history, symObjAddr: 0x1728, symBinAddr: 0x100008010, symSize: 0x0 }
+  - { offsetInCU: 0xCA, offset: 0xCA, size: 0x8, addend: 0x0, symName: _lastCommand, symObjAddr: 0x1730, symBinAddr: 0x100008018, symSize: 0x0 }
+  - { offsetInCU: 0xD3, offset: 0xD3, size: 0x8, addend: 0x0, symName: _execute_command, symObjAddr: 0x0, symBinAddr: 0x100003810, symSize: 0x80 }
+  - { offsetInCU: 0x109, offset: 0x109, size: 0x8, addend: 0x0, symName: _add_to_history, symObjAddr: 0x80, symBinAddr: 0x100003890, symSize: 0x2A0 }
+  - { offsetInCU: 0x18F, offset: 0x18F, size: 0x8, addend: 0x0, symName: _shrink_history, symObjAddr: 0x320, symBinAddr: 0x100003B30, symSize: 0xA0 }
+  - { offsetInCU: 0x1DD, offset: 0x1DD, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x3C0, symBinAddr: 0x100003BD0, symSize: 0x306 }
+...

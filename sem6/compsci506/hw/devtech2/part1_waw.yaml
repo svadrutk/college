@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  db1:
+    image: mysql/mysql-server:latest
+    restart: always
+    environment:
+       MYSQL_ROOT_PASSWORD: password
+       MYSQL_DATABASE: WhatAndWho
+       MYSQL_ROOT_HOST: '%'
+    volumes:
+       - wawdat1:/var/lib/mysql
+    ports:
+       - "53316:3306"
+
+volumes:
+  wawdat1:

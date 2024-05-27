@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  db1:
+    image: mysql/mysql-server:latest
+    restart: always
+    environment:
+       MYSQL_ROOT_PASSWORD: password
+       MYSQL_DATABASE: WhatAndWho
+       MYSQL_ROOT_HOST: '%'
+    volumes:
+      - wawdat1:/var/lib/mysql
+    ports:
+      - "53316:3306"
+  phpmyadmin1:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on: 
+      - db1
+    environment: 
+      PMA_HOST: db1
+      PMA_USER: root
+      PMA_PASSWORD: password
+    ports:
+      - "50081:80"
+
+volumes:
+  wawdat1:

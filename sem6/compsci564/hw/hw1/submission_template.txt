@@ -1,0 +1,272 @@
+<?xml version="1.0"?>
+<pset>
+
+    <!--
+        CS 564, SPRING 2024
+        HOMEWORK 1 SUBMISSION TEMPLATE
+
+        Please copy and paste your SQL queries into the appropriate spots below. 
+
+        When submitting SQL queries, please do not include the initial 
+        %sql or %%sql IPython commands. Just include the SQL code.
+
+        DO NOT DELETE THE <![CDATA[ ... ]]> LINES IN EACH <answer> TAG!
+        Doing so will break the autograder. To avoid accidentally breaking
+        something, please leave all existing comments in this template
+        intact in your submission.
+    -->
+
+    <student>
+        <name>
+            <!-- Insert your full name on the line below. -->
+            Svadrut Kukunooru            
+        </name>
+        <studentid>
+            <!-- Insert your student ID number below. -->
+            9083231366
+        </studentid>
+    </student>
+
+
+    <!-- BEGIN PROBLEM 1 -->
+    <answer number="1a">
+        <!-- Paste your solution to problem 1, part (a) below this line. --><![CDATA[
+SELECT A.i, A.j, A.val + B.val AS val
+FROM A
+JOIN B ON A.i = B.i AND A.j = B.j;
+
+
+        ]]><!-- End problem 1, part (a). -->
+    </answer>
+    <answer number="1b">
+        <!-- Paste your solution to problem 1, part (b) below this line. --><![CDATA[
+
+SELECT SUM(A.val * B.val) AS DotProduct
+FROM A
+JOIN B ON A.i = B.i
+WHERE A.j = 1 AND B.j = 2;
+
+        ]]><!-- End problem 1, part (b). -->
+    </answer>
+    <answer number="1c">
+        <!-- Paste your solution to problem 1, part (c) below this line. --><![CDATA[
+
+SELECT A.i, B.j, SUM(A.val * B.val) AS val
+FROM A
+JOIN B ON A.j = B.i
+GROUP BY A.i, B.j;
+
+        ]]><!-- End problem 1, part (c). -->
+    </answer>
+    <answer number="1d">
+        <!-- Paste your solution to problem 1, part (d) below this line. --><![CDATA[
+
+SELECT A.i, D.j, SUM(A.val * C.val * D.val) AS val
+FROM A
+JOIN A AS C ON A.j = C.i
+JOIN A AS D ON C.j = D.i
+GROUP BY A.i, D.j;
+
+        ]]><!-- End problem 1, part (d). -->
+    </answer>
+    <!-- END PROBLEM 1 -->
+
+
+    <!-- BEGIN PROBLEM 2 -->
+    <answer number="2a">
+        <!-- Paste your solution to problem 2, part (a) below this line. --><![CDATA[
+
+WITH HolidaySales AS (
+    SELECT
+        S.Store,
+        SUM(S.WeeklySales) AS AllSales
+    FROM
+        Sales S
+    JOIN
+        Holidays H ON S.WeekDate = H.WeekDate AND H.IsHoliday = 'TRUE'
+    GROUP BY
+        S.Store
+)
+
+SELECT
+    Store,
+    AllSales
+FROM
+    HolidaySales
+ORDER BY
+    AllSales DESC
+LIMIT 1;
+
+        ]]><!-- End problem 2, part (a). -->
+    </answer>
+    <answer number="2b">
+        <!-- Paste your solution to problem 2, part (b) below this line. --><![CDATA[
+
+WITH HolidaySales AS (
+    SELECT
+        SUM(S.WeeklySales) AS Sales
+    FROM
+        Sales S
+    JOIN
+        Holidays H ON H.WeekDate = S.WeekDate AND H.IsHoliday = 'TRUE'
+    GROUP BY 
+        S.WeekDate
+), 
+    NonHolidaySales AS (
+        SELECT
+        SUM(S.WeeklySales) AS Sales
+    FROM
+        Sales S
+    JOIN
+        Holidays H ON H.WeekDate = S.WeekDate AND H.IsHoliday = 'FALSE'
+    GROUP BY 
+        S.WeekDate
+    
+    )
+
+SELECT
+    COUNT(*) AS NumNonHolidays
+    
+FROM
+    NonHolidaySales
+WHERE
+    NonHolidaySales.Sales > (SELECT AVG(Sales) FROM HolidaySales);
+
+        ]]><!-- End problem 2, part (b). -->
+    </answer>
+    <answer number="2c">
+        <!-- Paste your solution to problem 2, part (c) below this line. --><![CDATA[
+
+SELECT
+    ST.Type,
+    SUM(S.WeeklySales) AS TotalSales
+FROM
+    Sales S
+JOIN
+    Stores ST ON S.Store = ST.Store
+WHERE
+    substr(S.WeekDate, 6, 2) IN ('06', '07', '08') -- Extracts month from WeekDate
+GROUP BY
+    ST.Type;
+
+        ]]><!-- End problem 2, part (c). -->
+    </answer>
+    <!-- END PROBLEM 2 -->
+
+
+    <!-- BEGIN PROBLEM 3 -->
+    <answer number="3a">
+        <!-- Paste your solution to problem 3, part (a) below this line. --><![CDATA[
+
+SELECT 
+    S1.B AS company, 
+    S1.d AS distance
+FROM 
+    streets S1
+WHERE
+    S1.A = 'UW-Madison' AND S1.d <= 9
+
+UNION 
+
+SELECT
+    S2.B AS company,
+    S1.d + S2.d AS distance
+FROM
+    streets S1
+JOIN
+    streets S2 ON S1.B = S2.A
+WHERE
+    S1.A = 'UW-Madison' AND (S1.d + S2.d) <= 9
+    
+UNION 
+
+SELECT 
+    S3.B AS company,
+    S1.d + S2.d + S3.d AS distance
+FROM 
+    streets S1
+JOIN 
+    streets S2 
+    ON S1.B = S2.A 
+JOIN 
+    streets S3 
+    ON S2.B = S3.A 
+WHERE 
+    S1.A = 'UW-Madison' AND (S1.d + S2.d + S3.d) <= 9;
+
+
+        ]]><!-- End problem 3, part (a). -->
+    </answer>
+    <answer number="3b">
+        <!-- Paste your solution to problem 3, part (b) below this line. --><![CDATA[
+
+SELECT 
+    S1.A AS company_1, S2.B AS company_2,
+    S1.d+S2.d AS distance
+FROM 
+    streets S1
+JOIN 
+    streets S2 ON S1.B = S2.A
+WHERE
+    S1.B = 'UW-Madison' AND S2.A = 'UW-Madison' AND distance <= 15 AND S1.id < S2.id
+
+UNION 
+
+SELECT 
+    S1.A AS company_1, S3.B AS company_2,
+    S1.d + S2.d + S3.d AS distance
+FROM 
+    streets S1
+JOIN 
+    streets S2 
+    ON S1.B = S2.A 
+JOIN 
+    streets S3 
+    ON S2.B = S3.A 
+WHERE 
+    S2.B = 'UW-Madison' AND (S1.d + S2.d + S3.d) <= 15 AND S1.id < S2.id < S3.id
+
+UNION
+
+SELECT 
+    S1.A AS company_1, S4.B AS company_2,
+    S1.d + S2.d + S3.d + S4.d AS distance
+FROM 
+    streets S1
+JOIN 
+    streets S2 
+    ON S1.B = S2.A 
+JOIN 
+    streets S3 
+    ON S2.B = S3.A 
+JOIN 
+    streets S4
+    ON S3.B = S4.A
+WHERE 
+    S2.B = 'UW-Madison' AND (S1.d + S2.d + S3.d + S4.d) <= 15 AND S1.id < S2.id < S3.id < S4.id;
+
+        ]]><!-- End problem 3, part (b). -->
+    </answer>
+    <answer number="3c">
+        <!-- Paste your solution to problem 3, part (c) below this line. --><![CDATA[
+
+SELECT 
+    S1.A AS A, S2.A AS B, S3.A AS C,
+    S1.d + S2.d + S3.d AS distance
+FROM 
+    streets S1
+JOIN 
+    streets S2 
+    ON S1.B = S2.A 
+JOIN 
+    streets S3 
+    ON S2.B = S3.A 
+WHERE 
+    S3.B = S1.A AND S1.id < S2.id AND S2.id < S3.id
+
+        ]]><!-- End problem 3, part (c). -->
+    </answer>
+    <!-- END PROBLEM 3 -->
+
+
+</pset>

@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS count_of_items FROM (SELECT ItemID FROM Categories GROUP BY ItemID HAVING COUNT(*) = 4) AS items_occuring_four_times;

@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "buf.C": "cpp",
+        "testbuf.C": "cpp"
+    },
+    "cmake.configureOnOpen": false
+}

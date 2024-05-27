@@ -1,0 +1,27 @@
+.separator |
+.import users.dat Users
+update Users set Location = NULL where Location = 'NULL';
+update Users set Country = NULL where Country = 'NULL';
+
+
+.import bidders.dat Bidders
+
+
+.import sellers.dat Sellers
+
+
+.import bids.dat Bids
+update Bids set Time = datetime(Time);
+
+
+.import items.dat Items
+update Items set Started = datetime(Started);
+update Items set Ends = datetime(Ends);
+update Items set Name = NULL where Name = 'NULL';
+update Items set Description = NULL where Description = 'NULL';
+update Items set Buy_Price = NULL where Buy_Price = 'NULL';
+update Items set Number_of_Bids = NULL where Number_of_Bids = 'NULL';
+
+
+.import categories.dat Categories
+update Categories set Category = NULL where Category = 'NULL';

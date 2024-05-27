@@ -1,0 +1,9 @@
+# direct tunnel to the mysql server
+ssh -f -N -L localhost:53066:localhost:53066 YOURLOGIN@cs506-team-XX.cs.wisc.edu
+# tunnel to the phpmyadmin web app
+ssh -f -N -L localhost:50080:localhost:50080 YOURLOGIN@cs506-team-XX.cs.wisc.edu
+
+# URL from browser to access the remote db:
+http://localhost:50080/
+
+
